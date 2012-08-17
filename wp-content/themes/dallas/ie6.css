@@ -1,0 +1,55 @@
+h2, h3 {
+	font-weight: bold;
+}
+.leftcolumn .flag, .rightcolumn .flag {
+	height: 28px;
+}
+#header h1 {
+	background:none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/wp-content/themes/dallas/images/logostart.png', sizingMethod='scale');
+}
+.subpage #header h1 {
+	background:none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/wp-content/themes/dallas/images/logosub.png', sizingMethod='scale');
+}
+.subpage #headerIssue {
+	margin-right: 0;
+	display: inline;
+}
+#toplinecontent {
+	height: 19px;
+	overflow: hidden;
+}
+#topline {
+	padding-top:1px;
+}
+#headerIssue {
+	margin-right:100px;
+}
+#header #nav {
+	margin-left: 5px;
+}
+#footerIssue {
+	margin-left:14px;
+}
+#footerIssue.length-3 {
+	margin-top:0px;
+}
+#footernav #footeritem4 #footerIssue .cufon {
+   top: -26px;
+   margin-left: 11px;
+}
+#footernav #footeritem4 .footerDate .cufon {
+   top: -22px;
+}
+
+
+/*
+.js #footernav #footeritem4 #footerIssue {
+   margin-left: 35px;
+   margin-top: -22px;
+}
+.js #footernav #footeritem4 .footerDate {
+   top: -22px;
+}
+*/

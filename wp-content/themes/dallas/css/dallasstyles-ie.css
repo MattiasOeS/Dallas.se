@@ -1,0 +1,456 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url("lookClasses.css");
+
+/*Clean tags*/
+
+
+/* TYPOGRAFI */
+@font-face {
+	font-family: "ITC Lubalin Graph";
+    src: url("http://www.dallassthlm.se/fonts/LUBALIN0.eot") format("embedded-opentype");
+}
+
+body {
+	background-color:#f4f3f2;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 62.5%;  /* 16px × 62.5% = 10px */
+	color:#666666;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	font-weight:normal;
+}
+p {
+	margin:5px 0px;
+	font-size: 1.3em;
+	line-height: 140%;
+	text-align: justify;	
+}
+
+h2 {
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	font-size: 2.4em;
+	line-height: 1.2em;
+	font-weight:500;
+	color:#333;
+}
+h3 {
+	color:#00e600;
+	font-weight:500;
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	margin-top:0;
+	margin-bottom:0;
+	font-size: 2em;
+	line-height: 1.2em;
+}
+h5 {
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	font-size: 3.6em;
+	line-height: 1.2em;
+	font-weight:500;
+	color:#00e600;
+}
+
+.footText {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-size: 1.2em;
+	line-height: 130%;	
+}
+
+.footText a, .footText a:link, .footText a:visited {
+	color:#666666;
+	font-weight:300;
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	margin-top:0;
+	margin-bottom:0;
+	text-decoration: none;
+}
+
+.footText a:hover {
+	color: #666666;
+	text-decoration:none;
+	border-bottom:3px #666666 double;
+}
+
+
+/*        HUVUDCONTAINERS      */
+
+#wrapper {
+	width:960px;
+	margin:auto;
+}
+#headerStartpage {
+	width:1004px;
+	margin:auto;	
+	background: url(../images/headerStartpage.png) no-repeat -2px;
+	margin-bottom: 20px;
+}
+
+#header {
+	width:960px;
+	margin:auto;
+}
+
+
+#heading{
+	margin-top:30px;	
+}
+#footer {
+	float: left;
+	width:960px;
+
+	clear:both;
+	background: url(../images/seperatorFooter.png) repeat-x;
+}
+
+
+
+
+
+
+
+/*       GENERELLA KOLUMNER     */
+
+.column {
+	width:300px;
+	float:left;
+	/*margin-top:19px;*/
+}
+
+.columnHeader {
+	margin-bottom:30px;
+}
+
+
+
+
+
+/*        Special columns         */
+
+
+#doubleWidthRightColumn{
+	width:630px;
+	margin-left:30px;
+	margin-bottom:30px;
+}
+
+#narrowMiddleColumn {
+	margin-left:64px;
+	margin-right:64px;
+	width:228px;
+	color:#666;
+}
+
+#narrowMiddleColumn .columnHeader {
+	margin-bottom:25px;
+}
+
+#twoColumnWrapper{
+	margin:30px 0px 30px 0px;
+}
+
+#normalMiddleColumn{
+	margin-left:30px;
+	margin-right:30px;
+}
+
+.footCell {
+	width: 125px;
+	float: left;
+	margin-top: 15px;
+	padding: 5px;
+}
+
+#footGlobe {
+	float: left;	
+	width: 160px;
+	height: 125px;
+	background: url(../images/footGlobe.png) no-repeat;
+	margin-top: -27px;
+}
+
+#footRSS {
+	width: 125px;
+	float: left;
+	margin-top: 15px;	
+}
+
+#footEdition {
+	width: 125px;
+	float: left;
+	margin-top: 15px;	
+}
+
+
+
+/*      CASE        */
+
+#videoPlayerContainer{
+	margin-top:26px;	
+	margin-bottom:35px;	
+}
+
+
+/*      POSTER PÅ STARTSIDESBLOGGEN          */
+.post {
+	padding-top:0px;
+	padding-bottom:10px;
+	margin-bottom:8px;
+}
+.post img {
+	clear:both;
+	margin-bottom:12px;
+}
+
+
+
+/*      PROJEKTVÄLJARMENYER, ÅTERFINNS I CASES.HTML    */
+
+
+#categoryChooser, #categoryChooser a:link{
+
+	margin-top: 20px;
+	margin-bottom: 20px;	
+	clear:both;	
+	
+	padding-top: 10px;
+	padding-bottom: 8px;
+	padding-right: 8px;	
+	
+	
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	font-weight:500;
+	font-size: 1.3em;
+
+	text-decoration: none;
+	color:#FFF;
+
+}
+
+#clientsActive {
+
+}
+
+#projectsActive {
+
+}
+
+.categoryLinkActive{
+	background-color:#00e600;
+	background: url(../images/categoryChooserPassive.png) no-repeat right;
+	padding-top: 32px;
+	padding-bottom: 32px;
+	padding-right: 5px;		
+	padding-left: 5px;
+	margin-right: 10px;
+}
+
+.categoryLinkPassive{
+	background-color:#333;
+	background: url(../images/categoryChooserActive.png) no-repeat right;
+	padding-top: 32px;
+	padding-bottom: 32px;
+	padding-right: 5px;
+	padding-left: 5px;
+	margin-right: 10px;	
+}
+
+#caseWrapper {
+	margin-top: 80px;
+}
+
+.caseSeperator {
+	height: 50px;
+	border-bottom-style: solid;
+	border-bottom-color: #333;
+	border-bottom-width: 3px;
+}
+
+.caseListSeperator{
+	height: 40px;	
+	border-top-style: double;
+	border-top-color: #333;
+	border-top-width: 3px;
+}
+
+.casePost {
+	margin-bottom:84px;
+}
+.casePost img {
+	clear:both;
+}
+
+.caseLinks, .caseLinks a{
+	float: left;
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;	
+	font-size: 1.2em;
+
+	text-align: left;
+	background-color:#00e600;
+	color:#FFF;
+	text-decoration: none;
+	clear: both;
+	margin-top: 4px;
+	margin-bottom: 1px;
+	padding-right: 3px;
+	padding-left: 3px;	
+}
+
+
+.subMenuBlock{
+	float:left;
+	width:20%;
+}
+
+.subMenu{
+	font-family: Georgia, "Times New Roman", Times, serif;	
+	font-size: 1.2em;
+	margin-bottom:40px;
+	height:75px;
+}
+
+.subMenu a:link,.subMenu a:visited{
+	width:90%;
+	float:none;
+	display:block;
+	height:1.3em;
+	color:#666666;
+	text-decoration:none;
+	padding:2px 0px 2px 2px;
+}
+
+.subMenu a:hover{
+	background-color: #00e600;
+	color:#FFF;
+	width: 90%;
+}
+.subMenu a:visited a:active{
+	background-color: #333;
+	color: #fff;
+	width: 90%;
+}
+
+
+
+
+/*   LÄNKAR  */
+
+/*Länkarna under varje caseyta på startsidan*/
+.underLinks{	
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;	
+	font-size: 1.3em;
+	line-height: 1.4em;
+	margin-top:10px;
+	margin-bottom:40px;
+	text-align: center;
+	background: url(../images/storiesSeperator.png) no-repeat 0 center;
+}
+
+.separator{  /*Separatorn mellan länkarna på startsidan*/
+	color:#00e600;
+	margin-left:5px;
+	margin-right:5px;
+	margin-top:10px;
+}
+
+a.underLink:link,a.underLink:visited {
+	margin-top:10px;
+	color:#00e600;
+	font-weight:normal;
+	text-decoration:none;
+}
+a.underLink:hover {
+	margin-top:10px;
+	color:#00e600;
+	font-weight:normal;
+	text-decoration:none;
+	border-bottom:3px #00e600 double;
+}
+
+
+/*Länkar som är mailadresser*/
+a.mail:link,a.mail:visited{
+	text-decoration:none;
+	color:#333;
+}
+a.mail:hover{
+	text-decoration:none;
+	color:#00e600;
+	border-bottom:3px #00e600 double;
+}
+
+
+/* ABOUT US FLAGS */
+
+.columnContactCrew {
+	margin-top: 20px;
+	width:315px;
+	float:left;
+}
+.flagContactCrew {
+	width: 280px;
+	height: 28px;
+	
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	color: #fff;
+	font-size: 1.4em;
+	line-height: 2.2em;
+	text-indent: 8px;
+	
+	background: url(../images/flagContactCrew.png) no-repeat left;
+
+	margin-bottom: 10px;
+}
+
+
+/* STARTPAGE FLAGS */
+.flagStartpageLeft {
+	width: 300px;
+	height: 28px;
+	
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	color: #fff;
+	font-size: 1.4em;
+	line-height: 2.2em;
+	text-align: center;	
+	
+	background: url(../images/flagStartpageLeft.png) no-repeat left;
+
+	margin-bottom: 10px;
+}
+
+.flagStartpageRight {
+	width: 300px;
+	height: 28px;
+	
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	color: #fff;
+	font-size: 1.4em;
+	line-height: 2.2em;
+	text-align: center;
+	
+	background: url(../images/flagStartpageRight.png) no-repeat right;
+
+	margin-bottom: 10px;
+}
+
+.flagStartpageMid {
+	width: 228px;
+	height: 28px;
+	
+	font-family: "ITC Lubalin Graph", Georgia, "Times New Roman", Times, serif;
+	color: #fff;
+	font-size: 1.4em;
+	line-height: 2.2em;
+	text-align: center;
+	
+	background: url(../images/flagStartpageMid.png) no-repeat;
+
+	margin-bottom: 10px;
+}

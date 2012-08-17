@@ -1,0 +1,208 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url("lookClasses.css");
+
+/*Clean tags*/
+
+body {
+	background-color:#f0f0f0;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:10pt;
+	color:#666666;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	font-weight:normal;
+}
+p {
+	margin:5px 0px;
+}
+h2 {
+	color:#333333;
+	font-weight:600;
+}
+h3 {
+	color:#3bd32f;
+	font-weight:600;
+	margin-top:0;
+	margin-bottom:0;
+}
+
+
+
+
+
+/*        HUVUDCONTAINERS      */
+
+#wrapper {
+	width:960px;
+	margin:auto;
+}
+#header {
+	width:960px;
+}
+#heading{
+	margin-top:30px;	
+}
+#footer {
+	margin-top:30px;
+	width:960px;
+	height:48px;
+	background-image:url(../images/footer_bg.gif);
+	clear:both;
+}
+
+
+
+
+
+
+
+/*       GENERELLA KOLUMNER     */
+
+.column {
+	width:300px;
+	float:left;
+	/*margin-top:19px;*/
+}
+
+.columnHeader {
+	margin-bottom:30px;
+}
+
+
+
+
+
+/*        Special columns         */
+
+
+#doubleWidthRightColumn{
+	width:630px;
+	margin-left:30px;
+	margin-bottom:30px;
+}
+
+#narrowMiddleColumn {
+	margin-left:64px;
+	margin-right:64px;
+	width:228px;
+	color:#666666;
+}
+
+#narrowMiddleColumn .columnHeader {
+	margin-bottom:25px;
+}
+
+#twoColumnWrapper{
+	margin:30px 0px 30px 0px;
+}
+
+#normalMiddleColumn{
+	margin-left:30px;
+	margin-right:30px;
+}
+
+
+
+
+/*      CASE        */
+
+#videoPlayerContainer{
+	margin-top:26px;	
+	margin-bottom:35px;	
+}
+
+
+/*      POSTER PÅ STARTSIDESBLOGGEN          */
+.post {
+	padding-top:0px;
+	padding-bottom:10px;
+	margin-bottom:8px;
+}
+.post img {
+	clear:both;
+}
+
+
+
+/*      PROJEKTVÄLJARMENYER    */
+
+#categoryChooser{
+	margin-top:20px;
+	clear:both;
+}
+
+.subMenuBlock{
+	float:left;
+	width:20%;
+}
+
+.subMenu{
+	border-bottom:3px #000 solid;
+	padding:20px 0px 45px 0px;
+	margin-bottom:40px;
+	height:75px;
+}
+
+.subMenu a:link,.subMenu a:visited{
+	width:100%;
+	float:none;
+	display:block;
+	height:15px;
+	color:#888888;
+	text-decoration:none;
+	padding:2px 0px 2px 4px;
+}
+
+.subMenu a:hover{
+	background-color:#0C3;
+	color:#FFF;
+}
+
+
+
+
+/*   LÄNKAR  */
+
+/*Länkarna under varje caseyta på startsidan*/
+.underLinks{
+	margin-top:15px;	
+}
+
+.separator{  /*Separatorn mellan länkarna på startsidan*/
+	color:#3bd32f;
+	margin-left:5px;
+	margin-right:5px;
+	margin-top:10px;
+}
+
+a.underLink:link,a.underLink:visited {
+	margin-top:10px;
+	color:#3bd32f;
+	font-weight:normal;
+	text-decoration:none;
+}
+a.underLink:hover {
+	margin-top:10px;
+	color:#3bd32f;
+	font-weight:normal;
+	text-decoration:none;
+	border-bottom:3px #3bd32f double;
+}
+
+
+/*Länkar som är mailadresser*/
+a.mail:link,a.mail:visited{
+	text-decoration:none;
+	color:#000;
+}
+a.mail:hover{
+	text-decoration:none;
+	color:#3bd32f;
+	border-bottom:3px #3bd32f double;
+};
+

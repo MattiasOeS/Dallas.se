@@ -1,0 +1,1 @@
+var node=document.documentElement;if(node.className===null||node.className.match(/\bjs\b/)===null){var append="js";var className=node.className;node.className=className===null?append:className.replace(/\s+/g," ")+(className===""?"":" ")+append}

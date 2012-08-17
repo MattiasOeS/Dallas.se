@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+
+.tm25{
+	margin-top:25px;	
+}
+
+.tm30{
+	margin-top:30px;
+}
+
+.bm25{
+	margin-bottom:25px;
+}
+
+.bm30{
+	margin-bottom:30px;
+}
+
+.bp25bb3black{
+	height:auto;
+	padding-bottom:25px;	
+	border-bottom:3px #000 solid;
+}
+
+.tm112tp25bt2black{
+	height:auto;
+	padding-top:25px;	
+	border-top:2px #000 solid;
+}
