@@ -1,7 +1,7 @@
 <?php
 
-update_option('siteurl','http://test.dallas.se');
-update_option('home','http://test.dallas.se');  
+update_option('siteurl','http://dallas.test.n-i.se');
+update_option('home','http://dallas.test.n-i.se');  
 
 
 // Load main options panel file  
@@ -82,8 +82,16 @@ function ttrust_scripts() {
 	
 	wp_enqueue_script('fittext', get_bloginfo('template_url').'/js/jquery.fittext.js', array('jquery'), '1.0', true);	
 	
+	wp_enqueue_script('easing', get_bloginfo('template_url').'/js/jquery.easing.1.3.js', array('jquery'), '1.0', true);	
+	
+	wp_enqueue_script('masonry', get_bloginfo('template_url').'/js/jquery.masonry.min.js', array('jquery'), '1.0', true);	
+	
+	wp_enqueue_script('lazyload', get_bloginfo('template_url').'/js/jquery.lazyload.js', array('jquery'), '1.0', true);	
+	
 	wp_enqueue_style('slideshow', get_bloginfo('template_url').'/css/flexslider.css', false, '1.8', 'all' );
 	wp_enqueue_script('slideshow', get_bloginfo('template_url').'/js/jquery.flexslider-min.js', array('jquery'), '1.8', true);	
+	
+	wp_enqueue_script('yt_iframe_api', 'http://www.youtube.com/iframe_api', array('jquery'), '1.8', true);	
 	
 	wp_enqueue_script('theme_trust_js', get_bloginfo('template_url').'/js/theme_trust.js', array('jquery'), '1.0', true);	
 	
@@ -96,27 +104,7 @@ function ttrust_theme_head() { ?>
 
 <style type="text/css" media="screen">
 
-<?php $heading_font = of_get_option('ttrust_heading_font'); ?>
-<?php $body_font = of_get_option('ttrust_body_font'); ?>
-<?php $call_to_action_font = of_get_option('ttrust_call_to_action_font'); ?>
-<?php $banner_main_font = of_get_option('ttrust_banner_main_font'); ?>
-<?php $banner_secondary_font = of_get_option('ttrust_banner_secondary_font'); ?>
-<?php if ($heading_font) : ?>
-	h1, h2, h3, h4, h5, h6 { font-family: '<?php echo $heading_font; ?>'; }
-<?php endif; ?>
-<?php if ($body_font) : ?>
-	body { font-family: '<?php echo $body_font; ?>'; }
-<?php endif; ?>
-<?php if ($banner_main_font) : ?>
-	#homeBanner h2 { font-family: '<?php echo $banner_main_font; ?>'; }
-<?php endif; ?>
-<?php if ($banner_secondary_font) : ?>
-	#homeBanner p { font-family: '<?php echo $banner_secondary_font; ?>'; }
-<?php endif; ?>
 
-<?php if(of_get_option('ttrust_banner_text_position')) : ?>
-	#bannerText { top: <?php echo(of_get_option('ttrust_banner_text_position')); ?>px; }
-<?php endif; ?>
 
 <?php if(of_get_option('ttrust_color_accent')) : ?>
 	blockquote, address {
@@ -542,16 +530,16 @@ function create_post_types() {
 add_action( 'init', 'create_taxonomies' );
 function create_taxonomies() {
 	$labels = array(
-    	'name' => __( 'Skills' ),
-    	'singular_name' => __( 'Skill' ),
-    	'search_items' =>  __( 'Search Skills' ),
-    	'all_items' => __( 'All Skills' ),
-    	'parent_item' => __( 'Parent Skill' ),
-    	'parent_item_colon' => __( 'Parent Skill:' ),
-    	'edit_item' => __( 'Edit Skill' ),
-    	'update_item' => __( 'Update Skill' ),
-    	'add_new_item' => __( 'Add New Skill' ),
-    	'new_item_name' => __( 'New Skill Name' )
+    	'name' => __( 'Tags' ),
+    	'singular_name' => __( 'Tag' ),
+    	'search_items' =>  __( 'Search Tags' ),
+    	'all_items' => __( 'All Tags' ),
+    	'parent_item' => __( 'Parent Tag' ),
+    	'parent_item_colon' => __( 'Parent Tag:' ),
+    	'edit_item' => __( 'Edit Tag' ),
+    	'update_item' => __( 'Update Tag' ),
+    	'add_new_item' => __( 'Add New Tag' ),
+    	'new_item_name' => __( 'New Tag Name' )
   	); 	
 
   	register_taxonomy('skill','project',array(
@@ -633,6 +621,26 @@ function ttrust_get_terms_list( $id = '' , $echo = true ) {
     return false;
   }
 }
+
+
+
+////////////////////////////////////////////////////////////////////
+// Display content text only and limit characters by $num
+////////////////////////////////////////////////////////////////////
+
+
+function content($num) {
+	$theContent = get_the_excerpt();
+	$output = preg_replace('/<img[^>]+./','', $theContent);
+	$output = preg_replace( '/<blockquote>.*<\/blockquote>/', '', $output );
+	$output = preg_replace( '|\[(.+?)\](.+?\[/\\1\])?|s', '', $output );
+	$limit = $num+1;
+	$content = explode(' ', $output, $limit);
+	array_pop($content);
+	$content = implode(" ",$content)."...";
+	echo $content;
+}
+
 
 
 
@@ -853,3 +861,7 @@ function ttrust_pings($comment, $args, $depth) {
 <?php
 }
 ?>
+
+
+
+

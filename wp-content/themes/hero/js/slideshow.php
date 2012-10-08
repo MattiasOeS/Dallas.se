@@ -17,7 +17,9 @@ jQuery(window).load(function() {
 		directionNav: true,
 		slideshow: false,				 				
 		animation: '<?php echo $slideshow_effect; ?>',
-		animationLoop: true
+		animationLoop: true,
+		prevText: "h",
+		nextText: "j"
 	});  
 	
 });
