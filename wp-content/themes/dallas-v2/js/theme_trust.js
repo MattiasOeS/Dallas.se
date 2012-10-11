@@ -68,20 +68,7 @@ function projectFilterInit() {
 		
 
 		return false;
-	});	
-	
-	
-	caseContent();
-	
-}
-
-
-function caseContent() {
-	
-	if($('.project-slider').length > 0) {
-		$('.project').prepend($('.project-slider'));
-		$('.project').prepend($('.project-excerpt'));
-	}
+	});
 	
 }
 

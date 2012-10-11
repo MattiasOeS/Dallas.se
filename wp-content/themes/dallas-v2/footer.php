@@ -2,27 +2,27 @@
 	</div>	
 	<div id="footer" >
 		<div class="inside">		
-		<div class="primary clearfix">
-			<div class="recent">
+		<div class="primary">
+			<div class="footershade_top"></div>
+			<div class="recent clearfix">
 			
-				<h2>Recent stories</h2>
+				<h1>Recent stories</h1>
 				
 				<?php
 				$query = new WP_Query(array(
 						'category_name' => 'short', 
-						'posts_per_page' => '3' 
+						'posts_per_page' => '2' 
 					));
 				
 				while ( $query->have_posts() ) : $query->the_post(); 
 				?>
 				
 				<div class="blog-post">
-					<h3><?php the_title(); ?></h3>
+					<h2><?php the_title(); ?></h2>
 					<p>
-						<?php echo substr(get_the_excerpt(),0,150); ?>... <a class="more green">Read more</a>
+						<?php echo substr(get_the_excerpt(),0,150); ?>... <a class="more">Read more<span></span></a>
 					</p>
 					<a href="<?php the_permalink(); ?>"></a>
-					<div class="divider"></div>
 				</div>
 				
 				<?php endwhile; ?>
@@ -30,19 +30,21 @@
 				<?php wp_reset_postdata(); ?>
 			
 			</div>
+			<div class="footershade_bottom"></div>
 			
-			<div class="empire">
+			<div class="contact">
 				
-				<h3>DALLAS STHLM</h3>
-				<p>
-					<a class="green" href="#">INFO<span class="dallaswebicons">d</span>DALLAS.SE</a><br />
-					HEAD QUATER: +46 (0)8-670 96 00<br />
-					ARTIC OFFICE: +46 (0)8-670 96 00<br />
-				</p>
-				<div class="divider"></div>
-				<p class="green">
-					<a class="green" href="#">FACEBOOK</a>, <a class="green" href="#">YOUTUBE</a>, <a class="green" href="#">TWITTER</a>
-				</p>
+				<span class="large">Sthlm: 46 (0)8-670 96 00</span>
+				<div class="dot"></div>
+				<span class="large">Åre: +46 (0)8-670 96 00</span>
+				
+				<div class="links">
+					<a href="mailto:info@dallas.se">info@dallas.se</a>
+					<a href="https://www.facebook.com/dallassthlm">Facebook</a>
+					<a href="http://www.youtube.com/user/dallassthlm">YouTube</a>
+					<a href="https://twitter.com/dallassthlm">Twitter</a>
+					<a href="/blog/">Stories</a>
+				</div>
 				
 			</div>
 			

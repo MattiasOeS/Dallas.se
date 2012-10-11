@@ -3,10 +3,10 @@
 		<div id="pageHead">
 			<div class="projectNav clearfix">
 				<div class="previous <?php if(!get_previous_post()){ echo 'inactive'; }?>">
-					<?php previous_post_link('%link', '<span class="drop-left"></span> %title'); ?>
+					<?php previous_post_link('%link', '<span class="drop-left"></span>%title'); ?>
 				</div>				
 				<div class="next <?php if(!get_next_post()){ echo 'inactive'; }?>">						
-					<?php next_post_link('%link', '%title <span class="drop-right"></span>'); ?>				
+					<?php next_post_link('%link', '%title<span class="drop-right"></span>'); ?>				
 				</div>					
 			</div>	
 			<div class="project_head clearfix">
@@ -37,10 +37,16 @@
 					<?php the_excerpt(); ?>
 				</div>
 				<div class="project-content">				
-					<?php  
+					<?php 
 					$content = split_content();  
-					echo '<div class="page-column page-column-first">', array_shift($content), '</div>';  
-					echo '<div class="page-column page-column-second">', implode($content), '</div>';  
+					if(strlen($content[1]) > 0) {
+						echo '<div class="page-column page-column-first">', $content[0], '</div>';  
+						echo '<div class="page-column page-column-second">', $content[1], '</div>';  
+					}
+					else {
+						echo $content[0];
+					}
+					
 					?> 	
 				</div>		
 

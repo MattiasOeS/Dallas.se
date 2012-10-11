@@ -638,7 +638,7 @@ function content($num) {
 
 function split_content() {  
     global $more;  
-    $more = true;  
+    $more = true; 
     $content = preg_split('/<span id="more-\d+"><\/span>/i', get_the_content('more'));  
     for($c = 0, $csize = count($content); $c < $csize; $c++) {  
         $content[$c] = apply_filters('the_content', $content[$c]);  

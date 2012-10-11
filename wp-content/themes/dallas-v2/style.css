@@ -107,7 +107,6 @@ Author: Dallas
     src: url('fonts/DalaFloda-Black.eot');
     src: url('fonts/DalaFloda-Black.eot?#iefix') format('embedded-opentype'),
          url('fonts/DalaFloda-Black.woff') format('woff'),
-         url('fonts/DalaFloda-Black.ttf') format('truetype'),
          url('fonts/DalaFloda-Black.svg#DalaFloda-Black') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -117,7 +116,6 @@ Author: Dallas
     src: url('fonts/DalaFloda-BlackItalic.eot');
     src: url('fonts/DalaFloda-BlackItalic.eot?#iefix') format('embedded-opentype'),
          url('fonts/DalaFloda-BlackItalic.woff') format('woff'),
-         url('fonts/DalaFloda-BlackItalic.ttf') format('truetype'),
          url('fonts/DalaFloda-BlackItalic.svg#DalaFloda-BlackItalic') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -128,7 +126,6 @@ Author: Dallas
     src: url('fonts/ChaletBook-Bold.eot');
     src: url('fonts/ChaletBook-Bold.eot?#iefix') format('embedded-opentype'),
          url('fonts/ChaletBook-Bold.woff') format('woff'),
-         url('fonts/ChaletBook-Bold.ttf') format('truetype'),
          url('fonts/ChaletBook-Bold.svg#ChaletBook-Bold') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -138,7 +135,6 @@ Author: Dallas
     src: url('fonts/ChaletBook-BoldItalic.eot');
     src: url('fonts/ChaletBook-BoldItalic.eot?#iefix') format('embedded-opentype'),
          url('fonts/ChaletBook-BoldItalic.woff') format('woff'),
-         url('fonts/ChaletBook-BoldItalic.ttf') format('truetype'),
          url('fonts/ChaletBook-BoldItalic.svg#ChaletBook-BoldItalic') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -148,7 +144,6 @@ Author: Dallas
     src: url('fonts/ChaletBook-Italic.eot');
     src: url('fonts/ChaletBook-Italic.eot?#iefix') format('embedded-opentype'),
          url('fonts/ChaletBook-Italic.woff') format('woff'),
-         url('fonts/ChaletBook-Italic.ttf') format('truetype'),
          url('fonts/ChaletBook-Italic.svg#ChaletBook-Italic') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -158,7 +153,6 @@ Author: Dallas
     src: url('fonts/ChaletBook-Regular.eot');
     src: url('fonts/ChaletBook-Regular.eot?#iefix') format('embedded-opentype'),
          url('fonts/ChaletBook-Regular.woff') format('woff'),
-         url('fonts/ChaletBook-Regular.ttf') format('truetype'),
          url('fonts/ChaletBook-Regular.svg#ChaletBook-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -316,8 +310,8 @@ body {
 }
 
 p {
-	line-height: 1.7em;
-	font-size: .75em;
+	line-height: 1.575em;
+	font-size: .875em;
 	margin: 0 0 20px 0;	
 	font-weight: 100; font-smooth: always; -webkit-font-smoothing: antialiased !important;
 }
@@ -352,13 +346,6 @@ a {
 	outline: none;
 }
 
-a{	
-	color: #ccb676;	
-}
-
-a:hover {
-	color: #aa9862;	
-}
 
 a img {
 	border:none;
@@ -370,8 +357,8 @@ h1, h2, h3, h4, h5, h6{
 	font-weight: 100;
 }
 h1 { font-size: 4.125em; }
-h2 { font-size: 1.2em; }
-h3 { font-size: 0.95em; }
+h2 { font-size: 1.375em; }
+h3 { font-size: 1em; }
 
 .dallaswebicons {
 	font-family: 'dallaswebicons' !important;
@@ -450,14 +437,12 @@ textarea { width: 80%; font-size: 13px;}
 	width: 32px;
 	height: 11px;
 	background: url('images/drops.png') 0 0 no-repeat;
-	background-size: 200% auto;
 }
 .drop-right {
 	display: block;
 	width: 32px;
 	height: 11px;
 	background: url('images/drops.png') -32px 0 no-repeat;
-	background-size: 200% auto;
 }
 
 
@@ -494,10 +479,9 @@ a.action {
 }
 
 .wrap {	
-	background: #f8f8f8;
+	background: #f2f9f4;
 	padding-top: 1px;
 	position: relative;
-	box-shadow: 0px 0px 80px 0px rgba(102, 91, 75, 0.2); 
 	z-index: 1;
 	
 }
@@ -775,9 +759,14 @@ a.action {
 	padding: 0 0 0 0 !important;
 	width: 62.5%;	
 	float: left;						
-}
+}/*
 #content .project-content p {
 	display: inline-block;
+}*/
+#content .project-content .flexslider {
+	border-bottom: 1px solid #4d4d4d;
+	margin-bottom: 25px !important;
+	padding-bottom: 10px;
 }
 #content .videoContainer {margin-top: -20px;}
 
@@ -1284,11 +1273,11 @@ a.button, #footer a.button {
 }
 
 .projectNav a {
-	display: inline-block !important;
 	font-size: 16px;
 	font-family: 'DalaFloda-Black', serif;
 	color: #2a2a2a;
 }
+
 .projectNav a span.drop-left {
 	float: left;
 	margin: 1px 5px 0 0;
@@ -1302,10 +1291,10 @@ a.button, #footer a.button {
 	color: #3bd32f;	
 }
 .projectNav a:hover span.drop-left {
-	background-position: 0 -11px;
+	background-position: 0 -12px;
 }
 .projectNav a:hover span.drop-right {
-	background-position: -32px -11px;
+	background-position: -32px -12px;
 }
 
 .projectNav .previous {
@@ -1471,9 +1460,12 @@ a.button, #footer a.button {
 	margin: 0 0 15px 0 !important;	
 }
 
-.slideshow li, #content .flexslider li, #content .flexslider ol {
+.slideshow li, #content .flexslider li {
 	list-style: none !important;
 	list-style-type: none !important;	
+}
+#content .flexslider ol {
+	display: none !important;
 }
 
 #content .flexslider .slides {
@@ -1481,26 +1473,24 @@ a.button, #footer a.button {
 }
 
 #content .flex-direction-nav a {
-	font-family: 'dallaswebicons';
-	text-indent: 0;
-	font-size: 48px;
-	line-height: 48px;
-	color: #fff;
-	width: 48px;
-	height: 48px;
+	text-indent: -9999px;
+	width: 50%;
+	height: 100%;
+	top: 0;
+	margin: 0;
 }
 #content .flex-direction-nav a:hover {
-	-moz-transform: scale(1.1);
 }
 #content .flex-direction-nav a:active {
-	-moz-transform: scale(1);
 }
 
 #content .flex-direction-nav .flex-prev {
 	left: 0;
+	background: url('images/flexslider/prev.png') 0 50% no-repeat;
 }
 #content .flex-direction-nav .flex-next {
 	right: 0;
+	background: url('images/flexslider/next.png') 100% 50% no-repeat;
 }
 
 
@@ -2042,14 +2032,10 @@ ol#commentslist {
 //  11 - Footer
 ////////////////////////////////////////////////////////////////////*/
 
-#footer {	
-	background: url('images/footer_bg.png') 0 0 repeat-x #e7e6e5;
-	color: #5b5b5a;
-}
 
 #footer .inside {
 	max-width: 62.5em;
-	margin: 0 auto 0;
+	margin: -70px auto 0;
 	padding: 0px 0 0;
 }
 
@@ -2091,21 +2077,6 @@ ol#commentslist {
 	padding: 0;	
 }
 
-#footer a {
-	color: #9a9a99;	
-}
-
-#footer.light a {
-	color: #939393;	
-}
-
-#footer a:hover {
-	color: #fff;	
-}
-
-#footer.light a:hover {
-	color: #6d6d6d;	
-}
 
 #footer .secondary {
 	margin: 10px 0 0;
@@ -2113,24 +2084,28 @@ ol#commentslist {
 	text-align: right;
 	border-top: 1px solid #313131;
 }
+#footer .footershade_top {
+	width: 118%;
+	margin: 0 -9% 40px;
+	height: 77px;
+	background: url('images/footer_shades.png') 0 0 no-repeat;
+	background-size: 100% 200%;
+}
+#footer .footershade_bottom {
+	width: 118%;
+	margin: 0 -9%;
+	height: 77px;
+	background: url('images/footer_shades.png') 0 -79px no-repeat;
+	background-size: 100% 200%;
+}
 #footer .primary {
 	padding: 35px 2.5%;
 	position: relative;
-	min-height: 310px;
 }
 
-#footer .primary p {
-	margin: 0 0 4px;
-	color: #363636;
-	font-family: "gotham_htf_bookregular",​Helvetica,​Arial,​sans-serif;
-}
 #footer .primary h2 {
 	color: #363636;
-	margin: 0 0 35px;
-}
-#footer .primary h3 {
-	color: #363636;
-	margin: 0 0 4px;
+	margin: 0 0 7px;
 }
 #footer .primary .divider {
 	width: 85px;
@@ -2140,20 +2115,33 @@ ol#commentslist {
 	background: #aaaaaa;
 }
 #footer .primary .blog-post {
+	width: 49%;
+	margin: 0 2% 0 0;
+	padding: 20px 0;
+	float: left;
 	position: relative;
+	border-top: 1px solid #4d4d4d;
+}
+#footer .primary .blog-post:last-child {
+	margin: 0 !important;
 }
 #footer .primary .blog-post:last-child .divider {
 	display: none;
 }
 #footer .primary .recent{
-	width: 50%;
-	margin: 0 3% 0 0;
-	float: left;
 }
 #footer .primary .recent .blog-post p a.more {
-	text-transform: uppercase;
-	font-family: "gotham_rounded_bold_boldRg",Helvetica,​Arial,​sans-serif;
+	font-size: 16px;
+	font-family: 'DalaFloda-Black',serif;
 	font-weight: 100;
+	display: inline-block;
+}
+#footer .primary .recent .blog-post p a.more span {
+	width: 31px;
+	height: 11px;
+	display: inline-block;
+	background: url("images/drops.png") 100% 0px no-repeat;
+	margin: 0 0 0 4px;
 }
 #footer .primary .recent .blog-post > a {
 	display: block;
@@ -2164,42 +2152,31 @@ ol#commentslist {
 	height: 100%;
 }
 
-#footer .primary .empire {
-	position: absolute;
-	top: 20px;
-	right: 0px;
-	width: 300px;
-	height: 142px;
-	background: url('images/empire.png') center 10px no-repeat;
+#footer .contact {
+	width: 100%;
+	margin: -24px auto 20px;
+	background: url("images/logo_black.png") 50% 0 no-repeat;
+	padding: 80px 0 0;
 	text-align: center;
-	padding: 168px 0 0;
 }
-#footer .primary .empire h3 {
-	font-family: "gotham_rounded_medium_mediuRg",Helvetica,​Arial,​sans-serif;
-	margin: 0 0 6px;
+#footer .contact span.large {
+	font-family: 'DalaFloda-Black',serif;
+	font-size: 30px;
+	line-height: 36px;
 }
-#footer .primary .empire p {
-	font-family: "gotham_rounded_book_bookRg",Helvetica,​Arial,​sans-serif;
+#footer .contact .dot {
+	display: inline-block;
+	background: url("images/dot_pink.png") 50% 0 no-repeat;
+	width: 17px;
+	height: 11px;
+}
+#footer .contact .links {
+	font-family: 'DalaFloda-Black',serif;
 	font-size: 14px;
+	margin: 35px 0;
 }
-#footer .primary .empire p .dallaswebicons {
-	font-size: 24px;
-    font-weight: 100;
-    margin: 0 2px;
-    vertical-align: bottom;
-}
-#footer .primary .empire p a {
-	font-family: "gotham_rounded_bold_boldRg",Helvetica,​Arial,​sans-serif;
-}
-#footer .primary .empire .divider {
-	margin: 10px auto;
-}
-#footer .secondary .left {
-	float: left;
-}
-
-#footer .secondary .right {
-	float: right;
+#footer .contact .links a {
+	margin: 0 10px;
 }
 
 
@@ -2248,16 +2225,16 @@ ol#commentslist {
 		-webkit-column-count: 1;
 		column-count: 1;
 	}
-	#footer .primary .recent { 
-		display: none; 
-	}
-	#footer .primary .empire {
-		right: 50%;
-		margin-right: -150px;
-	}
 	
 	ul#menu-main li a {
 		font-size: 18px;
+	}
+	
+	#footer .blog-post {
+		width: 100% !important;
+		margin: 0 !important;
+		border: 0 !important;
+		padding: 0 !important;
 	}
 	
 }
@@ -2289,6 +2266,11 @@ ol#commentslist {
 	}	
 	
 	#comments { width: 100%;}	
+	
+	
+	#footer .contact .dot { display: none; }
+	#footer .contact .large { display: block; }
+	
 }
 
 /*layouts smaller than 600px, iPhone and mobiles*/
