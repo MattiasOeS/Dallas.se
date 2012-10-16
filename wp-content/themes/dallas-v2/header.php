@@ -10,6 +10,8 @@
 	<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
 	
+	<script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
+	
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 	<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> Atom Feed" href="<?php bloginfo('atom_url'); ?>" />
@@ -33,7 +35,7 @@
 		<?php $ttrust_logo = of_get_option('logo'); ?>
 		<div id="logo">
 		<?php if($ttrust_logo) : ?>				
-			<h1 class="logo"><a href="<?php bloginfo('url'); ?>"><img src="<?php echo $ttrust_logo; ?>" alt="<?php bloginfo('name'); ?>" /></a></h1>
+			<h1 class="logo"><a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></h1>
 		<?php else : ?>				
 			<h1><a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></h1>				
 		<?php endif; ?>	
