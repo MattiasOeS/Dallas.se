@@ -93,6 +93,8 @@ function ttrust_scripts() {
 	
 	wp_enqueue_script('yt_iframe_api', 'http://www.youtube.com/iframe_api', array('jquery'), '1.8', true);	
 	
+	wp_enqueue_script('foresight', get_bloginfo('template_url').'/js/foresight.js', array('jquery'), '1.0', true);
+	
 	wp_enqueue_script('theme_trust_js', get_bloginfo('template_url').'/js/theme_trust.js', array('jquery'), '1.0', true);	
 	
 }
@@ -287,6 +289,8 @@ set_post_thumbnail_size(100, 100, true);
 add_image_size('ttrust_post_thumb_big', 720, 220, true);
 add_image_size('ttrust_post_thumb_small', 150, 150, true);
 add_image_size('ttrust_post_thumb_tiny', 50, 50, true);
+add_image_size('ttrust_half_notcropped', 475, 9999, false);
+add_image_size('ttrust_half_notcropped_x2', 950, 9999, false);
 add_image_size('ttrust_one_third_cropped', 300, 175, true);
 
 
@@ -531,12 +535,37 @@ function create_taxonomies() {
     	'new_item_name' => __( 'New Tag Name' )
   	); 	
 
-  	register_taxonomy('skill','project',array(
+  	register_taxonomy('tags','project',array(
     	'hierarchical' => false,
     	'labels' => $labels
   	));
   	
 	flush_rewrite_rules( false );
+}
+
+
+add_action( 'init', 'create_filters' );
+function create_filters() {
+	
+	$labels_tax = array(
+		'name' => _x( 'Filters', 'taxonomy general name' ),
+		'singular_name' => _x( 'Filter', 'taxonomy singular name' ),
+		'search_items' =>  __( 'Search' ),
+		'all_items' => __( 'All' ),
+		'parent_item' => __( 'Parent' ),
+		'parent_item_colon' => __( 'Parent' ),
+		'edit_item' => __( 'Edit' ), 
+		'update_item' => __( 'Update' ),
+		'add_new_item' => __( 'Add new' ),
+		'new_item_name' => __( 'New' ),
+		'menu_name' => __( 'Filters' ),
+	);
+	    
+	register_taxonomy('filters', 'project', array(
+    	'hierarchical' => true,
+    	'labels' => $labels_tax
+  	));
+	
 }
 
 // List custom post type taxonomies
@@ -611,6 +640,58 @@ function ttrust_get_terms_list( $id = '' , $echo = true ) {
   }
 }
 
+
+
+
+// List project filters
+
+function list_filters() {
+	global $post, $post_id;
+	// get post by post id
+	$post = &get_post($post->ID);
+	// get post type by post
+	$post_type = $post->post_type;
+	// get post type taxonomies
+	
+	$terms = get_the_terms( $post->ID, 'filters' );
+	if ( !empty( $terms ) ) {
+		$out = array();
+		foreach ( $terms as $term ) {
+			if($term->name == 'Interactive')
+				$termName = '<span class="first">Inter</span><span class="last">active</span>';
+			else 
+				$termName = $term->name;
+				
+			$out[] = '<li><a href="' . get_bloginfo('wpurl') . '/cases/#' . $term->slug . '">'.$termName.'</a></li>';
+		}
+		$return = join( $out );
+	}
+
+	return $return;
+} 
+
+
+// List project tags
+
+function list_tags() {
+	global $post, $post_id;
+	// get post by post id
+	$post = &get_post($post->ID);
+	// get post type by post
+	$post_type = $post->post_type;
+	// get post type taxonomies
+	
+	$terms = get_the_terms( $post->ID, 'tags' );
+	if ( !empty( $terms ) ) {
+		$out = array();
+		foreach ( $terms as $term ) {
+			$out[] = '<a href="' . get_term_link( $term, 'tags' ) . '">'.$term->name.'</a>';
+		}
+		$return = join( $out );
+	}
+
+	return $return;
+}
 
 
 ////////////////////////////////////////////////////////////////////

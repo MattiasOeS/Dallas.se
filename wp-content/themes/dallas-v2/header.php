@@ -53,28 +53,31 @@
 		
 	<?php if(is_front_page()): ?>
 		<div id="topBanner">
-			<div class="flexslider loading">
 			
-				<ul class="slides">
-					<li class="about">
+			<div id="topSlider">
+				<div class="container clearfix">
+					<div class="about">
 						<div id="bannerText">
 							<h2><?php echo of_get_option('ttrust_banner_text_primary'); ?></h2>
 							<p><?php echo of_get_option('ttrust_banner_text_secondary');  ?></p>
-							<a id="showreel_link" href="#">Watch the showreel</a>
 						</div>
-					</li>
-					<li class="showreelvideo">
+						<a id="showreel_cta">
+							<span class="dallaswebicons">a</span>
+							<span class="txt">Play the Dallas Sthlm Showreel</span>
+						</a>
+					</div>
+					<div class="showreelvideo">
 						<div id="showreel">
 							<div class="youtube showreel">
 								<div class="embed" id="Z8Wy7rGKsT0"></div>
 								<div class="control play"></div>
 							</div>
 						</div>
-					</li>
-				
-				</ul>
-				
-			</div>	
+						<a id="showreel_back" class="dallaswebicons">b</a>
+					</div>
+				</div>
+			</div>
+			
 		</div>	
 	<?php endif; ?>	
 		

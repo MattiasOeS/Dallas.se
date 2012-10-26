@@ -11,23 +11,14 @@
 			</div>	
 			<div class="project_head clearfix">
 				<h1><?php the_title(); ?></h1>
-				<div class="links">
-					<!--<ul class="skillList clearfix"><?php ttrust_get_terms_list(); ?></ul>-->
-					<div id="temptagdot1"></div>
-					<div id="temptagdot2"></div>
+				<div class="filterWrap">
+					<ul id="filterNav"><?php echo list_filters(); ?></ul>
 				</div>
 			</div>
 		</div>
 				 
 		<div id="content" class="full">			
 			<?php while (have_posts()) : the_post(); ?>	
-
-			<?php $youtube_id = get_post_meta($post->ID, "_ttrust_youtube_id_value", true); ?>
-			<?php if($youtube_id) : ?>
-				<div id="youtube">
-					<iframe src="http://www.youtube.com/embed/<?php echo $youtube_id; ?>?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-				</div>
-			<?php endif; ?>		
 				    
 			<div class="project clearfix">  
 				<?php			
@@ -48,6 +39,9 @@
 					}
 					
 					?> 	
+					<div class="tags clearfix">
+						<?php echo list_tags(); ?>
+					</div>
 				</div>		
 
 				<?php $project_url = get_post_meta($post->ID, "_ttrust_url_value", true); ?>

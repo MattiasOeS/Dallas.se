@@ -1,6 +1,6 @@
 <div id="projects" class="clearfix">		
 				
-	<?php $page_skills = get_post_meta($post->ID, "_ttrust_page_skills_value", true); ?>
+	<?php $page_skills = get_post_meta($post->ID, "_ttrust_page_tags_value", true); ?>
 	
 	<?php if ($page_skills) : // if there are a limited number of skills set ?>
 		<?php $skill_slugs = ""; $skills = explode(",", $page_skills); ?>

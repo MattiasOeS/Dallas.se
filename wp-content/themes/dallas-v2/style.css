@@ -6,90 +6,8 @@ Author: Dallas
 */
 
 
-
-
-
 /* FONTS */
 
-/*
-@font-face {
-    font-family: 'gotham_rounded_bold_boldRg';
-    src: url('fonts/gothamroundedbold-bold.eot');
-    src: url('fonts/gothamroundedbold-bold.eot?#iefix') format('embedded-opentype'),
-         url('fonts/gothamroundedbold-bold.woff') format('woff'),
-         url('fonts/gothamroundedbold-bold.ttf') format('truetype'),
-         url('fonts/gothamroundedbold-bold.svg#gotham_rounded_bold_boldRg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'gotham_rounded_book_bookRg';
-    src: url('fonts/gothamroundedbook-book.eot');
-    src: url('fonts/gothamroundedbook-book.eot?#iefix') format('embedded-opentype'),
-         url('fonts/gothamroundedbook-book.woff') format('woff'),
-         url('fonts/gothamroundedbook-book.ttf') format('truetype'),
-         url('fonts/gothamroundedbook-book.svg#gotham_rounded_book_bookRg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'gotham_rounded_medium_mediuRg';
-    src: url('fonts/gothamroundedmedium-medium.eot');
-    src: url('fonts/gothamroundedmedium-medium.eot?#iefix') format('embedded-opentype'),
-         url('fonts/gothamroundedmedium-medium.woff') format('woff'),
-         url('fonts/gothamroundedmedium-medium.ttf') format('truetype'),
-         url('fonts/gothamroundedmedium-medium.svg#gotham_rounded_medium_mediuRg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'gotham_htf_bookregular';
-    src: url('fonts/gothamhtf-book.eot');
-    src: url('fonts/gothamhtf-book.eot?#iefix') format('embedded-opentype'),
-         url('fonts/gothamhtf-book.woff') format('woff'),
-         url('fonts/gothamhtf-book.ttf') format('truetype'),
-         url('fonts/gothamhtf-book.svg#gotham_htf_bookregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'gotham_htf_lightregular';
-    src: url('fonts/gothamhtf-light.eot');
-    src: url('fonts/gothamhtf-light.eot?#iefix') format('embedded-opentype'),
-         url('fonts/gothamhtf-light.woff') format('woff'),
-         url('fonts/gothamhtf-light.ttf') format('truetype'),
-         url('fonts/gothamhtf-light.svg#gotham_htf_lightregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'gotham_htf_mediumregular';
-    src: url('fonts/gothamhtf-medium.eot');
-    src: url('fonts/gothamhtf-medium.eot?#iefix') format('embedded-opentype'),
-         url('fonts/gothamhtf-medium.woff') format('woff'),
-         url('fonts/gothamhtf-medium.ttf') format('truetype'),
-         url('fonts/gothamhtf-medium.svg#gotham_htf_mediumregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'gothamhtfbold';
-    src: url('fonts/gothamhtf-bold.eot');
-    src: url('fonts/gothamhtf-bold.eot?#iefix') format('embedded-opentype'),
-         url('fonts/gothamhtf-bold.woff') format('woff'),
-         url('fonts/gothamhtf-bold.ttf') format('truetype'),
-         url('fonts/gothamhtf-bold.svg#gothamhtfbold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-*/
 @font-face {
     font-family: 'dallaswebicons';
     src: url('fonts/dallaswebicons-book.eot');
@@ -157,43 +75,6 @@ Author: Dallas
     font-weight: normal;
     font-style: normal;
 }
-
-
-
-#fonttest {
-	margin: 0 0 50px;
-}
-
-#fonttest h1 {
-	font-family: 'DalaFloda-Black', serif;
-	font-size: 66px;
-	line-height: 56px;
-	font-weight: 100;
-	text-transform: none;
-	color: #2a2a2a;
-	margin: 0 0 40px;
-}
-
-#fonttest strong {
-	font-family: 'ChaletBook-Bold', sans-serif;
-	font-weight: normal;
-	color: #e20060;
-}
-
-#fonttest p {
-	font-family: 'ChaletBook-Regular', sans-serif;
-	font-size: 14px;
-	line-height: 20px;
-	color: #2a2a2a;
-}
-
-#fonttest p.excerpt {
-	color: #e20060;
-	font-size: 22px;
-	line-height: 28px;
-	font-weight: normal;
-}
-
 
 
 
@@ -494,13 +375,8 @@ a.action {
 
 #main {
 	margin: 0 auto;
-	padding: 24px 0 0;	
+	padding: 18px 0 0;	
 	max-width: 62.5em;			
-}
-
-
-.home #main {
-	border: none;		
 }
 
 .home.page #content {
@@ -526,10 +402,18 @@ a.action {
 	width: 100%;
 	height: 100%;
 }
-#content.blog div.blog-post > p > img {
+#content.blog div.blog-post a.more {
+    font-size: 0.75em;
+    position: relative;
+    top: -15px;
+    color: #47e300;
+}
+#content.blog div.blog-post > img {
 	margin: 0 0 8px;
+	max-width: 100%;
 }
 #content.blog small.date {
+	display: block;
 	position: relative;
 	top: -12px;
 	font-size: 0.6875em;
@@ -539,6 +423,9 @@ a.action {
 	-webkit-column-count: 3;
 	   -moz-column-count: 3;
 	   		column-count: 3;
+	-webkit-column-gap: 25px;
+	   -moz-column-gap: 25px;
+	   		column-gap: 25px;
 }
 
 #sidebar {
@@ -778,9 +665,10 @@ a.action {
 #content .videoContainer {margin-top: -20px;}
 
 #content.full {
-	margin: 0 0 50px 2.5%;
+	margin: 0 auto !important;
 	padding: 0 0 0 0 !important;
-	width: 95%;					
+	float: none !important;
+	width: 95%;		
 }
 
 #content.full.grid {
@@ -791,9 +679,6 @@ a.action {
 	width: 100%;						
 }
 
-.page-template-page-home-php #main {
-	padding-top: 35px;
-}
 
 #content.fullProjects{	
 	width: 100%;				
@@ -904,7 +789,7 @@ a.action {
 }
 
 #pageHead .project_head {
-	padding: 18px 0 20px;
+	padding: 18px 0 0;
 }
 #pageHead .project_head h1 {
 	float: left;
@@ -913,83 +798,96 @@ a.action {
 	float: right;
 }
 
+
+.project-content .tags {
+	float: right;
+	margin: 12px 0 0 0;
+}
+.project-content .tags a {
+	display: block;
+	float: left;
+	padding: 5px;
+	margin: 0 0 0 7px;
+	background: #F0F0F0;
+	font-family: 'DalaFloda-Black', serif;
+	font-size: 1.5em;
+	color: #2A2A2A;
+}
+.project-content .tags a:hover {
+	background: #47e300;
+	color: #ffffff;
+}
+
 /*Home ------------------*/
 
 #topBanner {	
 	position: relative;
+    max-width: 62.5em;
+    margin: 55px auto 0;
     overflow: hidden;
-    padding: 5px 0 20px;
-	margin-top: -25px;
 }
-body.home #topBanner {
-	margin-top: 0;
-}
-#topBanner_bottom {
-	width: 100%;
-	height: 10px;
-	display: block;
-	margin: 0 auto;
-	width: 100%;
-	overflow: hidden;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	background: url('images/topBanner_bottom_bg.png') 0 0 repeat-x;
-	z-index: 2;
-}
-#topBanner .flexslider {
-	width: 100%;
-	height: 100%;
-	max-width: 960px;
-	margin: 0 auto;
+
+#topSlider {
+	width: 95%;
 	position: relative;
-	padding: 0;
-	opacity: 1;
+	margin: 0 auto;
+	overflow: hidden;
+    border-bottom: 1px solid #4d4d4d;
+    border-top: 1px solid #4d4d4d;
 }
-#topBanner .flexslider.loading {
-	opacity: 0;
-}
-#topBanner .flexslider ul.flex-direction-nav,
-#topBanner .flexslider li.showreelvideo {
-	display: block !important;
-}
-#topBanner .flexslider ul.flex-direction-nav a {
-	font-family: 'dallaswebicons';
-	text-indent: 0;
-	color: #3bd32f;
-	font-size: 47px;
-	width: 49px;
-	height: 48px;
-	margin: -24px 0;
-}
-#topBanner .flexslider ul.flex-direction-nav a.flex-next {
-	right: 0;
-}
-#topBanner .flexslider ul.flex-direction-nav a.flex-prev {
-	left: 2px;
-}
-#topBanner .flexslider ul.flex-direction-nav a.flex-disabled {
-	display: none;
-}
-
-
-#topBanner .flexslider ol.flex-control-nav {
-	display: none !important;
+#topSlider .container {
+	width: 250%;
+	position: relative;
 }
 
 #bannerText {
-	position: relative;
-	text-align: center;		
-	width: 100%;
-	max-width: 960px;
-	padding: 7% 0 0;
+	position: relative;	
+	padding: 20px 2.5% 63px 0;
+	width: 80%;
+	float: left;
 }
+#topBanner a#showreel_cta {
+	display: block;
+	position: relative;
+	float: left;
+	color: #0ab0ed;
+	cursor: pointer;
+	width: 17.5%;
+	padding: 28px 0;
+}
+#topBanner a#showreel_cta span.dallaswebicons {
+	font-size: 167px;
+	width: 100%;
+	display: block;
+	padding: 0 0 31px;
+	border-bottom: 1px solid #0ab0ed;
+}
+#topBanner a#showreel_cta span.txt {
+	font-family: 'DalaFloda-Black', serif;
+	font-size: 28px;
+	line-height: 0.95em;
+	padding: 12px 0;
+	display: block;
+	background: url('images/bluedrop.png') 89% 79% no-repeat;
+}
+
 #topBanner #showreel {
 	width: 90%;
 	max-width: 690px;
 	overflow: hidden;
 	position: relative;
 	margin: 15px auto;
+}
+a#showreel_back {
+	display: block;
+	cursor: pointer;
+	font-size: 66px;
+	color: #0ab0ed;
+	position: absolute;
+	top: 50%;
+	left: 2px;
+	margin-top: -33px;
+	overflow: visible;
 }
 .youtube {
 	position: relative;
@@ -1007,6 +905,7 @@ body.home #topBanner {
 }
 .youtube .control.play {
 	background: url(images/play.png) center center no-repeat;
+	background-size: 24.2% auto;
 }
 .youtube .control.pause {
 	background: url(images/pause.png) center center no-repeat;
@@ -1026,46 +925,36 @@ body.home #topBanner {
     width: 100%;
     height: 100%;
 	background: #000;
-}/*
-#topBanner #showreel a.playbtn {
-	position: absolute;
-	top: 167px;
-	display: block;
-	width: 100%;
-	max-width: 690px;
-	height: 300px;
-	background: url(images/play.png) 45% 24% no-repeat;
-	text-align: center;
-	color: #1bf200;
-}
-#topBanner #showreel a.playbtn span {
-	width: 100%;
-	position: absolute;
-	top: 157px;
-	left: 20px;
-}*/
-	
-#topBanner h2{	
-	text-align: center;
-	color:#363636;
-	font-size: 34px;
-	text-transform: uppercase;
-	position: relative;
-	margin: 0 auto 12px;
-	padding: 0 6%;
-	font-family: "gotham_rounded_medium_mediuRg", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#topBanner p{		
-	text-align: center;
-	text-transform: uppercase;
-	color:#666666;
-	font-family: "gotham_htf_lightregular", "Georgia", serif;
-	font-size: 21px;
+#topSlider .container > div {
+	position: relative;
+    width: 40%;
+    float: left;
+}
+#topSlider .container .about {
+	margin-right: 10%;
+}
+	
+#topBanner h2{	
+	color:#2a2a2a;
+	font-size: 66px;
+	line-height: 0.96em;
+	position: relative;
+	margin: 0 auto 7px;
+	padding: 0 0 15px;
+	font-family: 'DalaFloda-Black', serif;
+	border-bottom: 1px solid #e00560;
+}
+
+#topBanner p {
+	color:#e00560;
+	font-family: "ChaletBook-Regular", sans-serif;
+	font-size: 22px;
 	line-height: 1.25em;
 	position: relative;
-	margin: 1px auto 20px;	
-	padding: 0 12%;
+	margin: 0 auto;	
+	padding: 5px 60px 5px 0;
 }
 
 #topBanner a#showreel_link {
@@ -1077,21 +966,15 @@ body.home #topBanner {
 
 .homeSection {	
 	margin-bottom: 20px!important;
-	width: 100%;	
+	width: 100%;
 }
 
-#topBanner h2, #topBanner p, a#showreel_link { display: none; }
-
 .homeSection h3 {
-	font-size: 1.2em;	
-	margin: 0 auto 30px;
-	clear: both;
-	background: transparent url(images/line.gif) 0 8px repeat-x;	
-	color: #555555;
-	text-align: center;	
-	font-family: "gotham_rounded_medium_mediuRg", "Georgia", serif;
+	font-size: 2.5em;
+	color: #2a2a2a;
+	font-family: 'DalaFloda-Black', serif;
 	width: 95%;
-	text-transform: uppercase;
+	margin: 0 auto 22px;
 }
 
 .homeSection h3 span {
@@ -1187,6 +1070,28 @@ a.button, #footer a.button {
 	position: relative;
 }
 
+#projects_head h1, .project_head h1  {
+	font-size: 83px;
+	line-height: 0.7em;
+	float: left;
+	width: 100%;
+	max-width: 250px;
+}
+.project_head h1 {
+	width: auto;
+	max-width: none;
+}
+
+#projects_head {
+	width: 95%;
+	margin: 38px auto 24px;
+	border-top: 1px solid #4d4d4d;
+	border-bottom: 1px solid #4d4d4d;
+	padding: 23px 0;
+	position: relative;
+	overflow: hidden;
+}
+
 #projects .thumbs {
 	margin: 0 auto;	
 	padding: 0 25px 0 0;
@@ -1230,6 +1135,10 @@ a.button, #footer a.button {
 	font-size: 50px;
 	color: #c0c0c0;
 }
+html.ie7 #content .project.small .preloader,
+html.ie8 #content .project.small .preloader {
+	display: none !important;
+}
 
 #content .project.small img.lazy {
 	opacity: 0;
@@ -1249,6 +1158,15 @@ a.button, #footer a.button {
 	height: 175px;
 	display: table;
 	opacity: 0;
+	filter:alpha(opacity=0);
+	transition: opacity .3s;
+	-moz-transition: opacity .3s;
+	-webkit-transition: opacity .3s;
+	-o-transition: opacity .3s;
+}
+#content .project.small .title.show {
+	opacity: 1;
+	filter:alpha(opacity=80);
 }
 #content .project.small .title .title_inside {
 	display: table-cell;
@@ -1257,20 +1175,19 @@ a.button, #footer a.button {
 }
 #content .project.small .title .title_inside > span {
 	display: inline-block;
-	line-height: 1.4em;
+	line-height: 1.5em;
 	color: #363636;
-	background-color: rgba(255,255,255,0.9);
+	background: rgb(255,255,255);
+	background: rgba(255,255,255,0.8);
 	padding: 7px 12px;
 	margin: 4px 20px;
-	font-family: "gotham_rounded_book_bookRg", Georgia, Times, "Times New Roman", serif;
 }
 #content .project.small .title .title_inside span.view {
 	color: #3bd32f;
 	font-size: 12px;
 	text-transform: uppercase;
 	border-top: 1px solid #909090;
-	padding: 2px 0 0;
-	font-family: "gotham_rounded_bold_boldRg", Georgia, Times, "Times New Roman", serif;
+	padding: 6px 0 0;
 }
 
 .projectNav {	
@@ -1338,40 +1255,54 @@ a.button, #footer a.button {
 
 /*Project Filter Navigation------------------*/
 
-#content #filterNav{
-	padding: 0!important;
-	margin: 0 auto 20px auto!important;		
-	width: 95%;	
+.filterWrap{
+	padding: 0 !important;
+	margin-top: -3px;
+	float: right;
 }
 
-#content #filterNav li{
+
+#filterNav li{
 	padding: 0px 0 0 0;
 	background: none;
 	margin: 0 8px 8px 0;	
 	display: inline-block;		
 }
 
-#filterNav li a{
-	font-size: 1em;		
-	display: inline-block;	
-	color: #909090 !important;
+#filterNav li a {		
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;	
+	color: #f2f9f4 !important;
 	text-decoration: none;
 	position: relative;
-	cursor: pointer;	
-	padding: 7px 8px 7px !important;	
+	cursor: pointer;		
 	border: none;
-	line-height: 1em;
-	text-transform: uppercase;
-	font-family: "gotham_rounded_bold_boldRg", Georgia, Times, "Times New Roman", serif;			
+	font-size: 1.5em;
+	line-height: 0.9em;
+	font-family: 'DalaFloda-Black',serif;
+	background: #0ab0ed;
+	width: 80px;
+	height: 80px;
+	-webkit-border-radius: 40px;
+	   -moz-border-radius: 40px;
+	     -o-border-radius: 40px;
+	     	border-radius: 40px;
+}
+.project_head #filterNav li a {
+	font-size: 1.125em;
+}
+#filterNav li a span.first {
+	display: block;
+}
+#filterNav li a span.first:after {
+	content: "-";
 }
 
-#filterNav li a:hover {
-	background: #e4e4e4 !important;
-}
 
-#filterNav .selected, #filterNav a.selected:hover {
-	background: #e4e4e4 !important;
-	color: #363636 !important;
+
+#filterNav .selected, #filterNav a:hover {
+	background: #e00560 !important;
 }
 
 
@@ -1426,7 +1357,7 @@ a.button, #footer a.button {
 /*Lists------------------*/
 
 #content ul{	
-	margin:  0 0 25px 20px;
+	margin:  0 0 0 20px;
 	list-style-type: disc;	
 }
 
@@ -2042,8 +1973,8 @@ ol#commentslist {
 
 #footer .inside {
 	max-width: 62.5em;
-	margin: -70px auto 0;
-	padding: 0px 0 0;
+	margin: 0 auto;
+	padding: 0px;
 }
 
 #footer.light {	
@@ -2093,7 +2024,7 @@ ol#commentslist {
 }
 #footer .footershade_top {
 	width: 118%;
-	margin: 0 -9% 40px;
+	margin: -50px -9% 40px;
 	height: 77px;
 	background: url('images/footer_shades.png') 0 0 no-repeat;
 	background-size: 100% 200%;
@@ -2123,42 +2054,33 @@ ol#commentslist {
 }
 #footer .primary .blog-post {
 	width: 49%;
-	margin: 0 2% 0 0;
+	margin: 0;
 	padding: 20px 0;
 	float: left;
 	position: relative;
 	border-top: 1px solid #4d4d4d;
 }
-#footer .primary .blog-post:last-child {
-	margin: 0 !important;
+#footer .primary .blog-post:first-child {
+	margin: 0 2% 0 0;
 }
-#footer .primary .blog-post:last-child .divider {
-	display: none;
-}
-#footer .primary .recent{
-}
-#footer .primary .recent .blog-post p a.more {
+#footer .primary .recent .blog-post a.more {
 	font-size: 16px;
 	font-family: 'DalaFloda-Black',serif;
 	font-weight: 100;
 	display: inline-block;
+	position: relative;
+	top: -12px;
 }
-#footer .primary .recent .blog-post p a.more span {
-	width: 31px;
+#footer .primary .recent .blog-post a.more span {
+	width: 32px;
 	height: 11px;
 	display: inline-block;
 	background: url("images/drops.png") 100% 0px no-repeat;
 	margin: 0 0 0 4px;
 }
-#footer .primary .recent .blog-post > a {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+#footer .primary .recent .blog-post a.more:hover span {
+	background-position: 100% -12px;
 }
-
 #footer .contact {
 	width: 100%;
 	margin: -24px auto 20px;
@@ -2204,9 +2126,6 @@ ol#commentslist {
 
 /* two columns */
 @media only screen and (max-width: 1000px) {	
-	#topBanner .flexslider ul.flex-direction-nav {
-		display: none !important;
-	}
 	
 	.thumbs {
 		width: 675px;
@@ -2222,7 +2141,45 @@ ol#commentslist {
 		width: 100% !important;
 		margin: 0 0 15px !important;
 	}
+	#footer .footershade_top {
+		margin-top: -50px !important;
+	}
+	#topBanner a#showreel_cta span.txt {
+		background: none !important;
+	}
+	
+	#bannerText {
+		width: 100%;
+		padding: 20px 0 0;
+	}
+	#topBanner p {
+		padding: 5px 0 !important;
+	}
+	#topBanner a#showreel_cta {
+		width: 100%;
+	}
+	#topBanner a#showreel_cta span.dallaswebicons {
+		font-size: 56px !important;
+		width: auto;
+		float: left;
+		border: 0;
+		margin: 0 12px 0 0;
+		padding: 0 0 0 2px;
+	}
+	#topBanner a#showreel_cta span.txt {	
+		padding: 16px 0;
+	}
+	
+	#showreel {
+		margin: 15px auto 100px !important;
+	}
+	#showreel_back {
+		top: 84% !important;
+		left: 50% !important;
+		margin: 0 0 0 -33px !important;
+	}
 }
+
 
 /* one column */
 @media only screen and (max-width: 675px) {
@@ -2246,7 +2203,7 @@ ol#commentslist {
 		width: 100% !important;
 		margin: 0 !important;
 		border: 0 !important;
-		padding: 0 !important;
+		padding: 0 0 12px !important;
 	}
 	
 }
@@ -2255,7 +2212,7 @@ ol#commentslist {
 
 /* iPad Portrait */
 
-@media only screen and (max-width: 768px) and (orientation:portrait) {	
+@media only screen and (max-width: 768px)  {	
 	
 	#comments { width: 100%;}
 	
@@ -2280,8 +2237,20 @@ ol#commentslist {
 	#comments { width: 100%;}	
 	
 	
-	#footer .contact .dot { display: none; }
-	#footer .contact .large { display: block; }
+	#footer .contact .dot { 
+		display: none; 
+	}
+	#footer .contact .large { 
+		display: block;
+		font-size: 28px !important;
+	}
+	
+	#projects h1 { max-width: 100%; }
+	#content .filterWrap { width: 100%; text-align: center; margin: 12px 0 0; }
+	
+	a#showreel_back {
+		top: 80% !important;
+	}
 	
 }
 
@@ -2291,33 +2260,33 @@ ol#commentslist {
 	html {
 	    -webkit-text-size-adjust: none; 
 	}
-	
-	h1 { font-size: 1.2em;}
-	h2 { font-size: 1.1em;}
-	h3 { font-size: 1.0em;}
-	h4 { font-size: .9em;}
-	h5 { font-size: .8em;}
+	h1 {
+	    font-size: 2.5em;
+	}
 	
 	
 	#mainNav ul li a {
 		margin: 11px 5px 21px !important;
 	}
 	
-	#topBanner a#showreel_link {
-		font-size: 17px;
-	}
-	#topBanner h2 {
-		padding: 0 2.5%;
-	}
-	#topBanner p {
-		padding: 0 2.5%;
-		margin: 1px auto 10px !important;
-	}
 	#pageHead {
 		margin: 0 0px 25px;		
 	}
 	
-	#pageHead h1 { font-size: 1.2em;}
+	#topBanner {
+    	margin: 25px auto 0px auto;
+    }
+    
+	#topBanner a#showreel_cta {
+		padding: 12px 0 28px;
+	}
+	#pageHead h1 { 
+		font-size: 2.6em;
+		margin: 0 0 8px;
+	}
+	.filterWrap {
+		margin-top: -1px;
+	}
 	
 	/*.flex-direction-nav, .flex-control-nav, .flex-caption { display: none !important;}*/
 	.flex-direction-nav li a {
@@ -2330,6 +2299,9 @@ ol#commentslist {
 	#main {
 		width: 95%;		
 		padding-top: 5px;
+	}
+	#content.full {
+		width: 100% !important;
 	}
 	
 	#comments { width: 100%;}
@@ -2364,12 +2336,6 @@ ol#commentslist {
 	#featuredPages .thumbs .small{		
 		margin-bottom: 25px !important;			
 	}
-	
-	#filterNav {
-		text-align: center;			
-		width: 100%;
-		position: relative;			
-	}	
 	
 	.projectNav {
 		margin: 0 0 0 0;	
@@ -2413,6 +2379,39 @@ ol#commentslist {
 		width: 90%;
 	}
 	
+	
+	#projects h1 {
+		font-size: 60px;
+		text-align: center;
+	}
+	
+	#filterNav li a,
+	#filterNav li a.selected,
+	#filterNav li a:hover {
+		background: transparent !important;
+		width: auto !important;
+		height: auto !important;
+		color: #2A2A2A !important;
+		font-size: 16px !important;
+	}
+	#filterNav li a:hover {
+		color: #47e300 !important;
+	}
+	#filterNav li a.selected {
+		color: #00AEEF !important;
+	}
+	#filterNav li a span {
+		display: inline !important;
+	}
+	#filterNav li a span:after {
+		content: "" !important;
+	}
+	
+	#content .project-excerpt, #content .project-excerpt p {
+		font-size: 1em;
+	}
+	
+	
 	/*Column Shortcodes------------------*/
 
 	.one_half{ width:100%; }
@@ -2424,9 +2423,7 @@ ol#commentslist {
 }
 
 /* iPhone Landscape */
-@media screen and (max-width: 480px) and (orientation: landscape) {
-	
-		
+@media screen and (max-width: 480px) and (orientation: landscape) {	
 	
 	.thumbs .small{		
 		margin-left: 0px !important;				
@@ -2439,16 +2436,13 @@ ol#commentslist {
 	
 	#mainNav ul{
 		margin: 0 0 0 17px;
-	}	
+	}
+	
+	
 }
 
 /* iPhone Portrait */
 @media screen and (max-width: 480px) and (orientation: portrait) {
-	
-	
-	#bannerText {
-		padding: 2% 0 0 !important;
-	}
 	
 	#content .project-content {
 		-moz-column-count: 1;
@@ -2475,6 +2469,10 @@ ol#commentslist {
 	#commentForm label, #comments label {
 		font-size: .8em;
 	}	
+	
+	#footer .contact .links a {
+		margin: 0 3px !important;
+	}
 }
 
 
@@ -2483,22 +2481,25 @@ ol#commentslist {
 
 @media (min-resolution: 124dpi), (-webkit-min-device-pixel-ratio: 1.3), (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 4/3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
 	
-	
-#logo h1 a {
-	background: url('images/logo@2.png') 50% 50% no-repeat;
-	background-size: 100%;
-}
-.divider {
-	background: url('images/dot_pink@2.png') 50% 50% no-repeat;
-	background-size: 100%;
-}
-.drop-left {
-	background: url('images/drops@2.png') 0 0 no-repeat;
-	background-size: 200% auto;
-}
-.drop-right {
-	background: url('images/drops@2.png') no-repeat -32px 0;
-	background-size: 200% auto;
-}
+	#logo h1 a {
+		background: url('images/logo@2.png') 50% 50% no-repeat;
+		background-size: 100%;
+	}
+	.divider {
+		background: url('images/dot_pink@2.png') 50% 50% no-repeat;
+		background-size: 100%;
+	}
+	.drop-left {
+		background: url('images/drops@2.png') 0 0 no-repeat;
+		background-size: 200% auto;
+	}
+	.drop-right {
+		background: url('images/drops@2.png') no-repeat -32px 0;
+		background-size: 200% auto;
+	}
+	#footer .contact {
+		background: url('images/logo_black@2.png') 50% 0 no-repeat;
+		background-size: 265px auto;
+	}
 
 }

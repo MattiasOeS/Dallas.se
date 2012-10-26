@@ -39,13 +39,13 @@ function isMobile(){
         var elements = this;
         var $container;
         var settings = {
-            threshold       : 0,
+            threshold       : 175,
             failure_limit   : 0,
             event           : "scroll",
             effect          : "show",
             container       : window,
             data_attribute  : "original",
-            skip_invisible  : true,
+            skip_invisible  : false,
             appear          : null,
             load            : null
         };
@@ -99,6 +99,7 @@ function isMobile(){
         }
 
         this.each(function() {
+        
             var self = this;
             var $self = $(self);
 

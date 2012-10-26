@@ -8,6 +8,7 @@
 			
 				<h1>Recent stories</h1>
 				
+				<div>
 				<?php
 				$query = new WP_Query(array(
 						'category_name' => 'short', 
@@ -19,15 +20,20 @@
 				
 				<div class="blog-post">
 					<h2><?php the_title(); ?></h2>
-					<p>
-						<?php echo substr(get_the_excerpt(),0,150); ?>... <a class="more">Read more<span></span></a>
-					</p>
-					<a href="<?php the_permalink(); ?>"></a>
+					<?php the_excerpt(); ?>
+					
+					<?php if(get_the_content() != '') { ?>
+						<a href="<?php the_permalink(); ?>" class="more">Read more<span></span></a>
+					<?php } else { ?>
+						<a href="/notes/" class="more">See all<span></span></a>
+					<?php } ?>
 				</div>
 				
 				<?php endwhile; ?>
 				
 				<?php wp_reset_postdata(); ?>
+				
+				</div>
 			
 			</div>
 			<div class="footershade_bottom"></div>
@@ -43,7 +49,6 @@
 					<a href="https://www.facebook.com/dallassthlm">Facebook</a>
 					<a href="http://www.youtube.com/user/dallassthlm">YouTube</a>
 					<a href="https://twitter.com/dallassthlm">Twitter</a>
-					<a href="/blog/">Stories</a>
 				</div>
 				
 			</div>

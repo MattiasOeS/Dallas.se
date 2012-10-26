@@ -7,7 +7,7 @@ Template Name: Home
 <?php $home_project_count = intval(of_get_option('ttrust_home_project_count')); ?>
 <?php if($home_project_count > 0) : ?>	
 <div id="projects" class="full homeSection clearfix">			
-	<h3><span><?php echo of_get_option('ttrust_recent_projects_title'); ?></span></h3>		
+	<h3><?php echo of_get_option('ttrust_recent_projects_title'); ?></h3>		
 	<?php
 	if(of_get_option('ttrust_home_project_type') == "featured") : //Show only featured projects 
 		query_posts( array(

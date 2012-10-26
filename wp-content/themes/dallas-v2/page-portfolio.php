@@ -2,81 +2,46 @@
 Template Name: Portfolio - filterable
 */
 
-/* Enabled categories for filtering projects !important */
-$categories = array("interactive", "mobile", "motion");
  ?>
 <?php get_header(); ?>			
 
-			<div id="content" class="fullProjects clearfix full grid">									
-				<?php while (have_posts()) : the_post(); ?>											
-					<?php the_content(); ?>														
-				<?php endwhile; ?>				
+			<div id="content" class="fullProjects clearfix full grid">			
 				<div id="projects" class="clearfix">		
-
-					<?php $page_skills = get_post_meta($post->ID, "_ttrust_page_skills_value", true); ?>
-
-					<?php if ($page_skills) : // if there are a limited number of skills set ?>
-						<?php $skill_slugs = ""; $skills = explode(",", $page_skills); ?>
-
-						<?php if (sizeof($skills) > 1) : // if there is more than one skill, show the filter nav?>	
-							<div class="filterWrap">
-							<ul id="filterNav" class="clearfix">
-								<li class="allBtn"><a href="#" data-filter="all" class="selected"><?php _e('All', 'themetrust'); ?></a></li>
-
-								<?php
-								$j=1;					  
-								foreach ($skills as $skill) {				
-									$skill = get_term_by( 'slug', trim(htmlentities($skill)), 'skill');
-									if($skill) {
-										$skill_slug = $skill->slug;				
-										
-										
-										$skill_slugs .= $skill_slug . ",";
-										
-						  				$a = '<li><a href="#" data-filter="'.$skill_slug.'">';
-										$a .= $skill->name;					
-										$a .= '</a></li>';
-										echo $a;
-										echo "\n";
-										$j++;
-									}		  
-								}?>
-							</ul>
-							</div>
-							<?php $skill_slugs = substr($skill_slugs, 0, strlen($skill_slugs)-1); ?>
-						<?php else: ?>
-							<?php $skill = $skills[0]; ?>
-							<?php $s = get_term_by( 'name', trim(htmlentities($skill)), 'skill'); ?>
-							<?php if($s) { $skill_slugs = $s->slug; } ?>
-						<?php endif; 	
-
-						query_posts( 'skill='.$skill_slugs.'&post_type=project&posts_per_page=200' );
-
-					else : // if not, use all the skills ?>
+					<div id="projects_head" class="clearfix">
+						<?php while (have_posts()) : the_post(); ?>											
+							<h1><?php the_title(); ?></h1>													
+						<?php endwhile; ?>	
+						
+						
+						
 						<div class="filterWrap">
-						<ul id="filterNav" class="clearfix">
-							<li class="allBtn"><a href="#" data-filter="all" class="selected"><?php _e('All', 'themetrust'); ?></a></li>
-							<?php $j=1;
+						<ul id="filterNav">
+							<?php 
 							
-									
-									
-							$skills = get_terms('skill');
-							foreach ($skills as $skill) {
-									if($skill->slug != $categories[$j-1]) {
-										break;
-									}
-									$a = '<li><a href="#" data-filter="'.$skill->slug.'">';
-							    	$a .= $skill->name;					
-									$a .= '</a></li>';
-									echo $a;
-									echo "\n";
-								$j++;
-							}?>
+							$filters = get_terms('filters');
+							$preselect = false;
+							
+							foreach ($filters as $filter) {
+															
+								$a = '<li><a href="#" ' . $selected . ' data-filter="'.$filter->slug.'">';
+					  				if($filter->name == 'Interactive') {
+						  				$a .= '<span class="first">Inter</span><span class="last">active</span>';
+					  				}
+					  				else {
+										$a .= $filter->name;
+									}				
+								$a .= '</a></li>';
+								echo $a;
+								echo "\n";
+								
+							}
+							
+							?>
+							<li class="allBtn"><a href="#" data-filter="all" class="selected"><?php _e('All', 'themetrust'); ?></a></li>
 						</ul>
 						</div>
-						<?php query_posts( 'post_type=project&posts_per_page=200' );
-
-					endif; ?>
+						<?php query_posts( 'post_type=project&posts_per_page=200' ); ?>
+					</div>
 
 					<div class="thumbs">			
 					<?php  while (have_posts()) : the_post(); ?>
@@ -84,14 +49,14 @@ $categories = array("interactive", "mobile", "motion");
 						<?php
 						global $p;				
 						$p = "";
-						$skills = get_the_terms( $post->ID, 'skill');
-						if ($skills) {
-						   foreach ($skills as $skill) {				
-						      $p .= $skill->slug . " ";						
+						$filters = get_the_terms( $post->ID, 'filters');
+						if ($filters) {
+						   foreach ($filters as $filter) {				
+						      $p .= $filter->slug . " ";						
 						   }
 						}
 						?>  	
-						<?php get_template_part( 'part-project-thumb'); ?>		
+						<?php get_template_part( 'part-project-thumb' ); ?>		
 
 					<?php endwhile; ?>
 										
