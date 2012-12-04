@@ -292,6 +292,7 @@ add_image_size('ttrust_post_thumb_tiny', 50, 50, true);
 add_image_size('ttrust_half_notcropped', 475, 9999, false);
 add_image_size('ttrust_half_notcropped_x2', 950, 9999, false);
 add_image_size('ttrust_one_third_cropped', 300, 175, true);
+add_image_size('ttrust_one_third_cropped_x2', 600, 350, true);
 
 
 //////////////////////////////////////////////////////////////

@@ -6,8 +6,9 @@
 		<?php 
 		$img_id = get_post_thumbnail_id();
 		$original_img = wp_get_attachment_image_src ($img_id, 'ttrust_one_third_cropped');
+		$retina_img = wp_get_attachment_image_src ($img_id, 'ttrust_one_third_cropped_x2');
 		?>
-		<img src="" data-original="<?php echo $original_img[0]; ?>" class="thumb lazy" />
+		<img src="" data-original="<?php echo $original_img[0]; ?>" data-retina="<?php echo $retina_img[0]; ?>" class="thumb lazy" />
 		<div class="title">
 			<div class="title_inside">
 				<span>

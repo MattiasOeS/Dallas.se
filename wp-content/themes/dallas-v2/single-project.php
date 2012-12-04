@@ -2,11 +2,11 @@
 		
 		<div id="pageHead">
 			<div class="projectNav clearfix">
-				<div class="previous <?php if(!get_previous_post()){ echo 'inactive'; }?>">
-					<?php previous_post_link('%link', '<span class="drop-left"></span>%title'); ?>
+				<div class="next <?php if(!get_previous_post()){ echo 'inactive'; }?>">
+					<?php previous_post_link('%link', '<span class="drop-right"></span>%title'); ?>
 				</div>				
-				<div class="next <?php if(!get_next_post()){ echo 'inactive'; }?>">						
-					<?php next_post_link('%link', '%title<span class="drop-right"></span>'); ?>				
+				<div class="previous <?php if(!get_next_post()){ echo 'inactive'; }?>">						
+					<?php next_post_link('%link', '%title<span class="drop-left"></span>'); ?>				
 				</div>					
 			</div>	
 			<div class="project_head clearfix">
