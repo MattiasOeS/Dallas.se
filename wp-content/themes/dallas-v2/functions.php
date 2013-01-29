@@ -1,7 +1,9 @@
 <?php
 
-update_option('siteurl','http://dallas.test.n-i.se');
-update_option('home','http://dallas.test.n-i.se');  
+/*
+update_option('siteurl','http://www.dallas.se');
+update_option('home','http://www.dallas.se');  
+*/
 
 
 // Load main options panel file  

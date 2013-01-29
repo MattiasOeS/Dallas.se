@@ -8,6 +8,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
+	
+	<meta name="description" content="<?php bloginfo('description'); ?>" />
+	
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
 	
 	<script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>

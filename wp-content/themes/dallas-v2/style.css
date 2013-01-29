@@ -750,6 +750,10 @@ html.ie7 #mainNav ul li {
 #content .project-excerpt p {
 	font-size: 1.175em;
 	line-height: 1.25em;
+	margin: 0;
+}
+#content .project-excerpt {
+	padding: 0 0 20px;
 }
 
 

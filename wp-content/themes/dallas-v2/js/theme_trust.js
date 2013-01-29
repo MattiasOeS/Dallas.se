@@ -21,11 +21,11 @@ function loadImages() {
 	var retina = false;
 	if (window.devicePixelRatio >= 1.3) { retina = true; }
 	
-    $('img.lazy').each(function() {
-        if(retina == true) {
-            $(this).attr('data-original', $(this).data('retina'));
-        }
-    });
+	$('img.lazy').each(function() {
+		if(retina == true) {
+			$(this).attr('data-original', $(this).data('retina'));
+		}
+	});
  
 }
 
@@ -193,8 +193,7 @@ function startSlider() {
 	});
 	
 	
-	
-	$("#topBanner h2").fitText(1, { minFontSize: '42px', maxFontSize: '66px' });
+	$("#topBanner h2").fitText(1, { minFontSize: '40px', maxFontSize: '66px' });
 	$("#topBanner p").fitText(3, { minFontSize: '16px', maxFontSize: '22px' });
 	$("#showreel_cta span.dallaswebicons").fitText(0.1, { minFontSize: '100px', maxFontSize: '166px' });
 	$("#showreel_cta span.txt").fitText(0.6, { minFontSize: '18px', maxFontSize: '28px' });
@@ -267,7 +266,6 @@ function onYouTubeIframeAPIReady() {
 					'onStateChange': onPlayerStateChange
 				}
 			});
-			console.log(video);
 		});
 	}
 	else {
