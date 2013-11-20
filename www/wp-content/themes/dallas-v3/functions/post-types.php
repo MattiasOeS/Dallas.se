@@ -3,9 +3,9 @@ function custom_post_type() {
 	
 	// Post Types
 	$labels_xc1 = array(
-		'name' => _x( 'XC1', 'post type general name' ),
-		'singular_name' => _x( 'XC1', 'post type singular name' ),
-		'add_new' => _x( 'Add new', 'xc1' ),
+		'name' => _x( 'Cases', 'post type general name' ),
+		'singular_name' => _x( 'Cases', 'post type singular name' ),
+		'add_new' => _x( 'Add new', 'cases' ),
 		'add_new_item' => __( 'Add new item' ),
 		'edit_item' => __( 'Edit' ),
 		'new_item' => __( 'New' ),

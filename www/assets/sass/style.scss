@@ -1,0 +1,274 @@
+@import "base";
+
+
+
+/*================
+=====HEADER=======
+================*/
+
+header{
+	position: absolute;
+	//position: fixed;
+	width: 100%;
+	top: 60px;
+	padding: 20px 0;
+	@include box-sizing(border-box);
+	background-image: url('../images/transparent.png');
+	z-index: 10;
+}
+
+#statement{
+	position: relative;
+	max-width: 530px;
+	width: 100%;
+	margin: 0 auto;
+
+	img{
+		position: relative;
+		top: -46px;
+		margin: 0 auto;
+	}
+
+	h1{
+		position: relative;
+		top: -15px;
+		margin: 0;
+		padding: 0;
+	}
+
+}
+
+#menu{
+	position: absolute;
+	top: 40px;
+	right: 120px;
+
+	ul{
+		list-style: none;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		p{
+			margin: 0;
+			padding: 0;
+			display: inline;
+			color: #e20060;
+		}
+
+		li{
+			float: left;
+
+		}
+	}
+}
+
+
+
+/*================
+=======MAIN=======
+================*/
+
+#main{
+
+	.column{
+		position: relative;
+
+		> img{
+			width: 100%;
+			height: auto;
+		}
+
+		.hoverContentLarge{
+			visibility: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			@include background-image(linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%));
+
+			.textHolderLarge{
+				position: absolute;
+				bottom: 40px;
+				text-align: center;
+				width: 60%;
+				padding: 0 20%;
+
+			}
+
+		}
+
+		.hoverContentSmall{
+			visibility: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			@include background-image(linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%));
+
+			.textHolderSmall{
+				position: absolute;
+				top: 40px;
+				text-align: center;
+				width: 80%;
+				padding: 0 10%;
+			}
+		}
+
+		&:hover .hoverContentLarge{
+			visibility: visible;
+		}
+
+		&:hover .hoverContentSmall{
+			visibility: visible;
+		}
+
+		h3, p{
+			margin: 0;
+			padding: 0;
+		}
+
+	}
+
+
+	.contact{
+		background-color: #d8025e;
+
+		.contactinfo{
+			position: relative;
+			width: 100%;
+			max-width: 700px;
+			margin: 0 auto;
+			padding: 33px;
+			@include box-sizing(border-box);
+
+			img{
+				margin: 0 auto;
+			}
+
+			.ornament{
+				margin-top: 20px;
+			}
+
+			.numbers{
+				margin-top: 20px;
+				margin-bottom: 5px;
+				width: 100%;
+
+				h2{
+					margin-top: 20px;
+					display: inline;
+				}
+
+				span{
+					margin: 0 10px;
+
+					> img{
+						position: relative;
+						top: -3px;
+						display: inline;
+					}
+				}	
+
+			}
+
+			span{
+				color: #2a2a2a;
+				margin: 0 10px;
+			}
+				
+			a{
+				color: #2a2a2a;
+			}
+		}
+	}
+
+}
+
+
+
+/*================
+======FOOTER======
+================*/
+
+footer{
+	position: absolute;
+	padding: 20px 30px 30px 30px;
+	width: 100%;
+	background-color: #4b4b4b;
+	@include box-sizing(border-box);
+
+	.rad{
+		width: 100%;
+		margin: 0 auto;
+
+		img{
+			display: inline;
+			margin: 0 auto;
+			margin-right: 20px;
+			margin-top: 10px;
+		}
+	
+	}
+
+	#rad1{
+		text-align: center;
+		max-width: 1230px;
+	}
+
+	#rad2{
+		text-align: center;
+		max-width: 930px;
+	}
+}
+
+
+
+/*================
+===MEDIAQUERIES===
+================*/
+
+@media all and (max-width:$mq-tablet-portrait){
+
+
+	header{
+		position: static;
+		background-color: #000000;
+
+		#statement{
+
+			img{
+				top: 0;
+				margin-bottom: 30px;
+			}
+		}
+
+		#menu{
+			display: none;
+		}
+	}
+
+	.nomargin .column.grid-6{
+		width: 100%;
+
+		> img{
+			height: 60%;
+		}
+	}
+
+	.hoverContentLarge{
+
+		.textHolderLarge{
+			top: 40px;
+
+		}
+	}
+}
+
+@media all and (max-width:$mq-mobile){
+
+
+}
+

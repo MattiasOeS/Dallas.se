@@ -23,7 +23,8 @@
 	
     <!-- <link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI; ?>/reset.css" type="text/css" media="screen" /> <!-- Reset -->
     <!-- <link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI; ?>/print.css" type="text/css" media="print" /> <!-- Print CSS -->
-	<link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI;?>/style.css" type="text/css" media="screen" /> <!-- Style CSS -->  
+	<link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI;?>/style.css" type="text/css" media="screen" /> <!-- Style CSS --> 
+
 	
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
     
@@ -35,7 +36,19 @@
 	<div id="container">
 
 		<header>
-			<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1>
+
+			<div id="statement" class="aligncenter">
+				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/logo.png" alt="Dallas">
+				<h1>Communicating and flavouring brands in screen media since ‘93</h1>
+			</div>
+
+			<div id="menu">
+				<ul>
+					<li><a href="#">Clients</a><p>&nbsp;&nbsp;/&nbsp;&nbsp;</p></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+
 		</header>
 
 		<div id="main">
