@@ -65,15 +65,15 @@ function configure() {
     ),
     'stage' => array
     (
-        'WP_HOME'               => 'http://starcom.se.stage.n-i.se',
-        'WP_SITEURL'            => 'http://starcom.se.stage.n-i.se',
+        'WP_HOME'               => 'http://dallas.test.n-i.se/',
+        'WP_SITEURL'            => 'http://dallas.test.n-i.se/',
         'WP_CACHE'              => true,
         'CACHE'                 => true,
         'WP_DEBUG'              => false,
         'DB_HOST'               => 'localhost',
-        'DB_NAME'               => 'wp_starcom',
-        'DB_USER'               => 'starcom',
-        'DB_PASSWORD'           => '2UhmaMUkE7h',
+        'DB_NAME'               => 'wp_dallas_test',
+        'DB_USER'               => 'dallassite',
+        'DB_PASSWORD'           => 'vAc2kUKA',
         'DISABLE_WP_CRON'       => false
         //'FORCE_SSL_LOGIN'       => getenv("FORCE_SSL_LOGIN") == "true",
         //'FORCE_SSL_ADMIN'       => getenv("FORCE_SSL_ADMIN") == "true"

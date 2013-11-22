@@ -8,13 +8,29 @@
 
 header{
 	position: absolute;
-	//position: fixed;
 	width: 100%;
-	top: 60px;
-	padding: 20px 0;
+	height: 206px;
 	@include box-sizing(border-box);
-	background-image: url('../images/transparent.png');
 	z-index: 10;
+	top: 60px;
+	@include transition(height .3s);
+	background-image: url('../images/transparent.png');
+}
+
+.fixedHeader{
+	position: fixed;
+	top: -91px;
+	overflow: hidden;
+	height: 153px;
+
+	#statement h1{
+		display: none;
+	}
+}
+
+#transpbg{
+	position: absolute;
+	width: 100%;
 }
 
 #statement{
@@ -23,15 +39,33 @@ header{
 	width: 100%;
 	margin: 0 auto;
 
-	img{
+
+	#logo{
+		width: 257px;
+		height: 113px;
 		position: relative;
-		top: -46px;
+		top: -28px;
+		margin: 0 auto;
+		background-image: url('../images/logoornament.png');
+	}
+
+	img{
 		margin: 0 auto;
 	}
 
+	img:nth-child(2){
+		position: relative;
+		top: -12px;
+	}
+
+	img:last-child{
+		position: relative;
+		top: 9px;
+	}
+
+
 	h1{
 		position: relative;
-		top: -15px;
 		margin: 0;
 		padding: 0;
 	}
@@ -40,7 +74,7 @@ header{
 
 #menu{
 	position: absolute;
-	top: 40px;
+	top: 54px;
 	right: 120px;
 
 	ul{
@@ -62,6 +96,7 @@ header{
 		}
 	}
 }
+
 
 
 
@@ -90,13 +125,33 @@ header{
 
 			.textHolderLarge{
 				position: absolute;
-				bottom: 40px;
+				bottom: 35px;
 				text-align: center;
 				width: 60%;
 				padding: 0 20%;
 
+				> img{
+					margin: 0 auto;
+					margin-bottom: 15px;
+				}
+
 			}
 
+		}
+
+		.fluidMedia {
+		    position: relative;
+		    padding-bottom: 56.25%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+		    height: 0;
+		    overflow: hidden;
+		}
+
+		.fluidMedia iframe {
+		    position: absolute;
+		    top: 0; 
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
 		}
 
 		.hoverContentSmall{
@@ -110,10 +165,15 @@ header{
 
 			.textHolderSmall{
 				position: absolute;
-				top: 40px;
+				top: 15px;
 				text-align: center;
 				width: 80%;
 				padding: 0 10%;
+
+				> img{
+					margin: 0 auto;
+					margin-bottom: 15px;
+				}
 			}
 		}
 
@@ -181,6 +241,10 @@ header{
 				
 			a{
 				color: #2a2a2a;
+
+				&:hover{
+					color: #ffffff;
+				}
 			}
 		}
 	}
@@ -234,41 +298,88 @@ footer{
 
 
 	header{
-		position: static;
+		height: 62px;
+		position: fixed;
+		top: 0;
 		background-color: #000000;
 
 		#statement{
 
 			img{
-				top: 0;
-				margin-bottom: 30px;
+				display: none;
+			}
+
+			#logo{
+				width: 150px;
+				height: 25px;
+				top: 20px;
+				background-image: url('../images/logoclean.png');
+			}
+
+			h1{
+				display: none;
 			}
 		}
 
 		#menu{
-			display: none;
+			top: 20px;
+			right: 20px;
 		}
 	}
 
-	.nomargin .column.grid-6{
-		width: 100%;
+	#main{
+		position: relative;
+		top: 62px;
 
-		> img{
-			height: 60%;
+		.nomargin .column.grid-6{
+			width: 100%;
+
+			> img{
+				height: 60%;
+			}
 		}
+
 	}
 
-	.hoverContentLarge{
-
-		.textHolderLarge{
-			top: 40px;
-
-		}
+	footer{
+		margin-top: 62px;
 	}
+
 }
 
 @media all and (max-width:$mq-mobile){
 
+	#logo{
+		position: absolute;
+		float: left;
+		left: 10px;
+		background-image: url('../images/logoclean.png');
+	}
 
+
+
+	.numbers{
+
+		h2{
+			display: block !important;
+			margin-top: 5px !important;
+		}
+	}
+
+}
+
+@media all and (max-width:$mq-mobile-wide){
+
+	.textHolderSmall, .textHolderLarge{
+		bottom: 15px;
+
+		> h3{
+			font-size: 16px;
+		}
+
+		> p{
+			display: none;
+		}
+	}
 }
 

@@ -5,10 +5,12 @@ function parhaggstrom_scripts() {
     $concatenate_scripts = 1;
     define('ENFORCE_GZIP', true); 
  
-    /*if ( !is_admin() ) {
-		wp_enqueue_script('easing', XC1_THEME_STATIC_URI . 'assets/javascripts/jquery.easing.1.3.min.js',array('jquery'),'',true);
-		wp_enqueue_script('ui', XC1_THEME_STATIC_URI . 'assets/javascripts/jquery-ui-1.10.0.custom.min.js',array('jquery'),'',true);
-		wp_enqueue_script('flexslider', XC1_THEME_STATIC_URI . 'assets/javascripts/jquery.flexslider-min.js',array('jquery'),'',true);
-		wp_enqueue_script('jquery-xc1', XC1_THEME_STATIC_URI . 'assets/javascripts/jquery-xc1.js',array('jquery', 'easing', 'ui', 'flexslider'),'',true);
-    }*/
+    if ( !is_admin() ) {
+    
+        wp_deregister_script( 'jquery' );
+        wp_register_script( 'jquery', XC1_THEME_STATIC_URI . 'assets/javascripts/jquery-1.10.2.min.js');
+        wp_enqueue_script( 'jquery' );
+        
+        wp_enqueue_script('main', XC1_THEME_STATIC_URI . 'assets/javascripts/main.js',array('jquery'),'',true);
+    }
 }

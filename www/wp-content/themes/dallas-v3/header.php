@@ -36,16 +36,20 @@
 	<div id="container">
 
 		<header>
-
 			<div id="statement" class="aligncenter">
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/logo.png" alt="Dallas">
+				<div id="logo"></div>
+
+				<img class="pinkbullet" src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png" alt="Dallas">
+
 				<h1>Communicating and flavouring brands in screen media since ‘93</h1>
+
+				<img class="pinkbullet" src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png" alt="Dallas">
 			</div>
 
 			<div id="menu">
 				<ul>
 					<li><a href="#">Clients</a><p>&nbsp;&nbsp;/&nbsp;&nbsp;</p></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="#topcontact">Contact</a></li>
 				</ul>
 			</div>
 
