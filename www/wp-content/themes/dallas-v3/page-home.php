@@ -5,14 +5,15 @@
 	<div class="column grid-12 pointer">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/DWhWH8ie0NQ?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case1bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/DWhWH8ie0NQ?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentLarge">
 
 			<div class="textHolderLarge">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3>Programvinjett för Svenska Hockeyligan</h3>
@@ -24,10 +25,11 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/TSUv8jdr3t0?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case2bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/TSUv8jdr3t0?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 		
 
@@ -35,7 +37,7 @@
 
 			<div class="textHolderSmall centered">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>
@@ -47,17 +49,18 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/MgswVCMO63w?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case3bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/MgswVCMO63w?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentSmall">
 
 			<div class="textHolderSmall">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>
@@ -88,17 +91,18 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/tyqN7n2fuvo?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case5bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/tyqN7n2fuvo?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentSmall">
 
 			<div class="textHolderSmall">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>
@@ -110,17 +114,18 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/Z2JrdBQeKKA?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case6bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/Z2JrdBQeKKA?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentSmall">
 
 			<div class="textHolderSmall">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>
@@ -179,17 +184,18 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/EdMn5VbcMzY?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case8bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/EdMn5VbcMzY?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentSmall">
 
 			<div class="textHolderSmall">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>
@@ -201,17 +207,18 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/8QIOuLVeUw4?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case9bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/8QIOuLVeUw4?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentSmall">
 
 			<div class="textHolderSmall">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>
@@ -242,17 +249,18 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/MEa7d70k16k?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case11bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/MEa7d70k16k?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentSmall">
 
 			<div class="textHolderSmall">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>
@@ -264,17 +272,18 @@
 
 	</div>
 
-	<div class="column grid-6 pointer">
+	<div class="column grid-6">
 
 		<div class="fluidMedia">
-		    <iframe src="//www.youtube.com/embed/p_IUYRtjnxE?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case12bg.png">
+		    <iframe class="video1" data-src="//www.youtube.com/embed/p_IUYRtjnxE?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		</div>
 
 		<div class="hoverContentSmall">
 
 			<div class="textHolderSmall">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png">
+				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3 class="large">Programvinjett för Svenska Hockeyligan</h3>

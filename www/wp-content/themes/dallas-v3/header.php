@@ -49,7 +49,7 @@
 			<div id="menu">
 				<ul>
 					<li><a href="#">Clients</a><p>&nbsp;&nbsp;/&nbsp;&nbsp;</p></li>
-					<li><a href="#topcontact">Contact</a></li>
+					<li><a id="contactButton" href="#">Contact</a></li>
 				</ul>
 			</div>
 
