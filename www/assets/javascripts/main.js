@@ -5,22 +5,31 @@ $( document ).ready(function() {
 
 	$(".column").click(function(e){
 
+		if ( $(this).closest(".column").find(".video1").attr("src") == datasrc ) {
+			$(this).removeAttr( "src" );
+			console.log('har det');
+		};
+
 		var datasrc = $(this).find(".video1").attr("data-src");
 		$(this).closest(".column").find(".video1").attr("src", datasrc);
 		$(this).unbind("click");
 
 		e.preventDefault();
 
-		if ( $(this).closest(".column").find(".video1").attr("src") = datasrc ) {
-			$( this ).removeAttr( "src" );
-			console.log('har det');
-		};
 	});
 
 	$("#contactButton").click(function() {
 	    $('html, body').animate({
 
-	    	scrollTop: $('#topcontact').position().top + -62
+	    	scrollTop: $('#topcontact').position().top - 62
+
+	    }, 500 );
+	});
+
+	$("#clientsButton").click(function() {
+	    $('html, body').animate({
+
+	    	scrollTop: $('html, body').position().top - 62
 
 	    }, 500 );
 	});

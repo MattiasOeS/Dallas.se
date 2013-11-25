@@ -80,7 +80,7 @@
 
 			<div class="textHolderLarge">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
+				<img class="mobilehide" src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3>Programvinjett för Svenska Hockeyligan</h3>
 				<p>Dallas Sthlm för CMORE/SHL 2013. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
@@ -173,7 +173,7 @@
 
 			<div class="textHolderLarge">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
+				<img class="mobilehide" src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3>Programvinjett för Svenska Hockeyligan</h3>
 				<p>Dallas Sthlm för CMORE/SHL 2013. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
@@ -238,7 +238,7 @@
 
 			<div class="textHolderLarge">
 
-				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
+				<img class="mobilehide" src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
 				<h3>Programvinjett för Svenska Hockeyligan</h3>
 				<p>Dallas Sthlm för CMORE/SHL 2013. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
