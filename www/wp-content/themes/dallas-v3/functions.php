@@ -20,6 +20,7 @@ add_action('wp_enqueue_scripts', 'parhaggstrom_scripts');
 add_action('admin_menu', 'change_post_menu_label');
 
 add_theme_support( 'nav-menus' );
+add_theme_support( 'post-thumbnails' );
 
 // Add Filters
 add_filter('nav_menu_css_class', 'auto_custom_type_class', 10, 2 );

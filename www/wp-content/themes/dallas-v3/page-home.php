@@ -1,23 +1,34 @@
 <?php get_header(); ?>
 
-<div class="row clear nomargin">
+<?php $args = array(
+	'offset'           => 0,
+	'orderby'          => 'post_date',
+	'order'            => 'DESC',
+	'post_type'        => 'post',
+	'post_status'      => 'publish',
+	'suppress_filters' => true );
 
+	$the_query = new WP_Query( $args );
+?>
+
+<div class="row clear nomargin">
+	<?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
 	<div class="column grid-12 pointer">
 
 		<div class="fluidMedia">
-			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case1bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/DWhWH8ie0NQ?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+			<?php if ( has_post_thumbnail() ) { the_post_thumbnail(); } ?>
+		    <iframe id="frame1" class="video" data-src="//www.youtube.com/embed/DWhWH8ie0NQ?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1&enablejsapi=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentLarge">
+		<div class="hoverContent">
 
 			<div class="textHolderLarge">
 
 				<a href="#" class="playvideo"><img src="<?php echo XC1_THEME_IMAGES_URI;?>/play.png"></a>
 				<img src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png">
 
-				<h3>Programvinjett för Svenska Hockeyligan</h3>
-				<p>Dallas Sthlm för CMORE/SHL 2013. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+				<h3><?php the_title(); ?></h3>
+				<p><?php the_content(); ?></p>
 
 			</div>
 
@@ -29,11 +40,11 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case2bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/TSUv8jdr3t0?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame2" class="video" data-src="//www.youtube.com/embed/TSUv8jdr3t0?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 		
 
-		<div class="hoverContentSmall block">
+		<div class="hoverContent block">
 
 			<div class="textHolderSmall centered">
 
@@ -53,10 +64,10 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case3bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/MgswVCMO63w?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame3" class="video" data-src="//www.youtube.com/embed/MgswVCMO63w?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentSmall">
+		<div class="hoverContent">
 
 			<div class="textHolderSmall">
 
@@ -76,7 +87,7 @@
 
 		<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case4bg.png" alt="">
 
-		<div class="hoverContentLarge">
+		<div class="hoverContent">
 
 			<div class="textHolderLarge">
 
@@ -95,10 +106,10 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case5bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/tyqN7n2fuvo?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame4" class="video" data-src="//www.youtube.com/embed/tyqN7n2fuvo?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentSmall">
+		<div class="hoverContent">
 
 			<div class="textHolderSmall">
 
@@ -118,10 +129,10 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case6bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/Z2JrdBQeKKA?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame5" class="video" data-src="//www.youtube.com/embed/Z2JrdBQeKKA?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentSmall">
+		<div class="hoverContent">
 
 			<div class="textHolderSmall">
 
@@ -169,7 +180,7 @@
 
 		<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case7bg.png" alt="">
 
-		<div class="hoverContentLarge">
+		<div class="hoverContent">
 
 			<div class="textHolderLarge">
 
@@ -188,10 +199,10 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case8bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/EdMn5VbcMzY?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame6" class="video" data-src="//www.youtube.com/embed/EdMn5VbcMzY?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentSmall">
+		<div class="hoverContent">
 
 			<div class="textHolderSmall">
 
@@ -211,10 +222,10 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case9bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/8QIOuLVeUw4?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame7" class="video" data-src="//www.youtube.com/embed/8QIOuLVeUw4?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentSmall">
+		<div class="hoverContent">
 
 			<div class="textHolderSmall">
 
@@ -234,7 +245,7 @@
 
 		<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case10bg.png" alt="">
 
-		<div class="hoverContentLarge">
+		<div class="hoverContent">
 
 			<div class="textHolderLarge">
 
@@ -253,10 +264,10 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case11bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/MEa7d70k16k?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame8" class="video" data-src="//www.youtube.com/embed/MEa7d70k16k?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentSmall">
+		<div class="hoverContent">
 
 			<div class="textHolderSmall">
 
@@ -276,10 +287,10 @@
 
 		<div class="fluidMedia">
 			<img src="<?php echo XC1_THEME_IMAGES_URI;?>/case12bg.png">
-		    <iframe class="video1" data-src="//www.youtube.com/embed/p_IUYRtjnxE?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		    <iframe id="frame9" class="video" data-src="//www.youtube.com/embed/p_IUYRtjnxE?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1" frameborder="0"></iframe>
 		</div>
 
-		<div class="hoverContentSmall">
+		<div class="hoverContent">
 
 			<div class="textHolderSmall">
 
@@ -294,7 +305,7 @@
 		</div>
 
 	</div>
-
+	<?php endwhile;?>
 </div>
 
 <?php get_footer(); ?>

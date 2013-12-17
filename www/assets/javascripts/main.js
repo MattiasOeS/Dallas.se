@@ -1,18 +1,20 @@
 $( document ).ready(function() {
 
-	viewportWidth = $(window).width();
+	var viewportWidth = $(window).width();
 
+	var columnclick = true;
 
 	$(".column").click(function(e){
 
-		if ( $(this).closest(".column").find(".video1").attr("src") == datasrc ) {
-			$(this).removeAttr( "src" );
-			console.log('har det');
-		};
+		var datasrc = $(this).find(".video").attr("data-src");
 
-		var datasrc = $(this).find(".video1").attr("data-src");
-		$(this).closest(".column").find(".video1").attr("src", datasrc);
-		$(this).unbind("click");
+		if (columnclick) {
+			$(this).closest(".column").find(".video").attr("src", datasrc);
+			columnclick = false;
+		}else {
+			$(this).closest(".column").find(".video").removeAttr( "src" );
+			columnclick = true;
+		}
 
 		e.preventDefault();
 
