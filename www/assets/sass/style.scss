@@ -121,7 +121,6 @@ header{
 			left: 0;
 			width: 100%;
 			height: 100%;
-			cursor: pointer;
 			@include background-image(linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%));
 
 			.textHolderLarge{
@@ -150,6 +149,41 @@ header{
 					margin-bottom: 15px;
 				}
 			}
+
+			.playvideo{
+				width: 69px;
+				height: 48px;
+				margin: 0 auto;
+				background-image: url('../images/play.png');
+				margin-bottom: 15px;
+				cursor: pointer;
+			}
+
+			.pausevideo{
+				width: 69px;
+				height: 48px;
+				margin: 0 auto;
+				background-image: url('../images/pause.png');
+				margin-bottom: 15px;
+				cursor: pointer;
+			}
+
+			a{
+				font-family: 'ChaletBook-Regular', Helvetica, Arial, sans-serif; 
+				color: $body-font-color; 
+				font-size: 15px; 
+				font-size: 1.5rem; 
+				line-height: 20px; 
+				line-height: 2rem; 
+				font-weight: 100;
+			}
+			a:hover{
+				color: $link-font-color;
+			}
+		}
+
+		.mobileTitleHolder{
+			display: none;
 		}
 
 		.fluidMedia {
@@ -178,6 +212,13 @@ header{
 		}
 	}
 
+	.grid-6{
+
+		.hoverContent{
+			@include background-image(linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%));
+		}
+	}
+
 
 	.contact{
 		background-color: #d8025e;
@@ -187,7 +228,7 @@ header{
 			width: 100%;
 			max-width: 700px;
 			margin: 0 auto;
-			padding: 33px;
+			padding: 25px;
 			@include box-sizing(border-box);
 
 			img{
@@ -280,6 +321,7 @@ footer{
 ===MEDIAQUERIES===
 ================*/
 
+
 @media all and (max-width:$mq-tablet-portrait){
 
 
@@ -317,9 +359,56 @@ footer{
 		position: relative;
 		top: 62px;
 
-		.nomargin .column.grid-6{
-			width: 100%;
+		.nomargin {
 
+			.grid-6{
+				width: 100%;
+			}
+
+			.column{
+				.hoverContent{
+					display: none;
+				}
+
+				.mobileTitleHolder{
+					position: relative;
+					display: block;
+					height: 56px;
+					width: 100%;
+					background-color: #2a2a2a;
+					padding: 18px ;
+					@include box-sizing(border-box);
+
+					h3{
+						font-size: 1.4rem;
+						float: left;
+					}
+
+					a{
+						font-size: 1.4rem;
+						line-height: 24px; 
+						line-height: 2.4rem; 
+						font-family: 'DalaFloda-Black'; 
+						font-weight: 100;
+						float: left;
+						text-decoration: underline;
+					}
+
+					.mobilePlay{
+						width: 17px;
+						height: 24px;
+						background-image: url('../images/play-mobile.png');
+						float: right;
+					}
+
+					.mobilePause{
+						width: 17px;
+						height: 24px;
+						background-image: url('../images/pause-mobile.png');
+						float: right;
+					}
+				}
+			}
 		}
 
 	}

@@ -2,41 +2,45 @@ $( document ).ready(function() {
 
 	var viewportWidth = $(window).width();
 
-	var columnclick = true;
-
+	// Function to load and unload iframes on click of grid items
 	$(".column").click(function(e){
 
 		var datasrc = $(this).find(".video").attr("data-src");
 
-		if (columnclick) {
-			$(this).closest(".column").find(".video").attr("src", datasrc);
-			columnclick = false;
-		}else {
-			$(this).closest(".column").find(".video").removeAttr( "src" );
-			columnclick = true;
-		}
+		$(".video").removeAttr( "src" );
+		$(this).find(".video").attr("src", datasrc);
 
-		e.preventDefault();
+		//Change play/pause vide0 buttons
+		$('.playbtn').removeClass('pausevideo').addClass('playvideo');
+		$(this).find('.playbtn').removeClass('playvideo').addClass('pausevideo');
+
+		$('.playbtn').removeClass('mobilePause').addClass('mobilePlay');
+		$(this).find('.playbtn').removeClass('mobilePlay').addClass('mobilePause');
 
 	});
 
+	// Scroll to contacts
 	$("#contactButton").click(function() {
 	    $('html, body').animate({
 
-	    	scrollTop: $('#topcontact').position().top - 62
+	    	scrollTop: $('#topcontact').position().top - 61
 
 	    }, 500 );
 	});
 
+
+	// Scroll to top
 	$("#clientsButton").click(function() {
 	    $('html, body').animate({
 
-	    	scrollTop: $('html, body').position().top - 62
+	    	scrollTop: $('html, body').position().top
 
 	    }, 500 );
 	});
 
-	$( window ).resize(function() {
+
+	// Remove attributes and classes on tablet and smaller
+	$(window).resize(function() {
 
 		var viewportResize = $(window).width();
 
@@ -50,6 +54,7 @@ $( document ).ready(function() {
 	});
 
 
+	//Do animation of header on desktop
 	$(document).scroll(function() {
 
 		viewportWidth = $(window).width();
@@ -62,8 +67,9 @@ $( document ).ready(function() {
 
 	});
 
-    var scrollCalled = false;
 
+	//Function for headeranimation
+    var scrollCalled = false;
 
 	function headerAnimation(){
 

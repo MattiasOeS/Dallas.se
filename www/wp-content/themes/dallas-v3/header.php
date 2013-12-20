@@ -21,10 +21,10 @@
     <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
     <!--[if lt IE 9]> <script src="<?php echo XC1_THEME_JS_URI;?>/html5.js"></script> <![endif]-->
 	
-    <!-- <link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI; ?>/reset.css" type="text/css" media="screen" /> <!-- Reset -->
-    <!-- <link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI; ?>/print.css" type="text/css" media="print" /> <!-- Print CSS -->
+    <!-- <link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI; ?>/reset.css" type="text/css" media="screen" /> Reset -->
+    <!-- <link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI; ?>/print.css" type="text/css" media="print" /> Print CSS -->
 	<link rel="stylesheet" href="<?php echo XC1_THEME_CSS_URI;?>/style.css" type="text/css" media="screen" /> <!-- Style CSS --> 
-
+	<link rel="icon" href="<?php echo XC1_THEME_IMAGES_URI;?>/favicon.png" type="image/x-icon" />
 	
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
     
