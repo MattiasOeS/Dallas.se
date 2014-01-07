@@ -4,7 +4,7 @@ Plugin Name: STC - Login
 Plugin URI: http://ottopress.com/wordpress-plugins/simple-twitter-connect/
 Description: Integrates Twitter Login and Authentication to WordPress
 Author: Otto
-Version: 0.15
+Version: 0.16
 Author URI: http://ottodestruct.com
 License: GPL2
 
@@ -61,7 +61,7 @@ function stc_login_profile_page($profile) {
 	<?php	
 	} else { ?>
 		<td><p>Connected as 
-		<img src='http://api.twitter.com/1/users/profile_image/<?php echo $twuid; ?>?size=bigger' width='32' height='32' />
+		<img src='http://twitter.com/api/users/profile_image/<?php echo $twuid; ?>?size=bigger' width='32' height='32' />
 		<a href='http://twitter.com/<?php echo $twuid; ?>'><?php echo $twuid; ?></a>
 <?php if (STC_ALLOW_DISCONNECT) { ?>
 		<input type="button" class="button-primary" value="Disconnect this account from WordPress" onclick="stc_login_disconnect(); return false;" />

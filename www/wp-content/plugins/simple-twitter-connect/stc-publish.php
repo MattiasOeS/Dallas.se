@@ -4,7 +4,7 @@ Plugin Name: STC - Publish
 Plugin URI: http://ottopress.com/wordpress-plugins/simple-twitter-connect/
 Description: Allows you to tweet your posts to a Twitter account. Activate this plugin, then look on the Edit Post pages for Twitter posting buttons.
 Author: Otto
-Version: 0.15
+Version: 0.16
 Author URI: http://ottodestruct.com
 License: GPL2
 
@@ -147,25 +147,11 @@ function stc_publish_auto_check($new, $old, $post) {
 	}
 }
 
-add_action('post_submitbox_misc_actions','stc_publish_check_box');
-function stc_publish_check_box() {
-	global $post;
-	$options = get_option('stc_options');
-	if ($post->post_status == 'publish') return;
-?>
-<div class="misc-pub-section">
-<input type="checkbox" <?php checked($options['autotweet_flag'],true); ?> name="stc_auto_publish" /> Auto-publish post to Twitter (STC)
-</div>
-<?php 
-}
-
 function stc_publish_automatic($id, $post) {
 
 	// check to make sure post is published
 	if ($post->post_status !== 'publish') return;
 	
-	if ( empty($_POST['stc_auto_publish']) && !defined('DOING_CRON') && !defined('IFRAME_REQUEST') ) return;
-
 	// check options to see if we need to send to FB at all
 	$options = get_option('stc_options');
 	if (!$options['autotweet_flag'] || !$options['autotweet_token'] || !$options['autotweet_secret'] || !$options['publish_text'])
@@ -181,7 +167,17 @@ function stc_publish_automatic($id, $post) {
 	
 	$args = apply_filters('stc_publish_automatic', $args, $post);
 
-	$resp = stc_do_request('http://api.twitter.com/1/statuses/update',$args);
+	$resp = stc_do_request('http://api.twitter.com/1.1/statuses/update',$args);
+}
+
+function stc_publish_send_tweet($status) {
+	$options = get_option('stc_options');
+	$args=array();
+	$args['status'] = $status;
+	$args['acc_token'] = $options['autotweet_token'];
+	$args['acc_secret'] = $options['autotweet_secret'];	
+	$args = apply_filters('stc_publish_send_tweet', $args );
+	$resp = stc_do_request('http://api.twitter.com/1.1/statuses/update',$args);
 }
 
 function stc_get_default_tweet($id) {
@@ -192,23 +188,33 @@ function stc_get_default_tweet($id) {
 		// use the shortlink if it's available
 		$link = wp_get_shortlink($id);
 	}
+	$fulllink = get_permalink($id);
 	
 	if (empty($link)) {
 		// no shortlink, try the full permalink
-		$link = get_permalink($id);
+		$link = $fulllink;
 	}
 	
 	$link = apply_filters('stc_publish_link', $link, $id);
 
 	$output = $options['publish_text'];
-	$title = str_replace('&nbsp;',' ',get_the_title($id) ); 
+	$title = str_replace('&nbsp;',' ',get_the_title($id) );
 	$output = str_replace('%title%', $title, $output );
 	$output = str_replace('%url%', $link, $output );
+	
+	// fullurl added to stop some complaints. But it doesn't work well if your tweet becomes longer than 140. I do not recommend using it.
+	$output = str_replace('%fullurl%', $fulllink, $output );
 
+	// decode html entities (although twitter's website displays them fine, some twitter clients don't)
+	$output = html_entity_decode( $output, ENT_QUOTES, 'UTF-8' );
+	
 	$output = apply_filters('stc_publish_text', $output, $id);
 
 	return $output;
 }
+
+// strip tags added as a filter because some people want to remove this filter sometimes
+add_filter('stc_publish_text','strip_tags');
 
 add_filter('stc_validate_options','stc_publish_validate_options');
 function stc_publish_validate_options($input) {

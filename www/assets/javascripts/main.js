@@ -2,20 +2,30 @@ $( document ).ready(function() {
 
 	var viewportWidth = $(window).width();
 
+	$('iframe').each(function() {
+		$(this).addClass('video').data('src', $(this).attr('src')).removeAttr('src');
+	});
 	// Function to load and unload iframes on click of grid items
 	$(".column").click(function(e){
 
-		var datasrc = $(this).find(".video").attr("data-src");
+		var datasrc = $(this).find(".video").data("src");
+		var realsrc = $(this).find(".video").attr("src");
 
 		$(".video").removeAttr( "src" );
-		$(this).find(".video").attr("src", datasrc);
+		$(this).find(".video").attr("src", datasrc + '?rel=0&vq=hd720&controls=0&showinfo=0&autoplay=1&enablejsapi=1');
 
-		//Change play/pause vide0 buttons
+		//Change play/pause video buttons
 		$('.playbtn').removeClass('pausevideo').addClass('playvideo');
 		$(this).find('.playbtn').removeClass('playvideo').addClass('pausevideo');
 
 		$('.playbtn').removeClass('mobilePause').addClass('mobilePlay');
 		$(this).find('.playbtn').removeClass('mobilePlay').addClass('mobilePause');
+
+		if (realsrc) {
+			$(".video").removeAttr( "src" );
+			$('.playbtn').removeClass('pausevideo').addClass('playvideo');
+			$('.playbtn').removeClass('mobilePause').addClass('mobilePlay');
+		};
 
 	});
 
@@ -66,7 +76,6 @@ $( document ).ready(function() {
 		}
 
 	});
-
 
 	//Function for headeranimation
     var scrollCalled = false;

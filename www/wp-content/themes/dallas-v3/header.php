@@ -41,7 +41,7 @@
 
 				<img class="pinkbullet" src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png" alt="Dallas">
 
-				<h1>Communicating and flavouring brands in screen media since ‘93</h1>
+				<h1><?php the_field('statement', 'options'); ?></h1>
 
 				<img class="pinkbullet" src="<?php echo XC1_THEME_IMAGES_URI;?>/pinkdot.png" alt="Dallas">
 			</div>

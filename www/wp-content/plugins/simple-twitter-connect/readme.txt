@@ -1,10 +1,10 @@
 === Simple Twitter Connect ===
 Contributors: Otto42
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=otto%40ottodestruct%2ecom
-Tags: twitter, connect, simple, otto, otto42, javascript
+Tags: twitter, connect, simple
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 0.15
+Tested up to: 3.6
+Stable tag: 0.16
 License: GPLv2
 License URI: http://www.opensource.org/licenses/GPL-2.0
 
@@ -112,6 +112,14 @@ The WordPress.com stats plugin implements this, and it provides shortlinks to "w
 4. Login info (before styling) after using Twitter connect button on comments form.
 
 == Changelog ==
+
+= 0.16 =
+* Bugfix release.
+* Change some class names to avoid conflicts with other plugins.
+* Remove versioning on twitter-anywhere JS
+* Remove checkbox on publisher. It just didn't work the way people expected it to work.
+* Remove rawurlencode on tweetbutton text. Causes weird amp; issues.
+* Update to Twitter API 1.1.
 
 = 0.15 =
 * Remove default source for tweet button.

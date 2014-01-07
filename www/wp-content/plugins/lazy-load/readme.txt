@@ -3,7 +3,7 @@ Contributors: batmoo, automattic, jakemgold, 10up
 Tags: lazy load, images, front-end optimization
 Requires at least: 3.2
 Tested up to: 3.4.1
-Stable tag: 0.4
+Stable tag: 0.5
 
 Lazy load images to improve page load times and server bandwidth. Images are loaded only when visible to the user.
 
@@ -57,6 +57,13 @@ if ( function_exists( 'lazyload_images_add_placeholders' ) )
 This will lazy load <em>all</em> your images.
 
 == Changelog ==
+
+= 0.5 =
+
+* Fix lazyload_images_add_placeholders by adding missing return, props Kevin Smith
+* Lazy load avatars, props i8ramin
+* Don't lazy load images in the Dashboard
+* Better compatibility with Jetpack Carousel
 
 = 0.4 =
 

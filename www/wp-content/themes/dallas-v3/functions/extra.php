@@ -10,7 +10,7 @@ function the_slug() {
 
 function change_post_menu_label() {
     global $menu;
-    $menu[5][0] = 'News';
+    $menu[5][0] = 'Cases';
     echo '';
 }
 

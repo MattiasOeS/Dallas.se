@@ -4,7 +4,7 @@ Plugin Name: STC - Tweet Button
 Plugin URI: http://ottopress.com/wordpress-plugins/simple-twitter-connect/
 Description: Adds a Tweet button to your content.
 Author: Otto
-Version: 0.15
+Version: 0.16
 Author URI: http://ottodestruct.com
 License: GPL2
 
@@ -53,16 +53,25 @@ $stc_tweetbutton_defaults = array(
  */
 function get_stc_tweetbutton($args='') {
 	global $stc_tweetbutton_defaults;
+
+	$options = get_option('stc_options');
+
+	// remove me as the source, tired of the spam on that account
+	if ($options['tweetbutton_source'] == 'ottodestruct') {
+		$options['tweetbutton_source'] = '';
+		update_option('stc_options',$options);
+	}
+
+	if (!empty($options['tweetbutton_source'])) $stc_tweetbutton_defaults['source'] = $options['tweetbutton_source'];
+	if (!empty($options['tweetbutton_style'])) $stc_tweetbutton_defaults['style'] = $options['tweetbutton_style'];
+	if (!empty($options['tweetbutton_related'])) $stc_tweetbutton_defaults['related'] = $options['tweetbutton_related'];
+
 	$args = wp_parse_args($args, $stc_tweetbutton_defaults);
 	extract($args);
 	
 	// fix for missing ID in some cases (some shortlink plugins don't work well with ID = zero)
 	if (!$id) $id = get_the_ID();
 	
-	$options = get_option('stc_options');
-	if ($options['tweetbutton_source']) $source = $options['tweetbutton_source'];
-	if ($options['tweetbutton_style']) $style = $options['tweetbutton_style'];
-	if ($options['tweetbutton_related']) $related = $options['tweetbutton_related'];
 	$url = wp_get_shortlink($id);
 	$counturl = get_permalink($id);
 	$post = get_post($id);
@@ -76,7 +85,7 @@ function get_stc_tweetbutton($args='') {
 		'related' => $related,
 		));
 
-	$query .= '&text='.rawurlencode($text);
+	$query .= '&text='.$text;
 
 	$out = "<a href='http://twitter.com/share?{$query}' class='twitter-share-button' data-text='{$text}' data-url='{$url}' data-counturl='{$counturl}' data-count='{$style}' data-via='{$source}'{$datarelated}></a>";
 	return $out;

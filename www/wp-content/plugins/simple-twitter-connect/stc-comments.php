@@ -4,7 +4,7 @@ Plugin Name: STC - Comments
 Plugin URI: http://ottopress.com/wordpress-plugins/simple-twitter-connect/
 Description: Comments plugin for STC (for sites that allow non-logged in commenting).
 Author: Otto
-Version: 0.15
+Version: 0.16
 Author URI: http://ottodestruct.com
 License: GPL2
 
@@ -169,7 +169,7 @@ function stc_comm_get_display() {
 	$tw = stc_get_credentials();
 	if ($tw) {
 		echo "<span id='tw-user'>".
-			 "<img src='http://api.twitter.com/1/users/profile_image/".$tw->screen_name."?size=bigger' width='96' height='96' />".
+			 "<img src='http://twitter.com/api/users/profile_image/".$tw->screen_name."?size=bigger' width='96' height='96' />".
 			 "<span id='tw-msg'><strong>Hi ".$tw->name."!</strong><br />You are connected with your Twitter account. ".
 			 "<a href='?stc-logout=1'>Logout</a>".
 			 "</span></span>";
@@ -218,7 +218,7 @@ function stc_comm_send_to_twitter() {
 		
 		$args['status'] = str_replace('%',$link, $options['comment_text']);
 		
-		$resp = stc_do_request('http://api.twitter.com/1/statuses/update',$args);
+		$resp = stc_do_request('http://api.twitter.com/1.1/statuses/update',$args);
 	}
 }
 
@@ -259,7 +259,7 @@ function comment_user_details_end() { echo '</div>'; }
 
 
 
-// generate facebook avatar code for Twitter user comments
+// generate avatar code for Twitter user comments
 add_filter('get_avatar','stc_comm_avatar', 10, 5);
 function stc_comm_avatar($avatar, $id_or_email, $size = '96', $default = '', $alt = false) {
 	// check to be sure this is for a comment
@@ -270,7 +270,7 @@ function stc_comm_avatar($avatar, $id_or_email, $size = '96', $default = '', $al
 	$twuid = get_comment_meta($id_or_email->comment_ID, 'twuid', true);
 	if ($twuid) {
 		// return the avatar code
-		$avatar = "<img class='avatar avatar-{$size} twitter-avatar' src='http://api.twitter.com/1/users/profile_image/{$twuid}?size=bigger' width='{$size}' height='{$size}' />";
+		$avatar = "<img class='avatar avatar-{$size} twitter-avatar' src='http://twitter.com/api/users/profile_image/{$twuid}?size=bigger' width='{$size}' height='{$size}' />";
 	}
 		
 	return $avatar;
