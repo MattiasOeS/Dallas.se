@@ -177,7 +177,7 @@ class XC1_Helper {
     define('XC1_THEME_STATIC_PATH', ABSPATH . get_option('xc1_helper_static_path') );
     $urlStr = get_option('xc1_helper_static_url');
     $parsed = parse_url($urlStr);
-    if (empty($parsed['scheme'])) {
+    if (empty($parsed['scheme']) && defined('DOMAIN')) {
       $urlStr = sprintf("http://%s%s", DOMAIN, $urlStr);
     }
 

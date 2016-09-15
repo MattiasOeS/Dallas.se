@@ -1,0 +1,68 @@
+@import "compass/css3/";
+@import "compass/css3/user-interface";
+
+/* GRID */
+
+@mixin grid($gridW, $columns) {
+
+	$i: 1;
+	$colWidth: $gridW/$columns;
+	
+	@while $i <= $columns {
+		&.g-#{$i} {
+			width: $i*$colWidth;
+		}
+		$i: $i+1;
+	}
+}
+
+
+/* RETINA IMAGES */
+
+@mixin image-2x($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    /* on retina, use image that's scaled by 2 */
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}
+
+
+
+/* INPUT PLACEHOLDER */
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+
+/* BOX SIZING */
+
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model; // Safari <= 5
+     -moz-box-sizing: $box-model; // Firefox <= 19
+          box-sizing: $box-model;
+}
+
+
+
+/* CLEARFIX */
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+

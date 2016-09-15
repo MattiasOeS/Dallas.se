@@ -8,6 +8,10 @@ function optionsframework_fields() {
 
 	global $allowedtags;
 	$optionsframework_settings = get_option('optionsframework');
+	
+	// Get the theme name so we can display it up top
+	$themename = wp_get_theme(get_stylesheet_directory() . '/style.css');
+	$themename = $themename['Name'];
 
 	// Gets the unique option id
 	if (isset($optionsframework_settings['id'])) {
@@ -35,7 +39,7 @@ function optionsframework_fields() {
 		if ( ($value['type'] != "heading") && ($value['type'] != "info") ) {
 
 			// Keep all ids lowercase with no spaces
-			$value['id'] = preg_replace('/\W/', '', strtolower($value['id']) );
+			$value['id'] = preg_replace('/[^a-zA-Z0-9._\-]/', '', strtolower($value['id']) );
 
 			$id = 'section-' . $value['id'];
 
@@ -48,7 +52,11 @@ function optionsframework_fields() {
 			}
 
 			$output .= '<div id="' . esc_attr( $id ) .'" class="' . esc_attr( $class ) . '">'."\n";
-			$output .= '<h3 class="heading">' . esc_html( $value['name'] ) . '</h3>' . "\n";
+			
+			if ( $value['name'] ) {
+				$output .= '<h4 class="heading">' . esc_html( $value['name'] ) . '</h4>' . "\n";
+			}
+			
 			$output .= '<div class="option">' . "\n" . '<div class="controls">' . "\n";
 		 }
 		
@@ -66,6 +74,12 @@ function optionsframework_fields() {
 						$val = stripslashes($val);
 					}
 			}
+		}
+		
+		// If there is a description save it for labels
+		$explain_value = '';
+		if ( isset( $value['desc'] ) ) {
+			$explain_value = $value['desc'];
 		}
 		                                
 		switch ( $value['type'] ) {
@@ -112,7 +126,7 @@ function optionsframework_fields() {
 			$name = $option_name .'['. $value['id'] .']';
 			foreach ($value['options'] as $key => $option) {
 				$id = $option_name . '-' . $value['id'] .'-'. $key;
-				$output .= '<input class="of-input of-radio" type="radio" name="' . esc_attr( $name ) . '" id="' . esc_attr( $id ) . '" value="'. esc_attr( $key ) . '" '. checked( $val, $key, false) .' /><label for="' . esc_attr( $id ) . '">' . esc_html( $option ) . '</label><br />';
+				$output .= '<input class="of-input of-radio" type="radio" name="' . esc_attr( $name ) . '" id="' . esc_attr( $id ) . '" value="'. esc_attr( $key ) . '" '. checked( $val, $key, false) .' /><label for="' . esc_attr( $id ) . '">' . esc_html( $option ) . '</label>';
 			}
 		break;
 		
@@ -137,6 +151,7 @@ function optionsframework_fields() {
 		// Checkbox
 		case "checkbox":
 			$output .= '<input id="' . esc_attr( $value['id'] ) . '" class="checkbox of-input" type="checkbox" name="' . esc_attr( $option_name . '[' . $value['id'] . ']' ) . '" '. checked( $val, 1, false) .' />';
+			$output .= '<label class="explain" for="' . esc_attr( $value['id'] ) . '">' . wp_kses( $explain_value, $allowedtags) . '</label>';
 		break;
 		
 		// Multicheck
@@ -144,7 +159,7 @@ function optionsframework_fields() {
 			foreach ($value['options'] as $key => $option) {
 				$checked = '';
 				$label = $option;
-				$option = preg_replace('/\W/', '', strtolower($key));
+				$option = preg_replace('/[^a-zA-Z0-9._\-]/', '', strtolower($key));
 
 				$id = $option_name . '-' . $value['id'] . '-'. $option;
 				$name = $option_name . '[' . $value['id'] . '][' . $option .']';
@@ -153,7 +168,7 @@ function optionsframework_fields() {
 					$checked = checked($val[$option], 1, false);
 				}
 
-				$output .= '<input id="' . esc_attr( $id ) . '" class="checkbox of-input" type="checkbox" name="' . esc_attr( $name ) . '" ' . $checked . ' /><label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label><br />';
+				$output .= '<input id="' . esc_attr( $id ) . '" class="checkbox of-input" type="checkbox" name="' . esc_attr( $name ) . '" ' . $checked . ' /><label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label>';
 			}
 		break;
 		
@@ -247,13 +262,13 @@ function optionsframework_fields() {
 			$output .= '</select>';
 			
 			// Background Attachment
-			$output .= '<select class="of-background of-background-attachment" name="' . esc_attr( $option_name . '[' . $value['id'] . '][attachment]' ) . '" id="' . esc_attr( $value['id'] . '_attachment' ) . '">';
-			$attachments = of_recognized_background_attachment();
+			//$output .= '<select class="of-background of-background-attachment" name="' . esc_attr( $option_name . '[' . $value['id'] . '][attachment]' ) . '" id="' . esc_attr( $value['id'] . '_attachment' ) . '">';
+		//	$attachments = of_recognized_background_attachment();
 			
-			foreach ($attachments as $key => $attachment) {
-				$output .= '<option value="' . esc_attr( $key ) . '" ' . selected( $background['attachment'], $key, false ) . '>' . esc_html( $attachment ) . '</option>';
-			}
-			$output .= '</select>';
+		//	foreach ($attachments as $key => $attachment) {
+			//	$output .= '<option value="' . esc_attr( $key ) . '" ' . selected( $background['attachment'], $key, false ) . '>' . esc_html( $attachment ) . '</option>';
+		//	}
+		//	$output .= '</select>';
 			$output .= '</div>';
 		
 		break;  
@@ -270,23 +285,24 @@ function optionsframework_fields() {
 
 			$output .= '<div class="' . esc_attr( $class ) . '">' . "\n";
 			if ( isset($value['name']) ) {
-				$output .= '<h3 class="heading">' . esc_html( $value['name'] ) . '</h3>' . "\n";
+				$output .= '<h4 class="heading">' . esc_html( $value['name'] ) . '</h4>' . "\n";
 			}
 			if ( $value['desc'] ) {
-				$output .= wpautop( wp_kses( $value['desc'], $allowedtags) ) . "\n";
+				$output .= apply_filters('of_sanitize_info', $value['desc'] ) . "\n";
 			}
 			$output .= '<div class="clear"></div></div>' . "\n";
 		break;                       
 		
 		// Heading for Navigation
 		case "heading":
-			if($counter >= 2){
+			if ($counter >= 2) {
 			   $output .= '</div>'."\n";
 			}
-			$jquery_click_hook = preg_replace('/\W/', '', strtolower($value['name']) );
+			$jquery_click_hook = preg_replace('/[^a-zA-Z0-9._\-]/', '', strtolower($value['name']) );
 			$jquery_click_hook = "of-option-" . $jquery_click_hook;
-			$menu .= '<li><a id="'.  esc_attr( $jquery_click_hook ) . '-tab" title="' . esc_attr( $value['name'] ) . '" href="' . esc_attr( '#'.  $jquery_click_hook ) . '">' . esc_html( $value['name'] ) . '</a></li>';
-			$output .= '<div class="group" id="' . esc_attr( $jquery_click_hook ) . '"><h2>' . esc_html( $value['name'] ) . '</h2>' . "\n";
+			$menu .= '<a id="'.  esc_attr( $jquery_click_hook ) . '-tab" class="nav-tab" title="' . esc_attr( $value['name'] ) . '" href="' . esc_attr( '#'.  $jquery_click_hook ) . '">' . esc_html( $value['name'] ) . '</a>';
+			$output .= '<div class="group" id="' . esc_attr( $jquery_click_hook ) . '">';
+			$output .= '<h3>' . esc_html( $value['name'] ) . '</h3>' . "\n";
 			break;
 		}
 
@@ -294,11 +310,10 @@ function optionsframework_fields() {
 			if ( $value['type'] != "checkbox" ) {
 				$output .= '<br/>';
 			}
-			$explain_value = '';
-			if ( isset( $value['desc'] ) ) {
-				$explain_value = $value['desc'];
+			$output .= '</div>';
+			if ( $value['type'] != "checkbox" ) {
+				$output .= '<div class="explain">' . wp_kses( $explain_value, $allowedtags) . '</div>'."\n";
 			}
-			$output .= '</div><div class="explain">' . wp_kses( $explain_value, $allowedtags) . '</div>'."\n";
 			$output .= '<div class="clear"></div></div></div>'."\n";
 		}
 	}

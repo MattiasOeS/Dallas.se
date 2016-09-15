@@ -1,27 +1,53 @@
 <?php get_header(); ?>
 
-	<div id="pageHead">
-		<h1><?php _e('Search Results', 'themetrust'); ?></h1>
-	</div>
-					 
-	<div id="content" class="threeFourth clearfix">
-		<?php $c=0; $post_count = $wp_query->post_count; ?>	
-		<?php while (have_posts()) : the_post(); ?>
-			<?php $c++; ?>				
-			<div <?php post_class('post'); ?> >																				
-				<div class="inside">
-					<h1><a href="<?php the_permalink() ?>" rel="bookmark" ><?php the_title(); ?></a></h1>	
-					<?php the_excerpt('',TRUE); ?>
-								
-					<?php $project_notes = get_post_meta($post->ID, "_ttrust_notes_value", true); ?>
-					<?php echo wpautop($project_notes); ?>
-				</div>																									
-			</div>				
-			
-		<?php endwhile; ?>
-		<?php get_template_part( 'part-pagination'); ?>		    	
-	</div>
+<div id="subhead_container">
+
+	<div id="subhead_wrapper">
+			<div id="subhead">
 		
-	<?php get_sidebar(); ?>	
+		<h1><?php printf( __( 'Search Results for: %s', 'Hero' ), '' . get_search_query() . '' ); ?></h1>
+			
+			</div>
+			
+			
 	
+	<div class="clear"></div>	
+			
+		</div>
+			<hr />
+	</div>
+
+	<!--inside container-->
+	<div id="content_container">
+		
+		<div id="content">
+		
+			<!-- left-col-->
+			<div id="left-col">
+
+			<?php if ( have_posts() ) : ?>
+				
+				<?php get_template_part( 'loop', 'search' ); ?>
+<?php else : ?>
+
+					<div class="post-head-notfound">
+					
+						<h1><?php _e( 'Nothing Found', 'Hero' ); ?></h1>
+					
+					</div><!--head end-->
+					
+					<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'Hero' ); ?></p>
+					
+<?php endif; ?>
+
+</div> <!--left-col end-->
+
+<?php get_sidebar(); ?>
+
+	</div> 
+</div> <!--content end-->
+	
+</div>
+<!--wrapper end-->
+
 <?php get_footer(); ?>

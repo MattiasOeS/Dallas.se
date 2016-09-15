@@ -1,0 +1,96 @@
+@import "webfonts";
+
+
+
+body {
+	font-family: 'chalet-book', serif;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+*, *:before, *:after {
+	outline: none !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: none;
+	font-weight: 100 !important;
+}
+
+b, strong, .bold, .strong {
+	font-family: 'chalet-book-bold', sans-serif;
+	font-weight: 100;
+}
+
+
+p {
+	margin: 0;
+	padding: 0 0 25px;
+	&:empty {
+		display: none;
+	}
+	&.p1 {
+		font-size: 18px;
+	}
+}
+
+
+h1,h2,h3,h4 {
+	font-family: 'dala-moa-medium', serif;
+	font-weight: 100;
+	margin: 0;
+	padding: 0 0 0.5em;
+}
+
+h1, h2 {
+	font-family: 'dala-moa-bold', serif;
+	font-size: 70px;
+	line-height: 1;
+}
+h3 {
+	font-size: 50px;
+	line-height: 1;
+}
+h4 {
+	font-size: 24px;
+	line-height: 1.25;
+	padding: 0 0 4px;
+}
+
+
+
+a { 
+	color: #00aeef;
+	text-decoration: none;
+	&.blockLink { display: block; }
+}
+
+
+
+.small { font-size: 12px; }
+p.small { padding: 0 0 12px; }
+.large { font-size: 18px; }
+.caps { text-transform: uppercase; }
+.semibold { font-weight: 600; }
+
+
+.alignCenter {
+	text-align: center;
+}
+.alignLeft {
+	text-align: left;
+}
+.alignRight {
+	text-align: right;
+}
+
+
+
+
+@media all and (max-width: 767px) {
+	
+	h1,h2 { font-size: 46px; }
+	h3 { font-size: 36px; }
+	h4 { font-size: 20px; }
+	
+	
+}

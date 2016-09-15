@@ -43,7 +43,7 @@ $( document ).ready(function() {
 	$("#clientsButton").click(function() {
 	    $('html, body').animate({
 
-	    	scrollTop: $('html, body').position().top
+	    	scrollTop: $('footer').position().top
 
 	    }, 500 );
 	});

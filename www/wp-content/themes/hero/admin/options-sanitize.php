@@ -7,12 +7,17 @@ add_filter( 'of_sanitize_text', 'sanitize_text_field' );
 /* Textarea */
 
 function of_sanitize_textarea($input) {
-	global $allowedtags;
-	$output = wp_kses( $input, $allowedtags);
+	global $allowedposttags;
+	$allowedposttags["script"] = array();
+	$output = wp_kses( $input, $allowedposttags);
 	return $output;
 }
 
 add_filter( 'of_sanitize_textarea', 'of_sanitize_textarea' );
+
+/* Info */
+
+add_filter( 'of_sanitize_info', 'of_sanitize_allowedposttags' );
 
 /* Select */
 
@@ -71,6 +76,27 @@ function of_sanitize_upload( $input ) {
 	return $output;
 }
 add_filter( 'of_sanitize_upload', 'of_sanitize_upload' );
+
+/* Allowed Tags */
+
+function of_sanitize_allowedtags($input) {
+	global $allowedtags;
+	$output = wpautop(wp_kses( $input, $allowedtags));
+	return $output;
+}
+
+add_filter( 'of_sanitize_info', 'of_sanitize_allowedtags' );
+
+/* Allowed Post Tags */
+
+function of_sanitize_allowedposttags($input) {
+	global $allowedposttags;
+	$output = wpautop(wp_kses( $input, $allowedposttags));
+	return $output;
+}
+
+add_filter( 'of_sanitize_info', 'of_sanitize_allowedposttags' );
+
 
 /* Check that the key value sent is valid */
 

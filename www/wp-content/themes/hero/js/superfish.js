@@ -1,3 +1,4 @@
+
 /*
  * Superfish v1.4.8 - jQuery menu widget
  * Copyright (c) 2008 Joel Birch
@@ -8,25 +9,6 @@
  *
  * CHANGELOG: http://users.tpg.com.au/j_birch/plugins/superfish/changelog.txt
  */
-
-//Supersubs
-(function(a){a.fn.supersubs=function(b){var c=a.extend({},a.fn.supersubs.defaults,b);return this.each(function(){var d=a(this);var e=a.meta?a.extend({},c,d.data()):c;var f=a('<li id="menu-fontsize">&#8212;</li>').css({padding:0,position:"absolute",top:"-999em",width:"auto"}).appendTo(d).width();a("#menu-fontsize").remove();$ULs=d.find("ul");$ULs.each(function(l){var k=$ULs.eq(l);var j=k.children();var g=j.children("a");var m=j.css("white-space","nowrap").css("float");var h=k.add(j).add(g).css({"float":"none",width:"auto"}).end().end()[0].clientWidth/f;h+=e.extraWidth;if(h>e.maxWidth){h=e.maxWidth}else{if(h<e.minWidth){h=e.minWidth}}h+="em";k.css("width",h);j.css({"float":m,width:"100%","white-space":"normal"}).each(function(){var n=a(">ul",this);var i=n.css("left")!==undefined?"left":"right";n.css(i,h)})})})};a.fn.supersubs.defaults={minWidth:9,maxWidth:25,extraWidth:0}})(jQuery);
-
-jQuery.noConflict();
-jQuery(document).ready(function(){ 
-    jQuery("ul.sf-menu").supersubs({ 
-        minWidth:    8,                                 // minimum width of sub-menus in em units 
-        maxWidth:    15,                                // maximum width of sub-menus in em units 
-        extraWidth:  1                                  // extra width can ensure lines don't sometimes turn over 
-                                                        // due to slight rounding differences and font-family 
-    }).superfish({ 
-        delay:       400,
-        animation:   {opacity:'show',height:'show'}, 
-        speed:       'fast',
-        autoArrows:  true,
-        dropShadows: true
-    }); 
-});
 
 ;(function($){
 	$.fn.superfish = function(op){
@@ -103,7 +85,7 @@ jQuery(document).ready(function(){
 		hoverClass	: 'sfHover',
 		pathClass	: 'overideThisToUse',
 		pathLevels	: 1,
-		delay		: 800,
+		delay		: 400,
 		animation	: {opacity:'show'},
 		speed		: 'normal',
 		autoArrows	: true,

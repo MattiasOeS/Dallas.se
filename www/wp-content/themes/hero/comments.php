@@ -1,96 +1,74 @@
-
-<?php // Do not delete these lines
-	if (isset($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['SCRIPT_FILENAME']))
-		die ('Please do not load this page directly. Thanks!');
-
-	if (!empty($post->post_password)) { // if there's a password
-		if ($_COOKIE['wp-postpass_' . COOKIEHASH] != $post->post_password) {  // and it doesn't match the cookie
-			?>
-
-			<p class="nocomments"><?php _e('Enter your password to view comments.', 'themetrust'); ?></p>
-
-			<?php
-			return;
-		}
-	}
+			<div id="comments">
+<?php if ( post_password_required() ) : ?>
+				<p class="nopassword"><?php _e( 'This post is password protected. Enter the password to view any comments.', 'Hero' ); ?></p>
+			</div><!-- #comments -->
+<?php
+		/* Stop the rest of comments.php from being processed,
+		 * but don't kill the script entirely -- we still have
+		 * to fully load the template.
+		 */
+		return;
+	endif;
 ?>
-<?php if(have_comments() || 'open' == $post->comment_status) : ?> <div id="commentBox" > <?php endif; ?>
-<?php if(have_comments()) : ?>	
 
-<div id="comments" class="">
+<?php
+	// You can start editing here -- including this comment!
+?>
 
-	<?php if (!empty($comments)) : ?>
+<?php if ( have_comments() ) : ?>
+<?php if ( ! empty($comments_by_type['comment']) ) : ?>
+			<h3 id="comments-title"><?php
+			printf( _n( 'One Response to %2$s', '%1$s Responses to %2$s', get_comments_number(), 'Hero' ),
+			number_format_i18n( get_comments_number() ), '' . get_the_title() . '' );
+			?></h3>
 
-	<?php $comments_count = count($comments); ?>
-	<h3><?php echo $comments_count; ?> <?php if($comments_count==1) : _e('Comment', 'themetrust'); else : _e('Comments', 'themetrust'); endif; ?></h3>
+<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
+			<div class="navigation">
+				<div class="nav-previous"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'Hero' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'Hero' ) ); ?></div>
+			</div> <!-- .navigation -->
+<?php endif; // check for comment navigation ?>
 
+			<ol class="commentlist">
+				<?php
+					/* Loop through and list the comments. Tell wp_list_comments()
+					 * to use Hero_comment() to format the comments.
+					 * If you want to overload this in a child theme then you can
+					 * define Hero_comment() and that will be used instead.
+					 * See Hero_comment() in Hero/functions.php for more.
+					 */
+					wp_list_comments('type=comment');
+				?>
+			</ol>
 	<?php endif; ?>
-
-	<?php if(!empty($comments)) : ?>
-					
-	<ol id="commentslist" class="clearfix">
-	    <?php wp_list_comments('callback=ttrust_comments'); ?>
-	</ol>
 	
-	<div class="pagination clearfix">
-		<?php paginate_comments_links(); ?> 
-	</div>
-	
-	<?php endif; ?>
-	
-	
+	    <?php if ( ! empty($comments_by_type['pings']) ) : ?>
+    <h3 id="pings"><?php _e( 'Trackbacks/Pingbacks', 'Hero' ); ?></h3>
+    <ol class="commentlist">
+    <?php wp_list_comments('type=pings&callback=Hero_list_pings'); ?>
+    </ol>
 
-</div><!-- end comments -->
+    <?php endif; ?>
 
-<?php endif; // endif comments ?>
+<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
+			<div class="navigation">
+				<div class="nav-previous"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'Hero' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'Hero' ) ); ?></div>
+			</div><!-- .navigation -->
+<?php endif; // check for comment navigation ?>
 
-<?php if ('open' == $post->comment_status) : ?>
+<?php else : // or, if we don't have comments:
 
-<div id="commentForm" class="clear">
+	/* If there are no comments and comments are closed,
+	 * let's leave a little note, shall we?
+	 */
+	if ( ! comments_open() ) :
+?>
+	<p class="nocomments"><?php _e( 'Comments are closed.', 'Hero' ); ?></p>
+<?php endif; // end ! comments_open() ?>
 
-	<div id="respond">
+<?php endif; // end have_comments() ?>
 
-	<h3><?php comment_form_title( __('Leave a Reply', 'themetrust'), __('Leave a Reply to %s', 'themetrust') ); ?></h3>	
+<?php comment_form(array('comment_notes_before'=>'' ,'comment_notes_after'=>'' ,'label_submit'=>'Submit Comment') ); ?>
 
-	<?php if ( get_option('comment_registration') && !is_user_logged_in() ) : ?>
-	<p><?php printf(__('You must be <a href="%s">logged in</a> to post a comment.', 'themetrust'), get_option('siteurl')."/wp-login.php?redirect_to=".urlencode(get_permalink()));?></p>
-	<?php else : ?>
-
-	<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" >
-
-	<?php if ( is_user_logged_in() ) : ?>
-
-	<p><?php printf(__('Logged in as %s', 'themetrust'), '<a href="'.get_option('siteurl').'/wp-admin/profile.php">'.$user_identity.'</a>'); ?> <a href="<?php echo wp_logout_url(); ?>" title="<?php _e('Log out of this account', 'themetrust') ?>" ><?php _e('Log out &raquo;', 'themetrust'); ?></a></p>
-
-	<?php else : ?>
-
-	<p><input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" size="32" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?> />
-	<label for="author"><?php _e('Name', 'themetrust'); ?> <?php if ($req) _e('(required)', 'themetrust'); ?></label></p>
-
-	<p><input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" size="32" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?> />
-	<label for="email"><?php _e('Email', 'themetrust'); ?> <?php if ($req) _e('(required)', 'themetrust'); ?></label></p>
-
-	<p><input type="text" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" size="32" tabindex="3" />
-	<label for="url"><?php _e('Website', 'themetrust'); ?> </label></p>
-
-	<?php endif; ?>
-
-	<p><textarea name="comment" id="comment" cols="55" rows="12" tabindex="4"></textarea></p>
-	
-	<p>
-	<input name="submit" type="submit" class="button" id="submit" tabindex="5" value="<?php echo esc_attr(__('Submit Comment', 'themetrust')); ?>" /> <?php cancel_comment_reply_link(__('Cancel Reply', 'themetrust')); ?>
-	<?php comment_id_fields(); ?>
-	</p>	
-	
-	<?php do_action('comment_form', $post->ID); ?>
-
-	</form>
-
-	<?php endif; // If registration required and not logged in ?>
-	</div>
-
-</div><!-- end commentform -->
-
-<?php endif; // if you delete this the sky will fall on your head ?>
-
-<?php if(have_comments() || 'open' == $post->comment_status) : ?> </div> <?php endif; ?>
+</div><!-- #comments -->

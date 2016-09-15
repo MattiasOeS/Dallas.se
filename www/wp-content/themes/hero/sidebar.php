@@ -1,24 +1,36 @@
-<div id="sidebar" class="clearfix">
-	
-	<?php if(is_author()) : ?>	
-		<div class="widgetBox sidebarBox clearfix">		
-			<h3><?php _e('Author Info', 'themetrust'); ?></h3>			
-			<?php global $wp_query; $current_author = $wp_query->get_queried_object(); ?>	
-	    	<?php echo get_avatar( $current_author->user_email, '80' ); ?>	        	
-	    	<p><?php echo $current_author->description; ?></p>	    	
-	    </div>	
-	<?php endif; ?>
-	
-    <?php
-	    if(is_archive() && is_active_sidebar('sidebar_posts')) : dynamic_sidebar('sidebar_posts');
-		elseif(is_home() && is_active_sidebar('sidebar_posts')) : dynamic_sidebar('sidebar_posts');		
-	    elseif(is_single() && is_active_sidebar('sidebar_posts')) : dynamic_sidebar('sidebar_posts');
-	    elseif(is_page() && is_active_sidebar('sidebar_pages')) : dynamic_sidebar('sidebar_pages');
-		elseif(is_search() && is_active_sidebar('sidebar_posts')) : dynamic_sidebar('sidebar_pages');
-		elseif(is_front_page() && is_active_sidebar('sidebar_home')) : dynamic_sidebar('sidebar_home');
-	else : ?>
+		<!--right-col-->
+		<div id="right-col">
+		
+		<img src="<?php echo get_template_directory_uri(); ?>/images/sidebar-top.png" alt="" />
+			
+				<!--sidebar-->
+				<div id="sidebar">
+			
+			<ul class="xoxo">
 
-		<?php if (!dynamic_sidebar('sidebar')) ;?>  		
-    
-	<?php endif; ?>
-</div><!-- end sidebar -->
+<?php
+
+	if ( ! dynamic_sidebar( 'primary-widget-area' ) ) : ?>
+
+
+		<?php endif; // end primary widget area ?>
+			</ul>
+
+<?php
+	// A second sidebar for widgets, just because.
+	if ( is_active_sidebar( 'secondary-widget-area' ) ) : ?>
+
+			<ul class="xoxo">
+				<?php dynamic_sidebar( 'secondary-widget-area' ); ?>
+			</ul>
+			
+
+<?php endif; ?>
+
+				</div><!--sb end-->
+				
+				<div class="clear"></div>
+				
+<img src="<?php echo get_template_directory_uri(); ?>/images/sidebar-bottom.png" alt="" />
+				
+			</div> <!--right-col-->

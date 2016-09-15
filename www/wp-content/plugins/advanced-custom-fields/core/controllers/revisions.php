@@ -115,7 +115,7 @@ class acf_revisions
 		$post_id = 0;
 		
 		
-		// determin $post_id
+		// determine $post_id
 		if( isset($_POST['post_id']) )
 		{
 			$post_id = $_POST['post_id'];
@@ -154,7 +154,7 @@ class acf_revisions
 				
 				
 				// WP 3.5: left vs right
-				// Add a value of the revision ID (as there is no way to determin this within the '_wp_post_revision_field_' filter!)
+				// Add a value of the revision ID (as there is no way to determine this within the '_wp_post_revision_field_' filter!)
 				if( isset($_GET['action'], $_GET['left'], $_GET['right']) && $_GET['action'] == 'diff' )
 				{
 					global $left_revision, $right_revision;
@@ -193,7 +193,7 @@ class acf_revisions
 		$post_id = 0;
 		
 		
-		// determin $post_id
+		// determine $post_id
 		if( isset($post->ID) )
 		{
 			// WP 3.6
@@ -252,24 +252,58 @@ class acf_revisions
 	*  @return	$revision_id (int) the source post
 	*/
 	
-	function wp_restore_post_revision( $parent_id, $revision_id )
-	{
+	function wp_restore_post_revision( $post_id, $revision_id ) {
+	
+		// global
 		global $wpdb;
+		
+		
+		// vars
+		$fields = array();
 		
 		
 		// get field from postmeta
 		$rows = $wpdb->get_results( $wpdb->prepare(
-			"SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key NOT LIKE %s", 
-			$revision_id, 
-			'_%'
+			"SELECT * FROM $wpdb->postmeta WHERE post_id=%d", 
+			$revision_id
 		), ARRAY_A);
 		
 		
+		// populate $fields
 		if( $rows )
 		{
 			foreach( $rows as $row )
 			{
-				update_post_meta( $parent_id, $row['meta_key'], $row['meta_value'] );
+				// meta_key must start with '_'
+				if( substr($row['meta_key'], 0, 1) !== '_' )
+				{
+					continue;
+				}
+				
+				
+				// meta_value must start with 'field_'
+				if( substr($row['meta_value'], 0, 6) !== 'field_' )
+				{
+					continue;
+				}
+				
+				
+				// this is an ACF field, append to $fields
+				$fields[] = substr($row['meta_key'], 1);
+				
+			}
+		}
+		
+		
+		// save data
+		if( $rows )
+		{
+			foreach( $rows as $row )
+			{
+				if( in_array($row['meta_key'], $fields) )
+				{
+					update_post_meta( $post_id, $row['meta_key'], $row['meta_value'] );
+				}
 			}
 		}
 			

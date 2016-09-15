@@ -1,88 +1,71 @@
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 
-<head>
-	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-	<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
-	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
-	<?php $heading_font = of_get_option('ttrust_heading_font'); ?>
-	<?php $body_font = of_get_option('ttrust_body_font'); ?>
-	<?php $banner_main_font = of_get_option('ttrust_banner_main_font'); ?>
-	<?php $banner_secondary_font = of_get_option('ttrust_banner_secondary_font'); ?>
-	<?php if ($heading_font != "") : ?>
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo(urlencode($heading_font)); ?>:regular,italic,bold,bolditalic" />
-	<?php endif; ?>	
-	<?php if ($body_font != "" && $body_font != $heading_font) : ?>
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo(urlencode($body_font)); ?>:regular,italic,bold,bolditalic" />
-	<?php endif; ?>	
-	<?php if ($banner_main_font != "") : ?>
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo(urlencode($banner_main_font)); ?>:regular,italic,bold,bolditalic" />
-	<?php endif; ?>
-	<?php if ($banner_secondary_font != "") : ?>
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo(urlencode($banner_secondary_font)); ?>:regular,italic,bold,bolditalic" />
-	<?php endif; ?>
+
+	<head profile="http://gmpg.org/xfn/11">
+		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+		<title><?php 	
+		
+		wp_title( '|' );
+
+	// Add the blog description for the home/front page.
+	$site_description = get_bloginfo( 'description', 'display' );
+	if ( $site_description && ( is_home() || is_front_page() ) )
+		echo " | $site_description"; ?>
+		
+		</title>
+			
+<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+
+<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+
 	
-	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
-	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
-	<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> Atom Feed" href="<?php bloginfo('atom_url'); ?>" />
-	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-	
-	<?php if (of_get_option('ttrust_favicon') ) : ?>
-		<link rel="shortcut icon" href="<?php echo of_get_option('ttrust_favicon'); ?>" />
-	<?php endif; ?>
-	
-	<?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
-	
-	<?php wp_head(); ?>	
+<?php wp_head(); ?>
+
 </head>
 
-<body <?php body_class(); ?> >
+<body <?php body_class(); ?>>
 
-<div id="container">	
-<div id="header">
-	<div class="inside clearfix">
+	<!--wrapper-->
+	<div id="wrapper">
 	
-		<div id="logo"></div>
-		
-		<div id="mainNav">							
-			<?php wp_nav_menu( array('menu_class' => 'sf-menu', 'menu' => 'Main', 'theme_location' => 'main', 'fallback_cb' => 'default_nav' )); ?>			
-		</div>		
-			
-	</div>		
-		<div id="topBanner">
-		
-		
-			<?php if(is_front_page()): ?>
-			
-			<div class="flexslider loading">
-			
-				<ul class="slides">
-					<li class="about">
-						<div id="bannerText">
-							<h2><?php echo of_get_option('ttrust_banner_text_primary'); ?></h2>
-							<p><?php echo of_get_option('ttrust_banner_text_secondary');  ?></p>
-							<a id="showreel_link" href="#">Watch the showreel</a>
-						</div>
-					</li>
-					<li class="showreelvideo">
-						<div id="showreel">
-							<div class="youtube showreel">
-								<div class="embed" id="Z8Wy7rGKsT0"></div>
-								<div class="control play"></div>
-							</div>
-						</div>
-					</li>
-				
-				</ul>
-				
-			</div>	
-			
-			<?php endif; ?>	
-			
-			<div id="topBanner_bottom"></div>
-		</div>	
-</div>
+	<!--headercontainer-->
+	<div id="header_container">
+	
+		<!--header-->
+		<div id="header2">
 
-<div class="wrap">
-<div id="main" class="clearfix">
+				<?php if ( ( of_get_option('logo_image') ) != '' ) { ?>
+		<div id="logo"><a href="<?php echo home_url(); ?>" title="<?php bloginfo('description'); ?>"><img src="<?php echo of_get_option('logo_image'); ?>" alt="<?php echo of_get_option('footer_cr'); ?>" /></a></div><!--logo end-->
+	<?php } else { ?>
+			<div id="logo2"><a href="<?php echo home_url(); ?>" title="<?php bloginfo('description'); ?>"><?php bloginfo( 'name' ); ?></a></div><!--logo end-->
+	<?php } ?>
+			
+			<!--menu-->
+			
+		<div id="menubar">
 	
+	<?php $navcheck = wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary', 'menu_class' => 'nav' ,'fallback_cb' => '', 'echo' => false ) ); ?>
+
+	 <?php  if ($navcheck == '') { ?>
+	
+	<ul class="nav">
+		<li class="page_item"><a href="<?php echo home_url(); ?>" title="Home">Home</a></li>				
+		<?php wp_list_pages('title_li=&sort_column=menu_order'); ?>
+
+	</ul>
+<?php } else echo($navcheck); ?> 
+
+
+	</div>
+		
+	
+	<!--menu end-->
+			
+			<div class="clear"></div>
+			
+		</div><!-- header end-->
+		<hr />
+		
+	</div><!--header container end-->	
+		

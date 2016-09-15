@@ -23,7 +23,7 @@ if ( ! function_exists( 'optionsframework_mlu_init' ) ) {
 	function optionsframework_mlu_init () {
 		register_post_type( 'optionsframework', array(
 			'labels' => array(
-				'name' => __( 'Options Framework Internal Container' ),
+				'name' => __( 'Options Framework Internal Container' , 'Hero'),
 			),
 			'public' => true,
 			'show_ui' => false,
@@ -48,10 +48,10 @@ if ( ! function_exists( 'optionsframework_mlu_css' ) ) {
 	function optionsframework_mlu_css () {
 	
 		$_html = '';
-		$_html .= '<link rel="stylesheet" href="' . get_option('siteurl') . '/' . WPINC . '/js/thickbox/thickbox.css" type="text/css" media="screen" />' . "\n";
+		$_html .= '<link rel="stylesheet" href="' . site_url() . '/' . WPINC . '/js/thickbox/thickbox.css" type="text/css" media="screen" />' . "\n";
 		$_html .= '<script type="text/javascript">
-		var tb_pathToImage = "' . get_option('siteurl') . '/' . WPINC . '/js/thickbox/loadingAnimation.gif";
-	    var tb_closeImage = "' . get_option('siteurl') . '/' . WPINC . '/js/thickbox/tb-close.png";
+		var tb_pathToImage = "' . site_url() . '/' . WPINC . '/js/thickbox/loadingAnimation.gif";
+	    var tb_closeImage = "' . site_url() . '/' . WPINC . '/js/thickbox/tb-close.png";
 	    </script>' . "\n";
 	    
 	    echo $_html;
@@ -125,7 +125,7 @@ if ( ! function_exists( 'optionsframework_medialibrary_uploader' ) ) {
 		
 		if ( $value ) { $class = ' has-file'; }
 		$output .= '<input id="' . $id . '" class="upload' . $class . '" type="text" name="'.$name.'" value="' . $value . '" />' . "\n";
-		$output .= '<input id="upload_' . $id . '" class="upload_button button" type="button" value="' . __( 'Upload' ) . '" rel="' . $int . '" />' . "\n";
+		$output .= '<input id="upload_' . $id . '" class="upload_button button" type="button" value="' . __( 'Upload' , 'Hero' ) . '" rel="' . $int . '" />' . "\n";
 		
 		if ( $_desc != '' ) {
 			$output .= '<span class="of_metabox_desc">' . $_desc . '</span>' . "\n";
@@ -149,7 +149,7 @@ if ( ! function_exists( 'optionsframework_medialibrary_uploader' ) ) {
 			
 				// Standard generic output if it's not an image.	
 				$title = __( 'View File', 'optionsframework' );
-				$output .= '<div class="no_image"><span class="file_link"><a href="' . $value . '" target="_blank" rel="external">'.$title.'</a></span>' . $remove . '</div>';
+				$output .= '<div class="no_image"><span class="file_link"><a href="' . $value . '" Hero="_blank" rel="external">'.$title.'</a></span>' . $remove . '</div>';
 			}	
 		}
 		$output .= '</div>' . "\n";
@@ -250,7 +250,7 @@ if ( ! function_exists( 'optionsframework_mlu_js_popup' ) ) {
 		// Change the title of each tab to use the custom title text instead of "Media File".
 		$( 'h3.media-title' ).each ( function () {
 			var current_title = $( this ).html();
-			var new_title = current_title.replace( 'media file', '<?php echo $_of_title; ?>' );
+			var new_title = current_title.replace( 'media file', '<?php echo esc_attr($_of_title); ?>' );
 			$( this ).html( new_title );
 		
 		} );

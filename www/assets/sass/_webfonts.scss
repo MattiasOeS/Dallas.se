@@ -1,0 +1,44 @@
+/* DALA MOA */
+
+@font-face {
+  font-family: 'dala-moa';
+  src: url('../fonts/dala-moa-regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/dala-moa-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/dala-moa-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/dala-moa-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/dala-moa-regular.svg#dala-moa') format('svg'); /* Legacy iOS */
+}
+@font-face {
+  font-family: 'dala-moa-medium';
+  src: url('../fonts/dala-moa-medium.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/dala-moa-medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/dala-moa-medium.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/dala-moa-medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/dala-moa-medium.svg#dala-moa-medium') format('svg'); /* Legacy iOS */
+}
+@font-face {
+  font-family: 'dala-moa-bold';
+  src: url('../fonts/dala-moa-bold.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/dala-moa-bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/dala-moa-bold.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/dala-moa-bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/dala-moa-bold.svg#dala-moa-bold') format('svg'); /* Legacy iOS */
+}
+
+
+/* CHALET BOOK */
+
+@font-face {
+  font-family: 'chalet-book';
+  src: url('../fonts/ChaletBook-Regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/ChaletBook-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/ChaletBook-Regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/ChaletBook-Regular.svg#chalet-book') format('svg'); /* Legacy iOS */
+}
+@font-face {
+  font-family: 'chalet-book-bold';
+  src: url('../fonts/ChaletBook-Bold.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/ChaletBook-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/ChaletBook-Bold.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/ChaletBook-Bold.svg#chalet-book-bold') format('svg'); /* Legacy iOS */
+}

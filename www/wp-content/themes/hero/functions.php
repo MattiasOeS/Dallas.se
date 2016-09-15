@@ -1,867 +1,401 @@
 <?php
 
-update_option('siteurl','http://dallas.test.n-i.se');
-update_option('home','http://dallas.test.n-i.se');  
+/** Tell WordPress to run Hero_setup() when the 'after_setup_theme' hook is run. */
+add_action( 'after_setup_theme', 'Hero_setup' );
 
+if ( ! function_exists( 'Hero_setup' ) ):
 
-// Load main options panel file  
-if ( !function_exists( 'optionsframework_init' ) ) {
-	define('OPTIONS_FRAMEWORK_URL', TEMPLATEPATH . '/admin/');
-	define('OPTIONS_FRAMEWORK_DIRECTORY', get_bloginfo('template_directory') . '/admin/');
-	require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
-}
+function Hero_setup() {
 
-// Enable translation
-// Translations can be put in the /languages/ directory
-load_theme_textdomain( 'themetrust', TEMPLATEPATH . '/languages' );
+	 global $content_width;
+	 
+     if (!isset($content_width))
+            $content_width = 620;
 
-// Widgets
-require_once (TEMPLATEPATH . '/admin/widgets.php');
-
-
-// Mobile device detection
-if( !function_exists('mobile_user_agent_switch') ){
-	function is_mobile(){
-		$device = '';
- 
-		if( stristr($_SERVER['HTTP_USER_AGENT'],'ipad') ) {
-			$device = "ipad";
-		} else if( stristr($_SERVER['HTTP_USER_AGENT'],'iphone') || strstr($_SERVER['HTTP_USER_AGENT'],'iphone') ) {
-			$device = "iphone";
-		} else if( stristr($_SERVER['HTTP_USER_AGENT'],'blackberry') ) {
-			$device = "blackberry";
-		} else if( stristr($_SERVER['HTTP_USER_AGENT'],'android') ) {
-			$device = "android";
-		}
- 
-		if( $device ) {
-			return $device; 
-		} return false; {
-			return false;
-		}
-	}
-}
-
-// Disable Updates
-function ttrust_hidden_theme( $r, $url ) {
-	if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check/1.0/' ) )
-		return $r; // Not a theme update request. Bail immediately.
-	$themes = unserialize( $r['body']['themes'] );
-	unset( $themes[ get_option( 'template' ) ] );
-	unset( $themes[ get_option( 'stylesheet' ) ] );
-	$r['body']['themes'] = serialize( $themes );
-	return $r;
-}
-
-add_filter( 'http_request_args', 'ttrust_hidden_theme', 5, 2 );
-
-
-//////////////////////////////////////////////////////////////
-// Theme Header
-/////////////////////////////////////////////////////////////
+	// This theme uses post thumbnails
+	add_theme_support( 'post-thumbnails' );
 	
-add_action('wp_enqueue_scripts', 'ttrust_scripts');
-
-function ttrust_scripts() {	
-
-	wp_enqueue_script('jquery');
+	// Add default posts and comments RSS feed links to head
+	add_theme_support( 'automatic-feed-links' );	
 	
-	wp_enqueue_script('superfish', get_bloginfo('template_url').'/js/superfish.js', array('jquery'), '1.4.8', true);
-	
-	wp_enqueue_style('superfish', get_bloginfo('template_url').'/css/superfish.css', false, '1.4.8', 'all' );	
-	
-	if(is_active_widget(false,'','ttrust_flickr')) :	
-    	wp_enqueue_script('flickrfeed', get_bloginfo('template_url').'/js/jflickrfeed.js', array('jquery'), '0.8', true);
-	endif;
-	
-	if(is_active_widget(false,'','ttrust_twitter')) :	
-    	wp_enqueue_script('jquery_twitter', get_bloginfo('template_url').'/js/jquery.twitter.js', array('jquery'), '1.5', true);
-	endif;	
-	
-	wp_enqueue_script('fitvids', get_bloginfo('template_url').'/js/jquery.fitvids.js', array('jquery'), '1.0', true);
-	
-	wp_enqueue_script('fittext', get_bloginfo('template_url').'/js/jquery.fittext.js', array('jquery'), '1.0', true);	
-	
-	wp_enqueue_script('easing', get_bloginfo('template_url').'/js/jquery.easing.1.3.js', array('jquery'), '1.0', true);	
-	
-	wp_enqueue_script('masonry', get_bloginfo('template_url').'/js/jquery.masonry.min.js', array('jquery'), '1.0', true);	
-	
-	wp_enqueue_script('lazyload', get_bloginfo('template_url').'/js/jquery.lazyload.js', array('jquery'), '1.0', true);	
-	
-	wp_enqueue_style('slideshow', get_bloginfo('template_url').'/css/flexslider.css', false, '1.8', 'all' );
-	wp_enqueue_script('slideshow', get_bloginfo('template_url').'/js/jquery.flexslider-min.js', array('jquery'), '1.8', true);	
-	
-	wp_enqueue_script('yt_iframe_api', 'http://www.youtube.com/iframe_api', array('jquery'), '1.8', true);	
-	
-	wp_enqueue_script('theme_trust_js', get_bloginfo('template_url').'/js/theme_trust.js', array('jquery'), '1.0', true);	
-	
-}
-
-add_action('wp_head','ttrust_theme_head');
-
-function ttrust_theme_head() { ?>
-<meta name="generator" content="<?php global $ttrust_theme, $ttrust_version; echo $ttrust_theme.' '.$ttrust_version; ?>" />
-
-<style type="text/css" media="screen">
-
-
-
-<?php if(of_get_option('ttrust_color_accent')) : ?>
-	blockquote, address {
-		border-left: 5px solid <?php echo(of_get_option('ttrust_color_accent')); ?>;
-	}	
-	#filterNav .selected, #filterNav a.selected:hover, #content .project.small .inside {
-		background-color: <?php echo(of_get_option('ttrust_color_accent')); ?>;
-	}	
-<?php endif; ?>
-
-<?php if(of_get_option('ttrust_color_menu')) : ?>#mainNav ul a, #mainNav ul li.sfHover ul a { color: <?php echo(of_get_option('ttrust_color_menu')); ?> !important;	}<?php endif; ?>
-
-<?php if(of_get_option('ttrust_color_menu_hover')) : ?>
-	#mainNav ul li.current a,
-	#mainNav ul li.current-cat a,
-	#mainNav ul li.current_page_item a,
-	#mainNav ul li.current-menu-item a,
-	#mainNav ul li.current-post-ancestor a,	
-	.single-post #mainNav ul li.current_page_parent a,
-	#mainNav ul li.current-category-parent a,
-	#mainNav ul li.current-category-ancestor a,
-	#mainNav ul li.current-portfolio-ancestor a,
-	#mainNav ul li.current-projects-ancestor a {
-		color: <?php echo(of_get_option('ttrust_color_menu_hover')); ?> !important;		
-	}
-	#mainNav ul li.sfHover a,
-	#mainNav ul li a:hover,
-	#mainNav ul li:hover {
-		color: <?php echo(of_get_option('ttrust_color_menu_hover')); ?> !important;	
-	}
-	#mainNav ul li.sfHover ul a:hover { color: <?php echo(of_get_option('ttrust_color_menu_hover')); ?> !important;}	
-<?php endif; ?>
-
-<?php if(of_get_option('ttrust_color_link')) : ?>a { color: <?php echo(of_get_option('ttrust_color_link')); ?>;}<?php endif; ?>
-
-<?php if(of_get_option('ttrust_color_link_hover')) : ?>a:hover {color: <?php echo(of_get_option('ttrust_color_link_hover')); ?>;}<?php endif; ?>
-
-<?php if(of_get_option('ttrust_color_btn')) : ?>.button, #searchsubmit, input[type="submit"] {background-color: <?php echo(of_get_option('ttrust_color_btn')); ?> !important;}<?php endif; ?>
-
-<?php if(of_get_option('ttrust_color_btn_hover')) : ?>.button:hover, #searchsubmit:hover, input[type="submit"]:hover {background-color: <?php echo(of_get_option('ttrust_color_btn_hover')); ?> !important;}<?php endif; ?>
-
-<?php if ( is_archive() ): ?> html {height: 101%;} <?php endif; ?>
-
-<?php if(of_get_option('ttrust_color_banner_bkg')) : ?>
-	#homeBanner {
-		background-color: <?php echo(of_get_option('ttrust_color_banner_bkg')); ?>;
-	}	
-<?php endif; ?>
-
-<?php $home_banner_img = of_get_option('ttrust_home_banner_img'); ?>
-<?php if($home_banner_img) : ?>
-	#homeBanner {
-		background-image: url(<?php echo $home_banner_img; ?>);		
-		background-repeat:no-repeat;
-		background-attachment:fixed;
-		background-position:center top;			
-	}
-<?php endif; ?>
-
-<?php echo(of_get_option('ttrust_custom_css')); ?>
-
-</style>
-
-<!--[if IE 7]>
-<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/ie7.css" type="text/css" media="screen" />
-<![endif]-->
-<!--[if IE 8]>
-<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/ie8.css" type="text/css" media="screen" />
-<![endif]-->
-<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-<?php echo "\n".of_get_option('ttrust_analytics')."\n"; ?>
-
-<?php }
-
-add_action('init', 'remheadlink');
-function remheadlink() {
-	remove_action('wp_head', 'rsd_link');
-	remove_action('wp_head', 'wlwmanifest_link');
-}
-
-
-//////////////////////////////////////////////////////////////
-// Custom Background Support
-/////////////////////////////////////////////////////////////
-
-if(function_exists('add_custom_background')) add_custom_background();
-
-
-//////////////////////////////////////////////////////////////
-// Body Class
-/////////////////////////////////////////////////////////////
-
-function ttrust_body_classes($classes) {	
-	
-	$classes[] = of_get_option('ttrust_background');	
-	return $classes;
-}
-add_filter('body_class','ttrust_body_classes');
-
-
-//////////////////////////////////////////////////////////////
-// Theme Footer
-/////////////////////////////////////////////////////////////
-
-add_action('wp_footer','ttrust_footer');
-
-function ttrust_footer() {		
-	wp_reset_query(); 	
-	global $wp_query;
-	global $post;
-		
-	if ( false !== strpos($post->post_content, '[slideshow') ) {	
-		include(TEMPLATEPATH . '/js/slideshow.php');			
-	}		
-}
-
-
-//////////////////////////////////////////////////////////////
-// Remove
-/////////////////////////////////////////////////////////////
-
-// #more from more-link
-function ttrust_remove($content) {
-	global $id;
-	return str_replace('#more-'.$id.'"', '"', $content);
-}
-add_filter('the_content', 'ttrust_remove');
-
-
-//////////////////////////////////////////////////////////////
-// Custom Excerpt
-/////////////////////////////////////////////////////////////
-
-function excerpt_ellipsis($text) {
-	return str_replace('[...]', '...', $text);
-}
-add_filter('the_excerpt', 'excerpt_ellipsis');
-
-
-//////////////////////////////////////////////////////////////
-// Add Excerpt Support for Pages
-/////////////////////////////////////////////////////////////
-
-add_post_type_support( 'page', 'excerpt' );
-
-
-//////////////////////////////////////////////////////////////
-// Get Meta Box Value
-/////////////////////////////////////////////////////////////
-
-function get_meta_box_vlaue($m) {
-	global $wp_query;
-	global $post;
-	$meta_box_value = get_post_meta($post->ID, $m, true);
-	return $meta_box_value;
-}
-
-//////////////////////////////////////////////////////////////
-// Pagination Styles
-/////////////////////////////////////////////////////////////
-
-add_action( 'wp_print_styles', 'ttrust_deregister_styles', 100 );
-function ttrust_deregister_styles() {
-	wp_deregister_style( 'wp-pagenavi' );
-}
-remove_action('wp_head', 'pagenavi_css');
-remove_action('wp_print_styles', 'pagenavi_stylesheets');
-
-
-//////////////////////////////////////////////////////////////
-// Navigation Menus
-/////////////////////////////////////////////////////////////
-
-add_theme_support('menus');
-register_nav_menu('main', 'Main Navigation Menu');
-
-function default_nav() {
-	echo '<ul class="sf-menu clearfix" >';					
-		wp_list_pages('sort_column=menu_order&title_li='); 
-	echo '</ul>';
-}
-
-//////////////////////////////////////////////////////////////
-// Feature Images (Post Thumbnails)
-/////////////////////////////////////////////////////////////
-
-add_theme_support('post-thumbnails');
-
-set_post_thumbnail_size(100, 100, true);
-add_image_size('ttrust_post_thumb_big', 720, 220, true);
-add_image_size('ttrust_post_thumb_small', 150, 150, true);
-add_image_size('ttrust_post_thumb_tiny', 50, 50, true);
-add_image_size('ttrust_one_third_cropped', 300, 175, true);
-
-
-//////////////////////////////////////////////////////////////
-// Button Shortcode
-/////////////////////////////////////////////////////////////
-
-function ttrust_button($a) {
-	extract(shortcode_atts(array(
-		'label' 	=> 'Button Text',
-		'id' 	=> '1',
-		'url'	=> '',
-		'target' => '_parent',		
-		'size'	=> '',
-		'ptag'	=> false
-	), $a));
-	
-	$link = $url ? $url : get_permalink($id);	
-	
-	if($ptag) :
-		return  wpautop('<a href="'.$link.'" target="'.$target.'" class="button '.$size.'">'.$label.'</a>');
-	else :
-		return '<a href="'.$link.'" target="'.$target.'" class="button '.$size.'">'.$label.'</a>';
-	endif;
-	
-}
-
-add_shortcode('button', 'ttrust_button');
-
-//////////////////////////////////////////////////////////////
-// Column Shortcodes
-/////////////////////////////////////////////////////////////
-
-function ttrust_one_third( $atts, $content = null ) {
-   return '<div class="one_third">' . do_shortcode(wpautop($content)) . '</div>';
-}
-add_shortcode('one_third', 'ttrust_one_third');
-
-function ttrust_one_third_last( $atts, $content = null ) {
-   return '<div class="one_third last">' . do_shortcode(wpautop($content)) . '</div><div class="clearboth"></div>';
-}
-add_shortcode('one_third_last', 'ttrust_one_third_last');
-
-function ttrust_two_third( $atts, $content = null ) {
-   return '<div class="two_third">' . do_shortcode(wpautop($content)) . '</div>';
-}
-add_shortcode('two_third', 'ttrust_two_third');
-
-function ttrust_two_third_last( $atts, $content = null ) {
-   return '<div class="two_third last">' . do_shortcode(wpautop($content)) . '</div><div class="clearboth"></div>';
-}
-add_shortcode('two_third_last', 'ttrust_two_third_last');
-
-function ttrust_one_half( $atts, $content = null ) {
-   return '<div class="one_half">' . do_shortcode(wpautop($content)) . '</div>';
-}
-add_shortcode('one_half', 'ttrust_one_half');
-
-function ttrust_one_half_last( $atts, $content = null ) {
-   return '<div class="one_half last">' . do_shortcode(wpautop($content)) . '</div><div class="clearboth"></div>';
-}
-add_shortcode('one_half_last', 'ttrust_one_half_last');
-
-
-//////////////////////////////////////////////////////////////
-// Slideshow Shortcode
-/////////////////////////////////////////////////////////////
-
-function ttrust_slideshow( $atts, $content = null ) {
-    $content = str_replace('<br />', '', $content);
-	$content = str_replace('<img', '<li><img', $content);
-	$content = str_replace('/>', '/></li>', $content);
-	return '<div class="flexslider clearfix" id="project-slider"><ul class="slides">' . $content . '</ul></div>';
-}
-add_shortcode('slideshow', 'ttrust_slideshow');
-
-//////////////////////////////////////////////////////////////
-// Elastic Video
-/////////////////////////////////////////////////////////////
-
-function ttrust_elasticVideo( $atts, $content = null ) {    
-	return '<div class="videoContainer">' . $content . '</div>';
-}
-add_shortcode('elastic-video', 'ttrust_elasticVideo');
-
-//////////////////////////////////////////////////////////////
-// Add conainers to all videos
-/////////////////////////////////////////////////////////////
-
-function add_video_containers($content) { 
-	$content = str_replace('<object', '<div class="videoContainer"><object', $content);
-	$content = str_replace('</object>', '</object></div>', $content);
-	
-	$content = str_replace('<embed', '<div class="videoContainer"><embed', $content);
-	$content = str_replace('</embed>', '</embed></div>', $content);
-	
-	$content = str_replace('<iframe', '<div class="videoContainer"><iframe', $content);
-	$content = str_replace('</iframe>', '</iframe></div>', $content);
-	
-	return $content;
-}
-
-add_action('the_content', 'add_video_containers');  
-
-//////////////////////////////////////////////////////////////
-// Home Custom Excerpt
-/////////////////////////////////////////////////////////////
-
-// Variable & intelligent excerpt length.
-function print_excerpt($title) { // Max excerpt length. Length is set in characters
-	global $post;
-
-	$rem_len = ""; //clear variable
-	$title_len = strlen($title); //get length of title
-	$excerpt_line=20;
-	if($title_len <= 30){
-    	$rem_len=$excerpt_line*8; //calc space remaining for excerpt
-	}elseif($title_len <= 34){
-    	$rem_len=$excerpt_line*7;
-	}elseif($title_len <= 51){
-    	$rem_len=$excerpt_line*6;
-	}elseif($title_len <= 68){
-    	$rem_len=$excerpt_line*5;
-	}elseif($title_len <= 85){
-    	$rem_len=$excerpt_line*4;
-	}
-
-	$text = $post->post_excerpt;
-	if ( '' == $text ) {
-    	$text = get_the_content('');
-    	$text = apply_filters('the_content', $text);
-    	$text = str_replace(']]>', ']]>', $text);
-	}
-	$text = strip_shortcodes($text); // optional, recommended
-	$text = strip_tags($text,'<p>'); // use ' $text = strip_tags($text,'<p><a>'); ' if you want to keep some tags
-
-	$text = substr($text,0,$rem_len);
-	$excerpt = reverse_strrchr($text, ' ', 1) . "&#0133;";
-	if( $excerpt ) {
-    	echo apply_filters('the_excerpt',$excerpt);
-	} else {
-    	echo apply_filters('the_excerpt',$text);
-	}
-}
-
-// Returns the portion of haystack which goes until the last occurrence of needle
-function reverse_strrchr($haystack, $needle, $trail) {
-    return strrpos($haystack, $needle) ? substr($haystack, 0, strrpos($haystack, $needle) + $trail) : false;
-}
-
-
-//////////////////////////////////////////////////////////////
-// Custom More Link
-/////////////////////////////////////////////////////////////
-
-function more_link() {
-	global $post;	
-	$more_link = '<p class="moreLink"><a href="'.get_permalink().'" title="'.get_the_title().'">';
-	$more_link .= '<span>'.__('Read More', 'themetrust').'</span>';
-	$more_link .= '</a></p>';
-	echo $more_link;	
-}
-
-//////////////////////////////////////////////////////////////
-// Custom Sanitize for Theme Options
-/////////////////////////////////////////////////////////////
-
-add_action('admin_init','optionscheck_change_santiziation', 100);
- 
-
-function optionscheck_change_santiziation() {
-    remove_filter( 'of_sanitize_textarea', 'of_sanitize_textarea' );
-    add_filter( 'of_sanitize_textarea', 'custom_sanitize_textarea' );
-}
- 
-function custom_sanitize_textarea($input) {
-    global $allowedposttags;
-    
-      $custom_allowedtags["script"] = array();
- 
-      $custom_allowedtags = array_merge($custom_allowedtags, $allowedposttags);
-      $output = wp_kses( $input, $custom_allowedtags);
-    return $output;
-}
-
-
-//////////////////////////////////////////////////////////////
-// Custom Post Types and Custom Taxonamies
-/////////////////////////////////////////////////////////////
-
-
-
-add_action( 'init', 'create_post_types' );
-
-function create_post_types() {
-	
-	$labels = array(
-		'name' => __( 'Projects' ),
-		'singular_name' => __( 'Project' ),
-		'add_new' => __( 'Add New' ),
-		'add_new_item' => __( 'Add New Project' ),
-		'edit' => __( 'Edit' ),
-		'edit_item' => __( 'Edit Project' ),
-		'new_item' => __( 'New Project' ),
-		'view' => __( 'View Project' ),
-		'view_item' => __( 'View Project' ),
-		'search_items' => __( 'Search Projects' ),
-		'not_found' => __( 'No projects found' ),
-		'not_found_in_trash' => __( 'No projects found in Trash' ),
-		'parent' => __( 'Parent Project' ),
-	);
-	
+	// Add support for custom backgrounds
 	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true,
-		'query_var' => true,		
-		'rewrite' => true,
-		'capability_type' => 'post',
-		'hierarchical' => false,
-		'menu_position' => null,
-		'supports' => array('title', 'editor', 'thumbnail', 'comments', 'revisions', 'excerpt', 'post_tag')
-	); 	
-	
-	register_post_type( 'project' , $args );
-	flush_rewrite_rules( false );
-}
-
-add_action( 'init', 'create_taxonomies' );
-function create_taxonomies() {
-	$labels = array(
-    	'name' => __( 'Tags' ),
-    	'singular_name' => __( 'Tag' ),
-    	'search_items' =>  __( 'Search Tags' ),
-    	'all_items' => __( 'All Tags' ),
-    	'parent_item' => __( 'Parent Tag' ),
-    	'parent_item_colon' => __( 'Parent Tag:' ),
-    	'edit_item' => __( 'Edit Tag' ),
-    	'update_item' => __( 'Update Tag' ),
-    	'add_new_item' => __( 'Add New Tag' ),
-    	'new_item_name' => __( 'New Tag Name' )
-  	); 	
-
-  	register_taxonomy('skill','project',array(
-    	'hierarchical' => false,
-    	'labels' => $labels
-  	));
-  	
-	flush_rewrite_rules( false );
-}
-
-// List custom post type taxonomies
-
-function ttrust_get_terms( $id = '' ) {
-  global $post;
-
-  if ( empty( $id ) )
-    $id = $post->ID;
-
-  if ( !empty( $id ) ) {
-    $post_taxonomies = array();
-    $post_type = get_post_type( $id );
-    $taxonomies = get_object_taxonomies( $post_type , 'names' );
-
-    foreach ( $taxonomies as $taxonomy ) {
-      $term_links = array();
-      $terms = get_the_terms( $id, $taxonomy );
-
-      if ( is_wp_error( $terms ) )
-        return $terms;
-
-      if ( $terms ) {
-        foreach ( $terms as $term ) {
-          $link = get_term_link( $term, $taxonomy );
-          if ( is_wp_error( $link ) )
-            return $link;
-          $term_links[] = '<li><span><a href="'.$link.'">' . $term->name . '</a></span></li>';
-        }
-      }
-
-      $term_links = apply_filters( "term_links-$taxonomy" , $term_links );
-      $post_terms[$taxonomy] = $term_links;
-    }
-    return $post_terms;
-  } else {
-    return false;
-  }
-}
-
-function ttrust_get_terms_list( $id = '' , $echo = true ) {
-  global $post;
-
-  if ( empty( $id ) )
-    $id = $post->ID;
-
-  if ( !empty( $id ) ) {
-    $my_terms = ttrust_get_terms( $id );
-    if ( $my_terms ) {
-      $my_taxonomies = array();
-      foreach ( $my_terms as $taxonomy => $terms ) {
-        $my_taxonomy = get_taxonomy( $taxonomy );
-        if ( !empty( $terms ) ) $my_taxonomies[] = implode( $terms);
-      }
-
-      if ( !empty( $my_taxonomies ) ) {
-	    $output = "";
-        foreach ( $my_taxonomies as $my_taxonomy ) {
-          $output .= $my_taxonomy . "\n";
-        }        
-      }
-
-      if ( $echo )
-        if(isset($output)) echo $output;
-      else
-        if(isset($output)) return $output;
-    } else {
-      return;
-    }
-  } else {
-    return false;
-  }
-}
-
-
-
-////////////////////////////////////////////////////////////////////
-// Display content text only and limit characters by $num
-////////////////////////////////////////////////////////////////////
-
-
-function content($num) {
-	$theContent = get_the_excerpt();
-	$output = preg_replace('/<img[^>]+./','', $theContent);
-	$output = preg_replace( '/<blockquote>.*<\/blockquote>/', '', $output );
-	$output = preg_replace( '|\[(.+?)\](.+?\[/\\1\])?|s', '', $output );
-	$limit = $num+1;
-	$content = explode(' ', $output, $limit);
-	array_pop($content);
-	$content = implode(" ",$content)."...";
-	echo $content;
-}
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////
-// Meta Box
-/////////////////////////////////////////////////////////////
-
-$prefix = "_ttrust_";
-
-$project_details = array(
-		
-		"youtube_id" => array(
-		"type" => "textfield",
-		"name" => $prefix."youtube_id",
-		"std" => "",
-		"title" => __('Youtube ID','themetrust'),
-		"description" => __('Enter the youtube ID of your project.','themetrust')),	
-
-		"url" => array(
-    	"type" => "textfield",
-		"name" => $prefix."url",
-    	"std" => "",
-    	"title" => __('URL','themetrust'),
-    	"description" => __('Enter the URL of your project.','themetrust')),
-
-		"url_label" => array(
-		"type" => "textfield",
-		"name" => $prefix."url_label",
-		"std" => "",
-		"title" => __('URL Label','themetrust'),
-		"description" => __('Enter a label for the URL.','themetrust'))		
+	'default-color' => '000000',
+	'wp-head-callback' => '_custom_background_cb'
 );
+add_theme_support( 'custom-background', $args );
 
-$page_options = array(	
-		"description" => array(
-    	"type" => "textarea",
-		"name" => $prefix."page_description",
-    	"std" => "",
-    	"title" => __('Description','themetrust'),
-    	"description" => __('Enter a description about this page.','themetrust'))		
-);
+	// Make theme available for translation
+	// Translations can be filed in the /languages/ directory
+	load_theme_textdomain( 'Hero', get_template_directory() . '/languages' );
 
-$portfolio_options = array(	
-		"notes" => array(
-    	"type" => "textarea",
-		"name" => $prefix."page_skills",
-    	"std" => "",
-    	"title" => __('Skills','themetrust'),
-    	"description" => __('For use with the Portfolio page template. <br/><br/>Enter the names of the skills (separated by commas) you want shown on this page. If left blank, all skills will be used.','themetrust'))
-);
+	$locale = get_locale();
+	$locale_file = get_template_directory() . "/languages/$locale.php";
+	if ( is_readable( $locale_file ) )
+		require_once( $locale_file );
+		
+			// This theme uses wp_nav_menu() in one location.
+	register_nav_menus( array(
+		'primary' => __( 'Primary Navigation', 'Hero' ),
+	) );
 
-$home_feature_options = array(
-		"featured" => array(
-    	"type" => "checkbox",
-		"name" => $prefix."featured",
-    	"std" => "",
-    	"title" => __('Feature on Home','themetrust'),
-    	"description" => __('Check this box to feature this on the home page.','themetrust'))
-);
-
-
-$meta_box_groups = array($project_details, $page_options, $portfolio_options, $home_feature_options);
-
-function new_meta_box($post, $metabox) {	
-	
-	$meta_boxes_inputs = $metabox['args']['inputs'];
-
-	foreach($meta_boxes_inputs as $meta_box) {
-	
-		$meta_box_value = get_post_meta($post->ID, $meta_box['name'].'_value', true);
-		if($meta_box_value == "") $meta_box_value = $meta_box['std'];
-		
-		echo'<div class="meta-field">';
-		
-		echo'<input type="hidden" name="'.$meta_box['name'].'_noncename" id="'.$meta_box['name'].'_noncename" value="'.wp_create_nonce( plugin_basename(__FILE__) ).'" />';
-		
-		echo'<p><strong>'.$meta_box['title'].'</strong></p>';
-		
-		if(isset($meta_box['type']) && $meta_box['type'] == 'checkbox') {
-		
-			if($meta_box_value == 'true') {
-				$checked = "checked=\"checked\"";
-			} elseif($meta_box['std'] == "true") {	
-					$checked = "checked=\"checked\"";	
-			} else {
-					$checked = "";
-			}
-		
-			echo'<p class="clearfix"><input type="checkbox" class="meta-radio" name="'.$meta_box['name'].'_value" id="'.$meta_box['name'].'_value" value="true" '.$checked.' /> ';		
-			echo'<label for="'.$meta_box['name'].'_value">'.$meta_box['description'].'</label></p><br />';		
-		
-		} elseif(isset($meta_box['type']) && $meta_box['type'] == 'textarea')  {			
-			
-			echo'<textarea rows="4" style="width:98%" name="'.$meta_box['name'].'_value" id="'.$meta_box['name'].'_value">'.$meta_box_value.'</textarea><br />';			
-			echo'<p><label for="'.$meta_box['name'].'_value">'.$meta_box['description'].'</label></p><br />';			
-		
-		} else {
-			
-			echo'<input style="width:70%"type="text" name="'.$meta_box['name'].'_value" id="'.$meta_box['name'].'_value" value="'.$meta_box_value.'" /><br />';		
-			echo'<p><label for="'.$meta_box['name'].'_value">'.$meta_box['description'].'</label></p><br />';			
-		
-		}
-		
-		echo'</div>';
-		
-	} // end foreach
-		
-	echo'<br style="clear:both" />';
-	
-} // end meta boxes
-
-function create_meta_box() {	
-	global $project_details, $page_options, $portfolio_options, $home_feature_options;	
-	
-	if ( function_exists('add_meta_box') ) {
-		add_meta_box( 'new-meta-boxes-details', __('Project Options','themetrust'), 'new_meta_box', 'project', 'normal', 'high', array('inputs'=>$project_details) );				
-		add_meta_box( 'new-meta-boxes-page-options', __('Page Options','themetrust'), 'new_meta_box', 'page', 'side', 'low', array('inputs'=>$page_options) );	
-		add_meta_box( 'new-meta-boxes-portfolio-options', __('Portfolio Options','themetrust'), 'new_meta_box', 'page', 'side', 'low', array('inputs'=>$portfolio_options) );		
-		add_meta_box( 'new-meta-boxes-home-feature', __('Home Feature Options','themetrust'), 'new_meta_box', 'project', 'normal', 'high', array('inputs'=>$home_feature_options) );
-		add_meta_box( 'new-meta-boxes-home-feature', __('Home Feature Options','themetrust'), 'new_meta_box', 'page', 'normal', 'high', array('inputs'=>$home_feature_options) );
-	}
 }
-
-
-
-function save_postdata( $post_id ) {
-global $post, $new_meta_boxes, $meta_box_groups;
-
-if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
-	return $post_id;
-}
-
-if( defined('DOING_AJAX') && DOING_AJAX ) { //Prevents the metaboxes from being overwritten while quick editing.
-	return $post_id;
-}
-
-if( ereg('/\edit\.php', $_SERVER['REQUEST_URI']) ) { //Detects if the save action is coming from a quick edit/batch edit.
-	return $post_id;
-}
-
-foreach($meta_box_groups as $group) {
-	foreach($group as $meta_box) {
-
-		// Verify
-		if(isset($_POST[$meta_box['name'].'_noncename'])){
-			if ( !wp_verify_nonce( $_POST[$meta_box['name'].'_noncename'], plugin_basename(__FILE__) )) {
-				return $post_id;
-			}
-		}
-
-		if ( isset($_POST['post_type']) && 'page' == $_POST['post_type'] ) {
-			if ( !current_user_can( 'edit_page', $post_id ))
-				return $post_id;
-		} else {
-			if ( !current_user_can( 'edit_post', $post_id ))
-				return $post_id;
-		}
-
-		$data = "";
-		if(isset($_POST[$meta_box['name'].'_value'])){
-			$data = $_POST[$meta_box['name'].'_value'];
-		}
-
-
-		if(get_post_meta($post_id, $meta_box['name'].'_value') == "") 
-			add_post_meta($post_id, $meta_box['name'].'_value', $data, true);
-		elseif($data != get_post_meta($post_id, $meta_box['name'].'_value', true))
-			update_post_meta($post_id, $meta_box['name'].'_value', $data);
-		elseif($data == "" || $data == $meta_box['std'] )
-			delete_post_meta($post_id, $meta_box['name'].'_value', get_post_meta($post_id, $meta_box['name'].'_value', true));
-	
-		} // end foreach
-	} // end foreach
-} // end save_postdata
-
-add_action('admin_menu', 'create_meta_box');
-add_action('save_post', 'save_postdata');
-
-
-
-//////////////////////////////////////////////////////////////
-// Comments
-/////////////////////////////////////////////////////////////
-
-function ttrust_comments($comment, $args, $depth) {
-	$GLOBALS['comment'] = $comment; ?>		
-	<li id="li-comment-<?php comment_ID() ?>">		
-		
-		<div class="comment <?php echo get_comment_type(); ?>" id="comment-<?php comment_ID() ?>">						
-			
-			<?php echo get_avatar($comment,'60',get_bloginfo('template_url').'/images/default_avatar.png'); ?>			
-   	   			
-   	   		<h5><?php comment_author_link(); ?></h5>
-			<span class="date"><?php comment_date(); ?></span>
-				
-			<?php if ($comment->comment_approved == '0') : ?>
-				<p><span class="message"><?php _e('Your comment is awaiting moderation.', 'themetrust'); ?></span></p>
-			<?php endif; ?>
-				
-			<?php comment_text() ?>				
-				
-			<?php
-			if(get_comment_type() != "trackback")
-				comment_reply_link(array_merge( $args, array('add_below' => 'comment','reply_text' => '<span>'. __('Reply', 'themetrust') .'</span>', 'login_text' => '<span>'. __('Log in to reply', 'themetrust') .'</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'])))
-			
-			?>
-				
-		</div><!-- end comment -->
-			
+endif;
+?>
 <?php
-}
-
-function ttrust_pings($comment, $args, $depth) {
+function Hero_list_pings($comment, $args, $depth) { 
 	$GLOBALS['comment'] = $comment; ?>
-		<li class="comment" id="comment-<?php comment_ID() ?>"><?php comment_author_link(); ?> - <?php comment_excerpt(); ?>
+	<li id="comment-<?php comment_ID(); ?>"><?php comment_author_link(); ?>
+<?php } ?>
 <?php
+add_filter('get_comments_number', 'Hero_comment_count', 0);
+function Hero_comment_count( $count ) {
+	if ( ! is_admin() ) {
+	global $id;
+	$comments_by_type = &separate_comments(get_comments('status=approve&post_id=' . $id));
+	return count($comments_by_type['comment']);
+} else {
+return $count;
+}
 }
 ?>
+<?php
+if ( ! function_exists( 'Hero_comment' ) ) :
+function Hero_comment( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment;
+	switch ( $comment->comment_type ) :
+		case '' :
+	?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+		<div id="comment-<?php comment_ID(); ?>">
+		<div class="comment-author vcard">
+			<?php echo get_avatar( $comment, 40 ); ?>
+			<?php printf( __( '%s', 'Hero' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+		</div><!-- .comment-author .vcard -->
+		<?php if ( $comment->comment_approved == '0' ) : ?>
+			<em><?php _e( 'Your comment is awaiting moderation.', 'Hero' ); ?></em>
+			<br />
+		<?php endif; ?>
+
+		<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+			<?php
+				/* translators: 1: date, 2: time */
+				printf( __( '%1$s at %2$s', 'Hero' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'Hero' ), ' ' );
+			?>
+		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><?php comment_text(); ?></div>
+
+		<div class="reply">
+			<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<?php
+			break;
+		case 'pingback'  :
+		case 'trackback' :
+	?>
+	<li class="post pingback">
+		<p><?php _e( 'Pingback:', 'Hero' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'Hero'), ' ' ); ?></p>
+	<?php
+			break;
+	endswitch;
+}
+endif;
+
+/**
+ * Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
+ *
+ * To override Hero_widgets_init() in a child theme, remove the action hook and add your own
+ * function tied to the init hook.
+ */
+function Hero_widgets_init() {
+	// Area 1, located at the top of the sidebar.
+	register_sidebar( array(
+		'name' => __( 'Primary Widget Area', 'Hero' ),
+		'id' => 'primary-widget-area',
+		'description' => __( 'The primary widget area', 'Hero' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+	
+	// Area 3, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'First Footer Widget Area', 'Hero' ),
+		'id' => 'first-footer-widget-area',
+		'description' => __( 'The first footer widget area', 'Hero' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 4, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Second Footer Widget Area', 'Hero' ),
+		'id' => 'second-footer-widget-area',
+		'description' => __( 'The second footer widget area', 'Hero' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 5, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Third Footer Widget Area', 'Hero' ),
+		'id' => 'third-footer-widget-area',
+		'description' => __( 'The third footer widget area', 'Hero' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 6, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Fourth Footer Widget Area', 'Hero' ),
+		'id' => 'fourth-footer-widget-area',
+		'description' => __( 'The fourth footer widget area', 'Hero' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+}
+if ( ! function_exists( 'Hero_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post—date/time and author.
+ */
+function Hero_posted_on() {
+	printf( __( '%2$s <span class="meta-sep">by</span> %3$s', 'Hero' ),
+		'meta-prep meta-prep-author',
+		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
+			get_permalink(),
+			esc_attr( get_the_time() ),
+			get_the_date()
+		),
+		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+			get_author_posts_url( get_the_author_meta( 'ID' ) ),
+			sprintf( esc_attr__( 'View all posts by %s', 'Hero' ), get_the_author() ),
+			get_the_author()
+		)
+	);
+}
+endif;
+/** Register sidebars by running Hero_widgets_init() on the widgets_init hook. */
+add_action( 'widgets_init', 'Hero_widgets_init' );
+
+/** Excerpt */
+function Hero_excerpt_length( $length ) {
+	return 30;
+}
+add_filter( 'excerpt_length', 'Hero_excerpt_length' );
+
+function Hero_auto_excerpt_more( $more ) {
+	return ' &hellip;' ;
+}
+add_filter( 'excerpt_more', 'Hero_auto_excerpt_more' );
 
 
+/** filter function for wp_title */
+function Hero_filter_wp_title( $old_title, $sep, $sep_location ){
+ 
+// add padding to the sep
+$ssep = ' ' . $sep . ' ';
+ 
+// find the type of index page this is
+if( is_category() ) $insert = $ssep . 'Category';
+elseif( is_tag() ) $insert = $ssep . 'Tag';
+elseif( is_author() ) $insert = $ssep . 'Author';
+elseif( is_year() || is_month() || is_day() ) $insert = $ssep . 'Archives';
+else $insert = NULL;
+ 
+// get the page number we're on (index)
+if( get_query_var( 'paged' ) )
+$num = $ssep . 'page ' . get_query_var( 'paged' );
+ 
+// get the page number we're on (multipage post)
+elseif( get_query_var( 'page' ) )
+$num = $ssep . 'page ' . get_query_var( 'page' );
+ 
+// else
+else $num = NULL;
+ 
+// concoct and return new title
+return get_bloginfo( 'name' ) . $insert . $old_title . $num;
+}
+
+// call our custom wp_title filter, with normal (10) priority, and 3 args
+add_filter( 'wp_title', 'Hero_filter_wp_title', 10, 3 );
+
+/*-----------------------------------------------------------------------------------*/
+/* Exclude categories from displaying on the "Blog" page template.
+/*-----------------------------------------------------------------------------------*/
+
+// Exclude categories on the "Blog" page template.
+add_filter( 'Hero_blog_template_query_args', 'Hero_exclude_categories_blogtemplate' );
+
+function Hero_exclude_categories_blogtemplate ( $args ) {
+
+	if ( ! function_exists( 'Hero_prepare_category_ids_from_option' ) ) { return $args; }
+
+	$excluded_cats = array();
+
+	// Process the category data and convert all categories to IDs.
+	$excluded_cats = Hero_prepare_category_ids_from_option( 'exclude_cat' );
 
 
+	if ( count( $excluded_cats ) > 0 ) {
+
+		// Setup the categories as a string, because "category__not_in" doesn't seem to work
+		// when using query_posts().
+
+		foreach ( $excluded_cats as $k => $v ) { $excluded_cats[$k] = '-' . $v; }
+		$cats = join( ',', $excluded_cats );
+
+		$args['cat'] = $cats;
+	}
+
+	return $args;
+
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* Hero_prepare_category_ids_from_option()
+/*-----------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'Hero_prepare_category_ids_from_option' ) ) {
+
+	function Hero_prepare_category_ids_from_option ( $option ) {
+
+		$cats = array();
+
+		$stored_cats = of_get_option( $option );
+
+		$cats_raw = explode( ',', $stored_cats );
+
+		if ( is_array( $cats_raw ) && ( count( $cats_raw ) > 0 ) ) {
+			foreach ( $cats_raw as $k => $v ) {
+				$value = trim( $v );
+
+				if ( is_numeric( $value ) ) {
+					$cats_raw[$k] = $value;
+				} else {
+					$cat_obj = get_category_by_slug( $value );
+					if ( isset( $cat_obj->term_id ) ) {
+						$cats_raw[$k] = $cat_obj->term_id;
+					}
+				}
+
+				$cats = $cats_raw;
+			}
+		}
+
+		return $cats;
+
+	}
+
+}
+
+
+// custom function
+function Hero_head_css() {
+		$output = '';
+		$custom_css = of_get_option('custom_css');
+		if ($custom_css <> '') {
+			$output .= $custom_css . "\n";
+		}	
+		// Output styles
+		if ($output <> '') {
+			$output = "<!-- Custom Styling -->\n<style type=\"text/css\">\n" . $output . "</style>\n";
+			echo $output;
+		}
+	
+}
+
+add_action('wp_head', 'Hero_head_css');
+
+function Hero_of_analytics(){
+$googleanalytics= of_get_option('go_code');
+echo stripslashes($googleanalytics);
+}
+add_action( 'wp_footer', 'Hero_of_analytics' );
+
+function Hero_favicon() {
+	if (of_get_option('favicon_image') != '') {
+	echo '<link rel="shortcut icon" href="'. of_get_option('favicon_image') .'"/>'."\n";
+	}
+}
+
+add_action('wp_head', 'Hero_favicon');
+
+function Hero_date_on() {
+	printf( __( '<span class="%1$s">Posted on</span> %2$s', 'Hero' ),
+		'meta-prep meta-prep-author',
+		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
+			get_permalink(),
+			esc_attr( get_the_time() ),
+			get_the_date()
+		)
+	);
+}
+
+function Hero_of_register_js() {
+	if (!is_admin()) {
+		
+		wp_register_script('superfish', get_template_directory_uri() . '/js/superfish.js', 'jquery', '1.0', TRUE);
+		wp_register_script('custom', get_template_directory_uri() . '/js/jquery.custom.js', 'jquery', '1.0', TRUE);
+		wp_register_script('nivo', get_template_directory_uri() . '/js/jquery.nivo.slider.js', 'jquery', '3.0.1', TRUE);
+		
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('superfish');
+		wp_enqueue_script('custom');
+		wp_enqueue_script('nivo');
+	}
+}
+add_action('init', 'Hero_of_register_js');
+
+function of_single_scripts() {
+	if(is_singular()) wp_enqueue_script( 'comment-reply' ); // loads the javascript required for threaded comments 
+}
+add_action('wp_print_scripts', 'of_single_scripts');
+
+function Hero_of_styles() {
+		wp_register_style( 'superfish', get_template_directory_uri() . '/css/superfish.css' );
+		wp_register_style( 'nivo', get_template_directory_uri() . '/css/nivo-slider.css' );
+		
+		wp_enqueue_style( 'superfish' );
+		wp_enqueue_style( 'nivo' );	
+		
+}
+add_action('wp_print_styles', 'Hero_of_styles');
+
+/** redirect */
+if ( is_admin() && isset($_GET['activated'] ) && $pagenow ==	"themes.php" )
+	wp_redirect( 'themes.php?page=options-framework');
+
+// include panel file.
+if ( !function_exists( 'optionsframework_init' ) ) {
+
+	/*-----------------------------------------------------------------------------------*/
+	/* Options Framework Theme
+	/*-----------------------------------------------------------------------------------*/
+
+	/* Set the file path based on whether the Options Framework Theme is a parent theme or child theme */
+
+	if ( get_stylesheet_directory() == get_template_directory_uri() ) {
+		define('OPTIONS_FRAMEWORK_URL', get_template_directory() . '/admin/');
+		define('OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/admin/');
+	} else {
+		define('OPTIONS_FRAMEWORK_URL', get_template_directory() . '/admin/');
+		define('OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/admin/');
+	}
+
+	require_once (OPTIONS_FRAMEWORK_URL . 'options-framework.php');
+
+}

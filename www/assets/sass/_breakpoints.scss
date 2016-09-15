@@ -1,0 +1,149 @@
+
+@media all and (max-width:1160px) {
+	
+	#case-grid .column > article {
+		.title {
+			display: block;
+			position: relative;
+			top: 0;
+			left: 0;
+			padding: 0 0 0 10px;
+			margin: 0 0 12px;
+			border-left: 4px solid #00aeef;
+			width: auto;
+		}
+		.body {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+	}
+}
+
+
+
+@media all and (max-width:1023px) {
+	
+	body > header {
+		a.home-link {
+			left: 0;
+			margin: 0;
+		}
+		.bg-l { display: none; }
+		.bg-r {
+			width: 100%;
+			right: auto;
+			left: 236px;
+			margin: 0;
+		}
+	}
+	
+}
+
+
+
+@media all and (max-width:767px) {
+
+	#wrapper {
+		margin-top: 45px;
+	}
+
+	body > header {
+		a.home-link, & img {
+			width: 150px;
+			height: 45px;
+		}
+		h1.site-title {
+			font-size: 45px;
+			line-height: 45px;
+			height: 45px;
+		}
+		> .inner {
+			height: 45px;
+		}
+		.bg-r {
+			left: 145px;
+		}
+		nav {
+			top: 13px;
+			right: 11px;
+			ul {
+				li { 
+					&:before { margin: 0 4px 0 3px; }
+					a {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+	}
+	
+	#case-grid {
+		.column {
+			width: 100%;
+			article {
+				.title {
+					h3 { 
+						font-size: 24px;
+					}
+				}
+			}
+			&.top-post > article {
+				.title {
+					margin: 0;
+					padding: 0;
+					h2 {
+						padding: 0 0 14px;
+					}
+				}
+				.body {
+					font-size: 15px;
+					line-height: 1.15;
+				}
+				&:after {
+					font-size: 50px;
+					line-height: 50px;
+				}
+			}
+		}
+		
+		.videoEmbed {
+			a.yt-play {
+				width: 40px;
+				height: 40px;
+				margin: -20px;
+				font-size: 40px;
+				line-height: 40px;
+				&:after {
+					font-size: 26px;
+					line-height: 26px;
+					top: -17px;
+					right: -17px;
+					bottom: -17px;
+					left: -17px;
+				}
+			}
+			&.topEmbed a.yt-play {
+				font-size: 58px;
+				line-height: 58px;
+				width: 58px;
+				height: 58px;
+				margin: -29px;
+				&:after {
+					font-size: 36px;
+					line-height: 36px;
+					top: -24px;
+					right: -24px;
+					bottom: -24px;
+					left: -24px;
+				}
+			}
+		}
+	}
+
+}
+
+
+@media all and (max-width:479px) {
+		
+}

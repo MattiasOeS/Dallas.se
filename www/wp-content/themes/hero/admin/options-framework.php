@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /* Basic plugin definitions */
 
-define('OPTIONS_FRAMEWORK_VERSION', '0.8');
+define('OPTIONS_FRAMEWORK_VERSION', '0.9');
 
 /* Make sure we don't expose any info if called directly */
 
@@ -49,6 +49,14 @@ function optionsframework_rolescheck () {
 	}
 }
 
+/* Loads the file for option sanitization */
+
+add_action('init', 'optionsframework_load_sanitization' );
+
+function optionsframework_load_sanitization() {
+	require_once dirname( __FILE__ ) . '/options-sanitize.php';
+}
+
 /* 
  * Creates the settings in the database by looping through the array
  * we supplied in options.php.  This is a neat way to do it since
@@ -62,7 +70,6 @@ function optionsframework_rolescheck () {
 function optionsframework_init() {
 
 	// Include the required files
-	require_once dirname( __FILE__ ) . '/options-sanitize.php';
 	require_once dirname( __FILE__ ) . '/options-interface.php';
 	require_once dirname( __FILE__ ) . '/options-medialibrary-uploader.php';
 	
@@ -150,7 +157,7 @@ function optionsframework_setdefaults() {
 if ( !function_exists( 'optionsframework_add_page' ) ) {
 function optionsframework_add_page() {
 
-	$of_page = add_submenu_page('themes.php', 'Theme Options', 'Theme Options', 'edit_theme_options', 'options-framework','optionsframework_page');
+	$of_page = add_theme_page('Theme Options', 'Theme Options', 'edit_theme_options', 'options-framework','optionsframework_page');
 	
 	// Adds actions to hook in the required css and javascript
 	add_action("admin_print_styles-$of_page",'optionsframework_load_styles');
@@ -199,47 +206,37 @@ function of_admin_head() {
 
 if ( !function_exists( 'optionsframework_page' ) ) {
 function optionsframework_page() {
-
-	// Get the theme name so we can display it up top
-	$themedata = get_theme_data(STYLESHEETPATH . '/style.css');
-	$themename = $themedata['Name'];
-	
+	$return = optionsframework_fields();
 	settings_errors();
 	?>
+	
+	 <div id="go_pro">
+            <h1>Go for Pro Version!</h1>
+            <p>This is a free version of Hero. Get your own copy of professional version if you need to setup your theme like a website with homepage SLIDER , get PORTFOLIO templates, Shortcodes, FORUM support and much more. <a href="http://antthemes.com/?page_id=114" Hero="blank">Click Here to Learn More Now</a> </p>
+
+        </div>
     
 	<div class="wrap">
     <?php screen_icon( 'themes' ); ?>
-	<h2><?php esc_html_e( 'Theme Options' ); ?></h2>
+    <h2 class="nav-tab-wrapper">
+        <?php echo $return[1]; ?>
+    </h2>
     
-    <div id="of_container">
-       <form action="options.php" method="post">
-	  <?php settings_fields('optionsframework'); ?>
+    <div class="metabox-holder">
+    <div id="optionsframework" class="postbox">
+		<form action="options.php" method="post">
+		<?php settings_fields('optionsframework'); ?>
 
-        <div id="header">
-          <div class="logo">
-            <h2><?php esc_html_e( $themename ); ?> <?php echo $themedata['Version'] ; ?></h2>
-          </div>
-          <div class="clear"></div>
-        </div>
-        <div id="main">
-        <?php $return = optionsframework_fields(); ?>
-          <div id="of-nav">
-            <ul>
-              <?php echo $return[1]; ?>
-            </ul>
-          </div>
-          <div id="content">
-            <?php echo $return[0]; /* Settings */ ?>
-          </div>
-          <div class="clear"></div>
-        </div>
-        <div class="of_admin_bar">
+		<?php echo $return[0]; /* Settings */ ?>
+        
+        <div id="optionsframework-submit">
 			<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options' ); ?>" />
-            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!' ) ); ?>' );" />
+            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!' , 'Hero' ) ); ?>' );" />
+            <div class="clear"></div>
 		</div>
-<div class="clear"></div>
 	</form>
-</div> <!-- / #container -->  
+</div> <!-- / #container -->
+</div>
 </div> <!-- / .wrap -->
 
 <?php
@@ -287,7 +284,7 @@ function optionsframework_validate( $input ) {
 				continue;
 			}
 
-			$id = preg_replace( '/\W/', '', strtolower( $option['id'] ) );
+			$id = preg_replace( '/[^a-zA-Z0-9._\-]/', '', strtolower( $option['id'] ) );
 
 			// Set checkbox to false if it wasn't sent in the $_POST
 			if ( 'checkbox' == $option['type'] && ! isset( $input[$id] ) ) {
@@ -304,6 +301,7 @@ function optionsframework_validate( $input ) {
 			// For a value to be submitted to database it must pass through a sanitization filter
 			if ( has_filter( 'of_sanitize_' . $option['type'] ) ) {
 				$clean[$id] = apply_filters( 'of_sanitize_' . $option['type'], $input[$id], $option );
+				$clean['favicon_image'] = esc_url_raw( $input['favicon_image'] );
 			}
 		}
 
@@ -365,7 +363,7 @@ function optionsframework_adminbar() {
 	$wp_admin_bar->add_menu( array(
 		'parent' => 'appearance',
 		'id' => 'of_theme_options',
-		'title' => __( 'Theme Options' ),
+		'title' => __( 'Theme Options' , 'Hero' ),
 		'href' => admin_url( 'themes.php?page=options-framework' )
   ));
 }

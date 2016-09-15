@@ -9,13 +9,16 @@
 function optionsframework_option_name() {
 
 	// This gets the theme name from the stylesheet (lowercase and without spaces)
-	$themename = get_theme_data(STYLESHEETPATH . '/style.css');
+	$themename = wp_get_theme(get_stylesheet_directory() . '/style.css');
 	$themename = $themename['Name'];
 	$themename = preg_replace("/\W/", "", strtolower($themename) );
+	$themename = 'Hero';
 	
 	$optionsframework_settings = get_option('optionsframework');
 	$optionsframework_settings['id'] = $themename;
 	update_option('optionsframework', $optionsframework_settings);
+	
+	// echo $themename;
 }
 
 /**
@@ -24,16 +27,24 @@ function optionsframework_option_name() {
  *  
  */
 
-function optionsframework_options() {	
+function optionsframework_options() {
 	
-	// Home Project Type
-	$home_project_type = array("all" => "All projects", "featured" => "Featured");	
+	// Test data
+	$comment_page_array = array("on" => "on","off" => "off");
 	
-	// Post Featured Image Size
-	$post_featured_image_size = array("large" => "Large", "small" => "Small");
+	// Multicheck Array
+	$multicheck_array = array("one" => "French Toast", "two" => "Pancake", "three" => "Omelette", "four" => "Crepe", "five" => "Waffle");
 	
-	// Slideshow Transition Effect
-	$slideshow_effect = array("slide" => "Slide", "fade" => "Fade");
+	// Multicheck Defaults
+	$slider_array = array("on" => "on","off" => "off");
+	
+	
+	// Pull all the categories into an array
+	$options_categories = array();  
+	$options_categories_obj = get_categories();
+	foreach ($options_categories_obj as $category) {
+    	$options_categories[$category->cat_ID] = $category->cat_name;
+	}
 	
 	// Pull all the pages into an array
 	$options_pages = array();  
@@ -44,258 +55,229 @@ function optionsframework_options() {
 	}
 		
 	// If using image radio buttons, define a directory path
-	$imagepath =  get_bloginfo('stylesheet_directory') . '/images/';
+	$imagepath =  get_stylesheet_directory_uri() . '/images/';
 		
 	$options = array();
 		
-	$options[] = array( "name" => __('General','themetrust'),
-						"type" => "heading");	
-	
-	$options[] = array( "name" => __('Logo','themetrust'),
-						"desc" => __('Upload a custom logo.','themetrust'),
-						"id" => "logo",
+	$options[] = array( "name" => "Homepage Settings",
+						"type" => "heading");
+						
+	$options[] = array( "name" => "Welcome text",
+						"desc" => "Hompage welcome text content.",
+						"id" => "welcome_text",
+						"std" => "",
+						"type" => "textarea");
+						
+	$options[] = array( "name" => "Welcome Button text",
+						"desc" => "Hompage welcome button text.",
+						"id" => "welcome_button",
+						"std" => "",
+						"type" => "text");
+						
+	$options[] = array( "name" => "Welcome Button link",
+						"desc" => "Hompage welcome button link.",
+						"id" => "welcome_button_link",
+						"std" => "",
+						"type" => "text");			
+						
+	$options[] = array( "name" => "Slider black box",
+						"desc" => "Select option on or off.",
+						"id" => "slider_box",
+						"std" => "on",
+						"type" => "select",
+						"class" => "mini", //mini, tiny, small
+						"options" => $slider_array);																												
+								
+	$options[] = array( "name" => "Slider heading 1",
+						"desc" => "Heading for the slider.",
+						"id" => "slider_head1",
+						"std" => "",
+						"type" => "text");
+							
+	$options[] = array( "name" => "Slider text 1",
+						"desc" => "Textarea description of slider.",
+						"id" => "slider_text1",
+						"std" => "",
+						"type" => "textarea");
+						
+	$options[] = array( "name" => "Slider image 1",
+						"desc" => "963px x 350px exact. Upload your image for homepage slider.",
+						"id" => "slider_image1",
 						"type" => "upload");
 						
-	$options[] = array( "name" => __('Favicon','themetrust'),
-						"desc" => __('Upload a custom favicon.','themetrust'),
-						"id" => "ttrust_favicon",
-						"type" => "upload");					
-		
-	
-	$options[] = array( "name" => __('Custom CSS','themetrust'),
-						"desc" => __('Enter custom CSS here.','themetrust'),
-						"id" => "ttrust_custom_css",
-						"std" => "",
-						"type" => "textarea");					
-					
-						
-	$options[] = array( "name" => __('Appearance','themetrust'),
-						"type" => "heading");
-						
-	$options[] = array( "name" => __('Accent Color','themetrust'),
-						"desc" => __('Select an accent color for your theme.','themetrust'),
-						"id" => "ttrust_color_accent",
-						"std" => "#ccb676",
-						"type" => "color");	
-						
-	$options[] = array( "name" => __('Menu Color','themetrust'),
-						"desc" => __('Select a color for your menu links.','themetrust'),
-						"id" => "ttrust_color_menu",
-						"std" => "#8f8f8f",
-						"type" => "color");
-						
-	$options[] = array( "name" => __('Menu Hover Color','themetrust'),
-						"desc" => __('Select a hover color for your menu links.','themetrust'),
-						"id" => "ttrust_color_menu_hover",
-						"std" => "#2e2e2e",
-						"type" => "color");
-						
-	$options[] = array( "name" => __('Button Color','themetrust'),
-						"desc" => __('Select a color for your buttons.','themetrust'),
-						"id" => "ttrust_color_btn",
-						"std" => "#757575",
-						"type" => "color");
-						
-	$options[] = array( "name" => __('Button Hover Color','themetrust'),
-						"desc" => __('Select a hover color for your buttons.','themetrust'),
-						"id" => "ttrust_color_btn_hover",
-						"std" => "#595959",
-						"type" => "color");
-						
-	$options[] = array( "name" => __('Link Color','themetrust'),
-						"desc" => __('Select a color for your links.','themetrust'),
-						"id" => "ttrust_color_link",
-						"std" => "#ccb676",
-						"type" => "color");
-
-	$options[] = array( "name" => __('Link Hover Color','themetrust'),
-						"desc" => __('Select a hover color for your links.','themetrust'),
-						"id" => "ttrust_color_link_hover",
-						"std" => "#aa9862",
-						"type" => "color");
-						
-	$options[] = array( "name" => __('Font for Headings','themetrust'),
-						"desc" => __('Enter the name of the <a href="http://www.google.com/webfonts" target="_blank">Google Web Font</a> you want to use for headings.','themetrust'),
-						"id" => "ttrust_heading_font",
+	$options[] = array( "name" => "Slider read more link",
+						"desc" => "Paste here the link of the page or post.",
+						"id" => "slider_link1",
 						"std" => "",
 						"type" => "text");
 						
-	$options[] = array( "name" => __('Font for Body Text','themetrust'),
-						"desc" => __('Enter the name of the <a href="http://www.google.com/webfonts" target="_blank">Google Web Font</a> you want to use for the body text.','themetrust'),
-						"id" => "ttrust_body_font",
+	$options[] = array( "name" => "Slider heading 2",
+						"desc" => "Heading for the slider.",
+						"id" => "slider_head2",
 						"std" => "",
 						"type" => "text");
-						
-	$options[] = array( "name" => __('Font for Home Page Banner Main Text','themetrust'),
-						"desc" => __('Enter the name of the <a href="http://www.google.com/webfonts" target="_blank">Google Web Font</a> you want to use for the main text in the home page benner.','themetrust'),
-						"id" => "ttrust_banner_main_font",
+							
+	$options[] = array( "name" => "Slider text 2",
+						"desc" => "Textarea description of slider.",
+						"id" => "slider_text2",
 						"std" => "",
-						"type" => "text");
+						"type" => "textarea");
 						
-	$options[] = array( "name" => __('Font for Home Page Banner Secondary Text','themetrust'),
-						"desc" => __('Enter the name of the <a href="http://www.google.com/webfonts" target="_blank">Google Web Font</a> you want to use for the secondary text in the home page banner.','themetrust'),
-						"id" => "ttrust_banner_secondary_font",
-						"std" => "",
-						"type" => "text");
-						
-	
-						
-	$options[] = array( "name" => __('Home Page','themetrust'),
-						"type" => "heading");
-						
-	$options[] = array( "name" => __('Banner Image','themetrust'),
-						"desc" => __('Upload an image for the home page banner. Recommended dimensions: 1200px x 590px','themetrust'),
-						"id" => "ttrust_home_banner_img",
+	$options[] = array( "name" => "Slider image 2",
+						"desc" => "963px x 350px exact. Upload your image for homepage slider.",
+						"id" => "slider_image2",
 						"type" => "upload");
 						
-	$options[] = array( "name" => __('Banner Background Color','themetrust'),
-						"desc" => __('Select a background color for the home page background.','themetrust'),
-						"id" => "ttrust_color_banner_bkg",
-						"std" => "#787878",
-						"type" => "color");
+	$options[] = array( "name" => "Slider read more link",
+						"desc" => "Paste here the link of the page or post.",
+						"id" => "slider_link2",
+						"std" => "",
+						"type" => "text");																		 
+
+	$options[] = array( "name" => "Homepage Box 1 heading",
+						"desc" => "Heading for homepage box1.",
+						"id" => "box_head1",
+						"std" => "",
+						"type" => "text");
 						
-						
-	$options[] = array( "name" => __('Primary Banner Text','themetrust'),
-						"desc" => __('Enter the primary text that will appear in the home page banner.','themetrust'),
-						"id" => "ttrust_banner_text_primary",
-						"std" => "CLEAN & RESPONSIVE",
+	$options[] = array( "name" => "Homepage Box 1 text",
+						"desc" => "Textarea for homepage box1.",
+						"id" => "box_text1",
+						"std" => "",
 						"type" => "textarea");
 						
-	$options[] = array( "name" => __('Secondary Banner Text','themetrust'),
-						"desc" => __('Enter the secondary text that will appear in the home page banner.','themetrust'),
-						"id" => "ttrust_banner_text_secondary",
-						"std" => "A Minimal Portfolio WordPress Theme",
+	$options[] = array( "name" => "Homepage Box 1 thumbnail image",
+						"desc" => "295px x 158px exact. Upload your image for homepage box 1.",
+						"id" => "box_image1",
+						"type" => "upload");						
+						
+	$options[] = array( "name" => "Homepage Box 1 link",
+						"desc" => "Paste here the link of the page or post.",
+						"id" => "box_link1",
+						"std" => "",
+						"type" => "text");
+						
+	$options[] = array( "name" => "Homepage Box 2 heading",
+						"desc" => "Heading for homepage box2.",
+						"id" => "box_head2",
+						"std" => "",
+						"type" => "text");
+						
+	$options[] = array( "name" => "Homepage Box 2 text",
+						"desc" => "Textarea for homepage box2.",
+						"id" => "box_text2",
+						"std" => "",
 						"type" => "textarea");
 						
-	$options[] = array( "name" => __('Banner Text Vertical Position','themetrust'),
-						"desc" => __('Use this field to adjust the vertical position of the banner text.','themetrust'),
-						"id" => "ttrust_banner_text_position",
-						"std" => "250",
-						"type" => "text");	
+	$options[] = array( "name" => "Homepage Box 2 thumbnail image",
+						"desc" => "295px x 158px exact. Upload your image for homepage box 2.",
+						"id" => "box_image2",
+						"type" => "upload");						
 						
-	$options[] = array( "name" => __('Recent Projects Title','themetrust'),
-						"desc" => __('Enter the title that will appear above the recent projects section on the home page.','themetrust'),
-						"id" => "ttrust_recent_projects_title",
-						"std" => "Recent Projects",
-						"type" => "text");	
-						
-	$options[] = array( "name" => __('Number of Projects to Show','themetrust'),
-						"desc" => __('Enter the number of project to show on the home page.','themetrust'),
-						"id" => "ttrust_home_project_count",
-						"std" => "6",
+	$options[] = array( "name" => "Homepage Box 2 link",
+						"desc" => "Paste here the link of the page or post.",
+						"id" => "box_link2",
+						"std" => "",
 						"type" => "text");
 						
-	$options[] = array( "name" => __('Type of Projects to Show','themetrust'),
-						"desc" => __('Select the type of projects to show on the home page.','themetrust'),
-						"id" => "ttrust_home_project_type",
-						"std" => "latest",
-						"type" => "select",
-						"options" => $home_project_type);
-						
-	$options[] = array( "name" => __('Featured Pages Title','themetrust'),
-						"desc" => __('Enter the title that will appear above the featured pages section on the home page.','themetrust'),
-						"id" => "ttrust_featured_pages_title",
-						"std" => "Our Services",
+	$options[] = array( "name" => "Homepage Box 3 heading",
+						"desc" => "Heading for homepage box3.",
+						"id" => "box_head3",
+						"std" => "",
 						"type" => "text");
 						
-	$options[] = array( "name" => __('Number of  Featured Pages to Show','themetrust'),
-						"desc" => __('Enter the number of featured pages to show on the home page.','themetrust'),
-						"id" => "ttrust_featured_pages_count",
-						"std" => "6",
-						"type" => "text");	
+	$options[] = array( "name" => "Homepage Box 3 text",
+						"desc" => "Textarea for homepage box3.",
+						"id" => "box_text3",
+						"std" => "",
+						"type" => "textarea");
 						
+	$options[] = array( "name" => "Homepage Box 3 thumbnail image",
+						"desc" => "295px x 158px exact. Upload your image for homepage box 3.",
+						"id" => "box_image3",
+						"type" => "upload");						
 						
-	$options[] = array( "name" => __('Slideshow','themetrust'),
-						"type" => "heading");	
-
-	$options[] = array( "name" => __('Slideshow Delay','themetrust'),
-						"desc" => __('Enter the delay in seconds between slides. Enter 0 to disable auto-playing.','themetrust'),
-						"id" => "ttrust_slideshow_delay",
-						"std" => "6",
-						"type" => "text");
-
-	$options[] = array( "name" => __('Slideshow Effect','themetrust'),
-						"desc" => __('Select the type of transition effect for the slideshow.','themetrust'),
-						"id" => "ttrust_slideshow_effect",
-						"std" => "fade",
-						"type" => "select",
-						"options" => $slideshow_effect);	
+	$options[] = array( "name" => "Homepage Box 3 link",
+						"desc" => "Paste here the link of the page or post.",
+						"id" => "box_link3",
+						"std" => "",
+						"type" => "text");																																										
 						
-						
-	$options[] = array( "name" => __('Posts','themetrust'),
+	$options[] = array( "name" => "Logo Settings",
 						"type" => "heading");
 						
-	$options[] = array( "name" => __('Show Author','themetrust'),
-						"desc" => __('Check this box to show the author.','themetrust'),
-						"id" => "ttrust_post_show_author",
-						"std" => "1",
-						"type" => "checkbox");
+	$options[] = array( "name" => "Logo image",
+						"desc" => "Upload your logo image over here.",
+						"id" => "logo_image",
+						"type" => "upload");
 						
-	$options[] = array( "name" => __('Show Date','themetrust'),
-						"desc" => __('Check this box to show the publish date.','themetrust'),
-						"id" => "ttrust_post_show_date",
-						"std" => "1",
-						"type" => "checkbox");
+	$options[] = array( "name" => "Favicon image",
+						"desc" => "Upload your favicon image over here or enter url.",
+						"id" => "favicon_image",
+						"type" => "upload");
 						
-	$options[] = array( "name" => __('Show Category','themetrust'),
-						"desc" => __('Check this box to show the category.','themetrust'),
-						"id" => "ttrust_post_show_category",
-						"std" => "1",
-						"type" => "checkbox");
-						
-	$options[] = array( "name" => __('Show Comment Count','themetrust'),
-						"desc" => __('Check this box to show the comment count.','themetrust'),
-						"id" => "ttrust_post_show_comments",
-						"std" => "1",
-						"type" => "checkbox");
-						
-	$options[] = array( "name" => __('Featured Image Size','themetrust'),
-						"desc" => __('Select the size of the post featured image.','themetrust'),
-						"id" => "ttrust_post_featured_img_size",
-						"std" => "large",
-						"type" => "select",
-						"options" => $post_featured_image_size);
-						
-	$options[] = array( "name" => __('Show Featured Image on Single Posts','themetrust'),
-						"desc" => __('Check this box to show the featured image on single post pages.','themetrust'),
-						"id" => "ttrust_post_show_featured_image",
-						"std" => "1",
-						"type" => "checkbox");
-						
-	$options[] = array( "name" => "Select a Page",
-						"desc" => "Select the page you're using as your blog page. This is used to show the blog title at the top of your posts.",
-						"id" => "ttrust_blog_page",
-						"type" => "select",
-						"options" => $options_pages);
-						
-	$options[] = array( "name" => __('Footer','themetrust'),
+	$options[] = array( "name" => "Blog Settings",
 						"type" => "heading");
 						
-	$options[] = array( "name" => __('Left Footer Text','themetrust'),
-						"desc" => __('This will appear on the left side of the footer.','themetrust'),
-						"id" => "ttrust_footer_left",
+	$options[] = array( "name" => "Blog Exclude Categories",
+						"desc" => "Specify a comma seperated list of category IDs (eg: 1,4,8) or slugs that you would like to exclude from your blog page (eg: uncategorized).",
+						"id" => "exclude_cat",
+						"std" => "",						
+						"type" => "text");												
+						
+	$options[] = array( "name" => "Footer Settings",
+						"type" => "heading");
+						
+	$options[] = array( "name" => "Footer copyright text",
+						"desc" => "Enter your company name here.",
+						"id" => "footer_cr",
+						"std" => "",
+						"type" => "text");	
+						
+	$options[] = array( "name" => "Google Analytics Code",
+						"desc" => "You can paste your Google Analytics or other tracking code in this box.",
+						"id" => "go_code",
 						"std" => "",
 						"type" => "textarea");
+						
+	$options[] = array( "name" => "Youtube URL",
+						"desc" => "Insert your Youtube URL here.",
+						"id" => "footer_youtube",
+						"std" => "",
+						"type" => "text");
 
-	$options[] = array( "name" => __('Right Footer Text','themetrust'),
-						"desc" => __('This will appear on the right side of the footer.','themetrust'),
-						"id" => "ttrust_footer_right",
+	$options[] = array( "name" => "Twitter",
+						"desc" => "Insert your link to the twitter page here.",
+						"id" => "footer_twitter",
+						"std" => "",
+						"type" => "text");
+						
+	$options[] = array( "name" => "Facebook",
+						"desc" => "Insert your link to the facebook page here.",
+						"id" => "footer_facebook",
+						"std" => "",
+						"type" => "text");
+						
+	$options[] = array( "name" => "Style Settings",
+						"type" => "heading");
+						
+	$options[] = array( "name" => "Custom CSS",
+						"desc" => "Add css to modify the theme here instead of adding it to style.css file.",
+						"id" => "custom_css",
 						"std" => "",
 						"type" => "textarea");
 						
-	$options[] = array( "name" => __('Integration','themetrust'),
-						"type" => "heading");	
+	$options[] = array( "name" => "Other Settings",
+						"type" => "heading");
 						
-	$options[] = array( "name" => __('Analytics','themetrust'),
-						"desc" => __('Enter your custom analytics code. (e.g. Google Analytics).','themetrust'),
-						"id" => "ttrust_analytics",
-						"std" => "",
-						"type" => "textarea",
-						"validate" => "none");
+	$options[] = array( "name" => "Comment on page",
+						"desc" => "Select option to display comments on page.",
+						"id" => "comment_page",
+						"std" => "on",
+						"type" => "select",
+						"class" => "mini", //mini, tiny, small
+						"options" => $comment_page_array);																			
 						
-	
-	
-						
-	
+															
 	return $options;
 }

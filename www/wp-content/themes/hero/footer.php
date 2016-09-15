@@ -1,56 +1,43 @@
+	<!--footer-->
+	<div class="clear"></div>
+		
+		<div id="footer">
+		<hr />
+	<!--footer container--><div id="footer-container">
+		
+		<div id="footer-widget">
+			
+			<?php
+			/* A sidebar in the footer? Yep. You can can customize
+			 * your footer with four columns of widgets.
+			 */
+			get_sidebar( 'footer' );
+			?>
+			
+			</div><!--footer widget end-->
+			
+			<div id="footer-info">		
+			
+			<div id="copyright"><?php _e( 'Copyright', 'Hero' ); ?> <?php echo date( 'Y' ); ?> <?php echo of_get_option('footer_cr'); ?> | <?php _e( 'Powered by', 'Hero' ); ?> <a href="http://www.wordpress.org">WordPress</a> | <?php _e( 'Hero theme by', 'Hero' ); ?> <a href="http://www.antthemes.com"><?php _e( 'antthemes', 'Hero' ); ?></a></div>
+			
+			<div id="follow-box"><p><?php _e( 'Follow us:', 'Hero' ); ?></p>
+	
+		<?php if (of_get_option('footer_youtube') != '' ) { ?><a href="<?php echo of_get_option('footer_youtube'); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/youtube.png" alt="Youtube" /></a> <?php }?>
+		<?php if (of_get_option('footer_twitter') != '' ) { ?><a href="<?php echo of_get_option('footer_twitter'); ?> "><img src="<?php echo get_template_directory_uri(); ?>/images/Twitter.png" alt="Twitter" /></a><?php }?>
+		<?php if (of_get_option('footer_facebook') != '' ) { ?><a href="<?php echo of_get_option('footer_facebook'); ?> "><img src="<?php echo get_template_directory_uri(); ?>/images/facebook.png" alt="facebook" /></a><?php }?>
+	
 	</div>
-	</div>	
-	<div id="footer" >
-		<div class="inside">		
-		<div class="primary clearfix">
-			<div class="recent">
+					
+			</div><!--footer info end-->
 			
-				<h2>Recent stories</h2>
-				
-				<?php
-				$query = new WP_Query(array(
-						'category_name' => 'short', 
-						'posts_per_page' => '3' 
-					));
-				
-				while ( $query->have_posts() ) : $query->the_post(); 
-				?>
-				
-				<div class="blog-post">
-					<h3><?php the_title(); ?></h3>
-					<p>
-						<?php echo substr(get_the_excerpt(),0,150); ?>... <a class="more green">Read more</a>
-					</p>
-					<a href="<?php the_permalink(); ?>"></a>
-					<div class="divider"></div>
-				</div>
-				
-				<?php endwhile; ?>
-				
-				<?php wp_reset_postdata(); ?>
+		</div><!-- footer container-->
+		
+	<div class="clear"></div>		
 			
-			</div>
-			
-			<div class="empire">
-				
-				<h3>DALLAS STHLM</h3>
-				<p>
-					<a class="green" href="#">INFO<span class="dallaswebicons">d</span>DALLAS.SE</a><br />
-					HEAD QUATER: +46 (0)8-670 96 00<br />
-					ARTIC OFFICE: +46 (0)8-670 96 00<br />
-				</p>
-				<div class="divider"></div>
-				<p class="green">
-					<a class="green" href="#">FACEBOOK</a>, <a class="green" href="#">YOUTUBE</a>, <a class="green" href="#">TWITTER</a>
-				</p>
-				
-			</div>
-			
-			
-		</div>	
-		</div><!-- end footer inside-->		
-	</div><!-- end footer -->
-</div><!-- end container -->
-<?php wp_footer(); ?>
+	</div>
+	
+	<?php wp_footer(); ?>
+
 </body>
+
 </html>

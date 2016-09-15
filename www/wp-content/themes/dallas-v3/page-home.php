@@ -91,7 +91,7 @@ $queryObjectTop = new WP_Query(
 	<?php } ?>
 
 		<?php if( get_field('linkout') ): ?>
-			<a href="<?php the_field('linkout'); ?>">
+			<a href="<?php the_field('linkout'); ?>" target="_blank">
 		<?php endif; ?>
 		<div class="hoverContent">
 
