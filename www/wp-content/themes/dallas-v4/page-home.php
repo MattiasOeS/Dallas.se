@@ -26,14 +26,14 @@
           	<img class="retinafy" width="543" src="/assets/images/com-hem.png?v=2" data-2x="/assets/images/com-hem@2.png?v=2" alt="Com Hem" />
         	</div>
         	<h3>Vår identitet för Com Hem är nominerad i Svenska Designpriset 2016!</h3>
-        	<a class="btn" href="http://www.designpriset.se/rostning.php" target="_blank">Rösta här</a>
+        	<!-- <a class="btn" href="http://www.designpriset.se/rostning.php" target="_blank">Rösta här</a> -->
       	</div>
       	<div class="badge"></div>
     	</div>
     	<div class="column g-6 melodifestivalen">
       	<div class="content">
       	  <h3>Vår logotyp och vinjett för Melodifestivalen 2016 är nominerade i Svenska Designpriset 2016!</h3>
-        	<a class="btn" href="http://www.designpriset.se/rostning.php" target="_blank">Rösta här</a>
+        	<!-- <a class="btn" href="http://www.designpriset.se/rostning.php" target="_blank">Rösta här</a> -->
       	</div>
       	<div class="badge"></div>
     	</div>
