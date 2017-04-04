@@ -67,7 +67,7 @@ function onPlayerStateChange(event) {
 		if(wrapper.hasClass('topEmbed') && !$('html').hasClass('touch'))
 			$('body').addClass('yt-playing');
 
-		if($('html').hasClass('touch') && $('body').hasClass('chrome'))
+		if($('html').hasClass('touch'))
 			player.siblings('img, .yt-play').css({
 				"opacity" : 0
 			});
