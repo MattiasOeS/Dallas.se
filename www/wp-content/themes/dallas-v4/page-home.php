@@ -14,10 +14,32 @@
 	if($post->post_name === 'svenska-designpriset') {
   	?>
   	
-  	<div class="column g-12 top-post">
-    	<div class="videoEmbed">
-      	<iframe width="560" height="315" src="https://www.youtube.com/embed/EXVxViP4F1U?autoplay=1&controls=0&rel=0&showinfo=0&modestbranding=1" frameborder="0" allowfullscreen></iframe>
+  	<div class="column g-12 top-post designpriset">
+    	
+    	<div class="column g-6 melodifestivalen">
+      	<div class="content">
+      	  <h3>Vår logotyp vann guld i Svenska Designpriset 2016!</h3>
+        	<a class="btn" href="http://www.svt.se/melodifestivalen/melodifestivalen-dubbel-vinnare-av-svenska-designpriset-2016" target="_blank">Mer här</a>
+      	</div>
+      	<div class="badge"></div>
     	</div>
+		
+		<div class="column g-6 com-hem">
+      	<div class="logo">
+        	<div class="vert-center">
+          	<img class="retinafy" width="543" src="/assets/images/com-hem.png?v=2" data-2x="/assets/images/com-hem@2.png?v=2" alt="Com Hem" />
+          </div>
+      	</div>
+      	<div class="content">
+        	<div class="logo-small-screens">
+          	<img class="retinafy" width="543" src="/assets/images/com-hem.png?v=2" data-2x="/assets/images/com-hem@2.png?v=2" alt="Com Hem" />
+        	</div>
+        	<h3>Vår identitet för Com Hem var nominerad i Svenska Designpriset 2016!</h3>
+        	<!-- <a class="btn" href="http://www.designpriset.se/rostning.php" target="_blank">Rösta här</a> -->
+      	</div>
+      	<div class="badge"></div>
+    	</div>
+		
   	</div>
   	
   	<?php
